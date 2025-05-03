@@ -1,4 +1,4 @@
-# AI-Tools
+# AI Tools
 Tools to customize and effortlessly use advanced AI tools. Runs entirely on the user's own device. The default AI settings of the projects I create and contribute to are decided by a Simulation made from closed source and mathematical/scientific methods.
 
 # Current Projects:
