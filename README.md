@@ -39,3 +39,5 @@ Thank you for considering contributing to this project! To ensure a consistent a
     *   **Technology Notes:**
         *   While `PHP` is not the ideal choice for purely client-side execution, its potential relevance for future backend interactions or API planning is noted. However, the immediate development focus must remain **strictly on the browser-side**.
         *   For ensuring security and performance in browser-based applications, **JavaScript** (along with relevant frameworks/libraries like React, Vue, Angular, Svelte, etc.) or technologies such as WebAssembly are generally the preferred choices. Please refer to the existing codebase for guidance on established standards and technological preferences.
+
+# [Telegram](https://t.me/cleverestech)
