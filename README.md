@@ -2,11 +2,11 @@
 Tools to customize and effortlessly use advanced AI tools. Runs entirely on the user's own device.
 
 # Current Projects:
-## [AI Subtitle Translator](https://tryigit.dev/ai/stranslate/)
+## [AI Subtitle Translator V1.0.1](https://tryigit.dev/ai/stranslate/)
 
-## [AI Article Generator](https://tryigit.dev/ai/article/)
+## [AI Article Generator V1.0.1](https://tryigit.dev/ai/article/)
 
-## [AI Text Reframer](https://tryigit.dev/ai/manipulation/)
+## [AI Text Reframer V1.0.1](https://tryigit.dev/ai/manipulation/)
 
 > [!WARNING]
 > You may see Google ads on the project pages, but this is very limited so as not to be intrusive, and the minimal revenues from Google ads will only be used for the development of the project and server costs.
