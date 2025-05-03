@@ -24,7 +24,4 @@ Thank you for considering contributing to this project! To ensure a consistent a
     *   All developed tools **must be designed to run client-side**, executing within the user's web browser. Server-side dependencies for the core functionality should be avoided.
     *   **Technology Notes:**
         *   While `PHP` is not the ideal choice for purely client-side execution, its potential relevance for future backend interactions or API planning is noted. However, the immediate development focus must remain **strictly on the browser-side**.
-        *   For ensuring security and performance in browser-based applications, **JavaScript** (along with relevant frameworks/libraries like React, Vue, Angular, Svelte, etc.) or technologies such as WebAssembly are generally the preferred choices. Please refer to the existing codebase for guidance on established standards and technological preferences
-
-
-Copyright (c) 2025 Yiğit. All Rights Reserved.
+        *   For ensuring security and performance in browser-based applications, **JavaScript** (along with relevant frameworks/libraries like React, Vue, Angular, Svelte, etc.) or technologies such as WebAssembly are generally the preferred choices. Please refer to the existing codebase for guidance on established standards and technological preferences.
