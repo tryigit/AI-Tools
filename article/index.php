@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- SEO Meta Tags -->
-    <title>AI Article Generator | Human-Like SEO Content</title> <!-- Title updated -->
-    <meta name="description" content="Generate high-quality, human-like, SEO-optimized articles less detectable by AI checkers. Compatible with WordPress & CMS. Uses Google Gemini AI. Upload files, define topic, persona, audience, keywords for unique, rank-worthy content."> <!-- Description updated -->
-    <meta name="keywords" content="ai article generator, seo content writer, human-like ai content, undetectable ai writer, blog post generator, cms content, wordpress content, gemini api, gemini-2.5-pro, content creation, ai writing tool, seo optimization, tryigit"> <!-- Keywords updated -->
+    <title>AI Article Generator | Human-Like SEO Content</title>
+    <meta name="description" content="Generate high-quality, human-like, SEO-optimized articles less detectable by AI checkers. Compatible with WordPress & CMS. Uses Google Gemini AI. Upload files, define topic, persona, audience, keywords for unique, rank-worthy content.">
+    <meta name="keywords" content="ai article generator, seo content writer, human-like ai content, undetectable ai writer, blog post generator, cms content, wordpress content, gemini api, content creation, ai writing tool, seo optimization, tryigit">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://tryigit.dev/ai/article" /> <!-- Update if URL changes -->
+    <link rel="canonical" href="https://tryigit.dev/ai/article" />
 
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -22,9 +22,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Tailwind Custom Configuration (Consistent with Translator) -->
+    <!-- Tailwind Custom Configuration (True Black Theme) -->
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -32,14 +33,32 @@
                         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
                     },
                     colors: {
-                        primary: { light: '#7c3aed', DEFAULT: '#6d28d9', dark: '#5b21b6' },
+                        primary: { light: '#9333ea', DEFAULT: '#6d28d9', dark: '#5b21b6' },
                         secondary: { light: '#2dd4bf', DEFAULT: '#14b8a6', dark: '#0d9488' },
-                        'status-bg': '#111827', 'status-text': '#e5e7eb', 'status-border': '#374151',
+                        // True Black Theme Colors
+                        'dm-bg': '#000000',
+                        'dm-card': '#111111',
+                        'dm-text-primary': '#e5e5e5',
+                        'dm-text-secondary': '#a3a3a3',
+                        'dm-text-muted': '#737373',
+                        'dm-border': '#333333',
+                        'dm-input-bg': '#1a1a1a',
+                        'dm-input-border': '#404040',
+                        'dm-input-placeholder': '#737373',
+                        'dm-status-bg': '#0a0a0a',
+                        'dm-status-border': '#2a2a2a',
+                        'dm-status-text': '#cccccc',
+                        'dm-output-bg': '#0f0f0f', // Slightly different for output area contrast
+                        'dm-output-border': '#2f2f2f',
+                        'dm-output-text': '#d4d4d4',
                     },
                     boxShadow: {
-                        'input-focus': '0 0 0 3px rgba(109, 40, 217, 0.3)',
-                        'btn': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-                        'btn-hover': '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+                         'input-focus': '0 0 0 3px rgba(109, 40, 217, 0.3)',
+                         'btn': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+                         'btn-hover': '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+                         'dark-input-focus': '0 0 0 3px rgba(147, 51, 234, 0.5)',
+                         'dark-btn': '0 4px 6px -1px rgba(255, 255, 255, 0.05), 0 2px 4px -2px rgba(255, 255, 255, 0.05)',
+                         'dark-btn-hover': '0 10px 15px -3px rgba(255, 255, 255, 0.07), 0 4px 6px -4px rgba(255, 255, 255, 0.07)',
                     }
                 },
             }
@@ -47,38 +66,50 @@
     </script>
 
     <style type="text/tailwindcss">
-        /* Base and Component styles (Consistent with Translator) */
         @layer base {
-            body { @apply bg-gray-100 font-sans antialiased; }
-            label { @apply block mb-1.5 text-sm font-semibold text-gray-700; }
-            input[type="text"], input[type="password"], select, textarea {
-                @apply block w-full px-4 py-2.5 text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-150 ease-in-out sm:text-sm;
+            html.dark { color-scheme: dark; }
+            body { @apply bg-gray-100 font-sans antialiased text-gray-800 dark:bg-dm-bg dark:text-dm-text-primary transition-colors duration-300; }
+            label { @apply block mb-1.5 text-sm font-semibold text-gray-700 dark:text-dm-text-secondary; }
+            input[type="text"], input[type="password"], select, textarea:not(#outputArticle) { /* Exclude output area from general textarea style */
+                @apply block w-full px-4 py-2.5 text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-150 ease-in-out sm:text-sm
+                       dark:bg-dm-input-bg dark:border-dm-input-border dark:text-dm-text-primary dark:placeholder-dm-input-placeholder dark:focus:ring-primary-light/50 dark:focus:border-primary-light dark:shadow-none;
             }
              select {
                  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
                  background-position: right 0.7rem center; background-repeat: no-repeat; background-size: 1.25em 1.25em;
                  -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 2.8rem;
              }
-            textarea { @apply min-h-[90px] leading-relaxed; }
-            fieldset { @apply border border-gray-200 rounded-lg p-5 pt-3; }
-            legend { @apply px-2 text-base font-semibold text-gray-800; }
-            .description { @apply mt-1.5 text-xs text-gray-600; }
-            .description a { @apply text-primary font-medium hover:text-primary-dark hover:underline; }
-            .warning { @apply text-amber-600 font-medium; }
-            #statusPanel::-webkit-scrollbar { width: 6px; }
-            #statusPanel::-webkit-scrollbar-track { @apply bg-status-border rounded; }
-            #statusPanel::-webkit-scrollbar-thumb { @apply bg-gray-500 rounded; }
-            #statusPanel::-webkit-scrollbar-thumb:hover { @apply bg-gray-400; }
+             html.dark select {
+                 background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a3a3a3' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e"); /* dm-text-secondary */
+             }
+            textarea:not(#outputArticle) { @apply min-h-[90px] leading-relaxed; } /* Apply min-height only to non-output textareas */
+            fieldset { @apply border border-gray-200 rounded-lg p-5 pt-3 dark:border-dm-border dark:bg-dm-card; }
+            legend { @apply px-2 text-base font-semibold text-gray-800 dark:text-dm-text-primary; }
+            .description { @apply mt-1.5 text-xs text-gray-600 dark:text-dm-text-muted; }
+            .description a { @apply text-primary font-medium hover:text-primary-dark hover:underline dark:text-primary-light dark:hover:text-purple-400; }
+            .warning { @apply text-amber-600 dark:text-yellow-400 font-medium; }
+            #statusPanel::-webkit-scrollbar, #outputArticle::-webkit-scrollbar { width: 6px; }
+            #statusPanel::-webkit-scrollbar-track, #outputArticle::-webkit-scrollbar-track { @apply bg-dm-status-border rounded; }
+            #statusPanel::-webkit-scrollbar-thumb, #outputArticle::-webkit-scrollbar-thumb { @apply bg-gray-600 dark:bg-gray-700 rounded; }
+            #statusPanel::-webkit-scrollbar-thumb:hover, #outputArticle::-webkit-scrollbar-thumb:hover { @apply bg-gray-500 dark:bg-gray-600; }
+            /* Specific style for output textarea */
+            #outputArticle {
+                @apply w-full p-4 bg-gray-50 border border-gray-300 rounded-lg shadow-sm font-sans text-sm leading-relaxed min-h-[400px]
+                       dark:bg-dm-output-bg dark:border-dm-output-border dark:text-dm-output-text dark:placeholder-dm-text-muted focus:outline-none focus:ring-1 focus:ring-primary-light/50 focus:border-primary-light;
+            }
         }
         @layer components {
-            .file-input-area { @apply relative block w-full p-6 text-center border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 hover:border-primary/70 transition-colors duration-200 ease-in-out; }
-            .file-input-area .icon { @apply w-10 h-10 mx-auto text-gray-400 group-hover:text-primary/80 transition-colors; }
-            .file-input-area .text-main { @apply mt-2 block text-sm font-semibold text-gray-700; }
-            .file-input-area .text-sub { @apply block text-xs text-gray-500; }
+            .file-input-area { @apply relative block w-full p-6 text-center border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 hover:border-primary/70 transition-colors duration-200 ease-in-out
+                                   dark:bg-dm-card dark:border-dm-border dark:hover:bg-opacity-75 dark:hover:border-primary-light/70; }
+            .file-input-area .icon { @apply w-10 h-10 mx-auto text-gray-400 group-hover:text-primary/80 transition-colors dark:text-dm-text-muted dark:group-hover:text-primary-light/80; }
+            .file-input-area .text-main { @apply mt-2 block text-sm font-semibold text-gray-700 dark:text-dm-text-secondary; }
+            .file-input-area .text-sub { @apply block text-xs text-gray-500 dark:text-dm-text-muted; }
             .file-input-area input[type="file"] { @apply absolute inset-0 w-full h-full opacity-0 cursor-pointer; }
-            .btn { @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg shadow-btn focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-150 ease-in-out disabled:opacity-60 disabled:cursor-not-allowed; }
-            .btn-primary { @apply btn text-white bg-primary hover:bg-primary-dark focus:ring-primary; }
-            .btn-secondary { @apply btn text-sm px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-400; }
+            .btn { @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg shadow-btn focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-150 ease-in-out disabled:opacity-60 disabled:cursor-not-allowed dark:focus:ring-offset-dm-bg dark:shadow-dark-btn; }
+            .btn:hover:not(:disabled) { @apply dark:shadow-dark-btn-hover; }
+            .btn-primary { @apply btn text-white bg-primary hover:bg-primary-dark focus:ring-primary dark:bg-primary dark:hover:bg-primary-dark; }
+            .btn-secondary { @apply btn text-sm px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-400
+                                    dark:bg-dm-input-bg dark:text-dm-text-secondary dark:hover:bg-opacity-75 dark:focus:ring-gray-500 dark:border dark:border-dm-border dark:shadow-none; } /* Dark mode for secondary button */
              @keyframes spin { to { transform: rotate(360deg); } }
              .spinner { animation: spin 1s linear infinite; @apply inline-block w-5 h-5 border-[3px] border-current border-t-transparent rounded-full; }
         }
@@ -87,14 +118,14 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1500862170490490"
          crossorigin="anonymous"></script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 dark:bg-dm-bg">
 
     <div class="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <header class="text-center mb-10 md:mb-12">
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-dm-text-primary">
                  AI Article Generator
              </h1>
-             <p class="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
+             <p class="mt-3 text-lg text-gray-600 dark:text-dm-text-secondary max-w-2xl mx-auto">
                  Create human-like, SEO-optimized articles from your context, powered by Google Gemini.
              </p>
          </header>
@@ -107,9 +138,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 mt-4">
                     <div>
                         <label for="apiKey">Gemini API Key:</label>
-                        <div class="flex rounded-lg shadow-sm">
+                        <div class="flex rounded-lg">
                              <input type="password" id="apiKey" name="apiKey" required placeholder="Enter your Google AI Studio key" class="flex-1 min-w-0 rounded-none rounded-l-lg focus:z-10">
-                             <button type="button" id="toggleApiKey" title="Show/Hide Key" class="inline-flex items-center px-3 py-2 text-gray-500 bg-gray-50 border border-l-0 border-gray-300 rounded-r-lg hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">
+                             <button type="button" id="toggleApiKey" title="Show/Hide Key" class="inline-flex items-center px-3 py-2 text-gray-500 bg-gray-50 border border-l-0 border-gray-300 rounded-r-lg hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary dark:bg-dm-input-bg dark:text-dm-text-muted dark:border-dm-input-border dark:hover:bg-opacity-75 dark:focus:ring-primary-light dark:focus:border-primary-light">
                                 <i data-feather="eye" class="w-4 h-4"></i>
                             </button>
                         </div>
@@ -121,9 +152,8 @@
                     </div>
                      <div>
                         <label for="modelId">Gemini Model ID:</label>
-                        <!-- DİKKAT: Varsayılan değer isteğiniz üzerine 'gemini-2.5-pro-exp-03-25' olarak bırakıldı -->
                         <input type="text" id="modelId" name="modelId" placeholder="Default: gemini-2.5-pro-exp-03-25">
-                        <p class="description">Using: <code class="font-medium text-primary-dark"><span id="currentModelDisplay"></span></code> (Default cannot be changed per request)</p> <!-- Added note -->
+                        <p class="description">Using: <code class="font-medium text-primary-dark dark:text-primary-light"><span id="currentModelDisplay"></span></code> (Default cannot be changed per request)</p>
                     </div>
                  </div>
             </fieldset>
@@ -143,7 +173,6 @@
                               <option value="Japanese">Japanese</option>
                               <option value="Korean">Korean</option>
                               <option value="Chinese (Simplified)">Chinese (Simplified)</option>
-                              <!-- Add more languages as needed -->
                               <option value="Other">Other (Specify)</option>
                         </select>
                         <input type="text" id="customArticleLanguage" name="customArticleLanguage" placeholder="Enter language if 'Other'" class="mt-2 hidden">
@@ -157,21 +186,21 @@
                               <option value="Journalist">Journalistic / Objective</option>
                               <option value="Storyteller">Storyteller / Narrative</option>
                               <option value="Researcher">Researcher / Data-Driven</option>
-                              <option value="Photographer">Photographer / Visual Artist</option> <!-- Example Added -->
-                              <option value="Developer">Developer / Technical</option> <!-- Example Added -->
+                              <option value="Photographer">Photographer / Visual Artist</option>
+                              <option value="Developer">Developer / Technical</option>
                               <option value="Marketer">Marketer / Persuasive</option>
                               <option value="Casual">Casual / Conversational</option>
                               <option value="Formal">Formal / Academic</option>
                               <option value="Other">Other (Specify)</option>
                         </select>
                         <input type="text" id="customAuthorPersona" name="customAuthorPersona" placeholder="Describe persona vividly if 'Other'" class="mt-2 hidden">
-                         <p class="description">Crucial for tone & style. Be specific! (e.g., 'Skeptical Tech Reviewer'). Saved locally.</p> <!-- Description updated -->
+                         <p class="description">Crucial for tone & style. Be specific! (e.g., 'Skeptical Tech Reviewer'). Saved locally.</p>
                     </div>
                  </div>
                  <div class="mt-5">
                      <label for="articleTopic">Article Topic / Prompt:</label>
-                     <textarea id="articleTopic" name="articleTopic" rows="4" required placeholder="Enter the main topic, title idea, or a detailed prompt. E.g., 'Write a human-sounding blog post for photographers about the ethics of AI image generation.'"></textarea> <!-- Placeholder updated -->
-                     <p class="description">Specificity matters for human-like, SEO content. Include target keywords if known.</p> <!-- Description updated -->
+                     <textarea id="articleTopic" name="articleTopic" rows="4" required placeholder="Enter the main topic, title idea, or a detailed prompt. E.g., 'Write a human-sounding blog post for photographers about the ethics of AI image generation.'"></textarea>
+                     <p class="description">Specificity matters for human-like, SEO content. Include target keywords if known.</p>
                  </div>
             </fieldset>
 
@@ -184,11 +213,11 @@
                          <label for="sourceFile" class="file-input-area group">
                              <i data-feather="file-text" class="icon"></i>
                              <span class="text-main">Click or drag & drop file</span>
-                             <span class="text-sub">PDF, DOCX, XLSX, TXT supported</span> <!-- DİKKAT: Dosya türleri orijinaldeki gibi bırakıldı -->
+                             <span class="text-sub">PDF, DOCX, XLSX, TXT supported</span>
                              <input type="file" id="sourceFile" name="sourceFile" accept=".pdf,.doc,.docx,.xls,.xlsx,.txt">
                          </label>
-                         <div id="sourceFileNameDisplay" class="mt-3 text-sm font-medium text-gray-600 text-center truncate px-2">No file selected</div>
-                         <p class="description">AI will use this file's content to add unique context & perspective.</p> <!-- Description updated -->
+                         <div id="sourceFileNameDisplay" class="mt-3 text-sm font-medium text-gray-600 dark:text-dm-text-secondary text-center truncate px-2">No file selected</div>
+                         <p class="description">AI will use this file's content to add unique context & perspective.</p>
                     </div>
                      <div>
                          <label for="sourceOwner">Website / Owner (Optional):</label>
@@ -205,7 +234,7 @@
                     <div>
                          <label for="targetAudience">Target Audience:</label>
                          <input type="text" id="targetAudience" name="targetAudience" placeholder="e.g., Beginner photographers, Experienced marketers">
-                          <p class="description">Crucial for tailoring language and depth. Saved locally.</p> <!-- Description updated -->
+                          <p class="description">Crucial for tailoring language and depth. Saved locally.</p>
                      </div>
                     <div>
                          <label for="primaryKeywords">Primary Keywords:</label>
@@ -215,7 +244,7 @@
                      <div class="md:col-span-2">
                          <label for="callToAction">Call to Action (Optional):</label>
                          <input type="text" id="callToAction" name="callToAction" placeholder="e.g., Share your thoughts below, Check out our portfolio">
-                          <p class="description">What should the reader do next? Keep it relevant. Saved locally.</p> <!-- Description updated -->
+                          <p class="description">What should the reader do next? Keep it relevant. Saved locally.</p>
                      </div>
                 </div>
             </fieldset>
@@ -224,8 +253,8 @@
             <!-- Submit Button -->
             <div class="pt-2">
                 <button type="submit" id="generateButton" class="w-full btn-primary">
-                     <i data-feather="zap" class="w-5 h-5 mr-2 icon"></i> <!-- Changed icon to Zap for 'generation' feel -->
-                     <span class="button-text">Generate SEO Article</span> <!-- Text updated -->
+                     <i data-feather="zap" class="w-5 h-5 mr-2 icon"></i>
+                     <span class="button-text">Generate SEO Article</span>
                      <div class="spinner hidden ml-2"></div>
                 </button>
             </div>
@@ -233,17 +262,17 @@
 
         <!-- Status Panel -->
         <div class="mt-10">
-            <label for="statusPanel" class="block mb-2 text-base font-semibold text-gray-800">Generation Status</label>
-            <div id="statusPanel" class="h-56 p-4 overflow-y-auto rounded-lg bg-status-bg text-status-text border border-status-border font-mono text-sm shadow-inner leading-relaxed">
-                <div class="text-gray-400">Waiting for input...</div>
+            <label for="statusPanel" class="block mb-2 text-base font-semibold text-gray-800 dark:text-dm-text-primary">Generation Status</label>
+            <div id="statusPanel" class="h-56 p-4 overflow-y-auto rounded-lg bg-gray-900 text-gray-200 border border-gray-700 dark:bg-dm-status-bg dark:text-dm-status-text dark:border-dm-status-border font-mono text-sm shadow-inner leading-relaxed">
+                <div class="text-gray-400 dark:text-dm-text-muted">Waiting for input...</div>
             </div>
         </div>
 
         <!-- Output Section -->
         <div id="outputSection" class="mt-10">
-            <label for="outputArticle" class="block mb-2 text-base font-semibold text-gray-800">Generated Article</label>
+            <label for="outputArticle" class="block mb-2 text-base font-semibold text-gray-800 dark:text-dm-text-primary">Generated Article</label>
             <div class="output-area mb-3">
-                <textarea id="outputArticle" rows="20" readonly placeholder="The generated article will appear here..." class="w-full p-4 bg-gray-50 border border-gray-300 rounded-lg shadow-sm font-sans text-sm leading-relaxed min-h-[400px]"></textarea> <!-- Increased min-height -->
+                <textarea id="outputArticle" rows="20" readonly placeholder="The generated article will appear here..."></textarea>
             </div>
             <div class="output-actions text-center mt-4 space-x-3">
                 <button type="button" class="btn-secondary" id="copyButton" disabled title="Copy article to clipboard">
@@ -255,11 +284,16 @@
             </div>
         </div>
 
-         <footer class="mt-10 pt-6 border-t border-gray-200 text-center text-xs text-gray-500">
+         <footer class="mt-10 pt-6 border-t border-gray-200 dark:border-dm-border text-center text-xs text-gray-500 dark:text-dm-text-muted">
              API key, settings, and file content are processed locally in your browser and sent directly to the Google API. No data is stored on our servers. Tool by Yiğit.
          </footer>
 
     </div>
+
+    <!-- Theme Toggle Button -->
+    <button id="themeToggleButton" title="Toggle Theme" class="fixed bottom-5 right-5 z-50 p-2.5 rounded-full bg-primary dark:bg-primary-light text-white dark:text-black shadow-lg hover:opacity-90 transition-opacity">
+        <i data-feather="sun" class="w-5 h-5"></i>
+    </button>
 
     <script>
         // --- START: JavaScript Code ---
@@ -276,24 +310,27 @@
         const authorPersonaSelect = document.getElementById('authorPersona');
         const customAuthorPersonaInput = document.getElementById('customAuthorPersona');
         const articleTopicInput = document.getElementById('articleTopic');
-        const sourceFileInput = document.getElementById('sourceFile'); // File input
-        const sourceFileNameDisplay = document.getElementById('sourceFileNameDisplay'); // File name display
+        const sourceFileInput = document.getElementById('sourceFile');
+        const sourceFileNameDisplay = document.getElementById('sourceFileNameDisplay');
         const sourceOwnerInput = document.getElementById('sourceOwner');
         const targetAudienceInput = document.getElementById('targetAudience');
         const primaryKeywordsInput = document.getElementById('primaryKeywords');
         const callToActionInput = document.getElementById('callToAction');
-        const generateButton = document.getElementById('generateButton'); // Correct button ID
+        const generateButton = document.getElementById('generateButton');
         const submitButtonText = generateButton.querySelector('.button-text');
         const submitButtonIcon = generateButton.querySelector('i.icon');
         const submitButtonSpinner = generateButton.querySelector('.spinner');
         const statusPanel = document.getElementById('statusPanel');
-        const outputArticle = document.getElementById('outputArticle'); // Output textarea
-        const outputSection = document.getElementById('outputSection'); // To potentially hide/show
+        const outputArticle = document.getElementById('outputArticle');
+        const outputSection = document.getElementById('outputSection');
         const copyButton = document.getElementById('copyButton');
         const downloadButton = document.getElementById('downloadButton');
+        const themeToggleButton = document.getElementById('themeToggleButton'); // Theme Toggle Button
+        const themeToggleIcon = themeToggleButton.querySelector('i'); // Theme Toggle Icon
+        const htmlElement = document.documentElement; // HTML Element
 
         // --- localStorage Keys ---
-        const STORAGE_PREFIX = 'aiArticleGenerator_v2_'; // Updated prefix for potential storage changes
+        const STORAGE_PREFIX = 'aiArticleGenerator_v3_'; // Incremented version
         const API_KEY_KEY = STORAGE_PREFIX + 'apiKey';
         const MODEL_ID_KEY = STORAGE_PREFIX + 'modelId';
         const ARTICLE_LANG_KEY = STORAGE_PREFIX + 'articleLanguage';
@@ -304,34 +341,67 @@
         const TARGET_AUDIENCE_KEY = STORAGE_PREFIX + 'targetAudience';
         const KEYWORDS_KEY = STORAGE_PREFIX + 'primaryKeywords';
         const CTA_KEY = STORAGE_PREFIX + 'callToAction';
+        const THEME_KEY = STORAGE_PREFIX + 'theme'; // Theme Key
 
         // --- State Variables ---
         let generatedArticleContent = null;
-        let sourceFileContent = null; // To store read file content
-        let sourceFile = null; // To store the File object
-        // DİKKAT: Varsayılan model isteğiniz üzerine değiştirilmedi.
+        let sourceFileContent = null;
+        let sourceFile = null;
         const DEFAULT_MODEL = 'gemini-2.5-pro-exp-03-25';
 
-        // --- Helper Functions (Similar to Translator) ---
+        // --- Helper Functions ---
         function updateStatus(message, type = 'info') {
-             const timestamp = new Date().toLocaleTimeString('en-GB'); const statusLine = document.createElement('div'); let typeClass = 'text-gray-400';
-             switch (type) { case 'success': typeClass = 'text-green-400'; break; case 'error': typeClass = 'text-red-400 font-semibold'; break; case 'warning': typeClass = 'text-yellow-400'; break; case 'info': typeClass = 'text-blue-400'; break; }
-             statusLine.className = `py-0.5 ${typeClass}`; statusLine.textContent = `[${timestamp}] ${message}`;
-             const initialMsg = statusPanel.querySelector('div:only-child.text-gray-400'); if (initialMsg && initialMsg.textContent.includes('Waiting')) { statusPanel.innerHTML = ''; }
-             statusPanel.appendChild(statusLine); statusPanel.scrollTop = statusPanel.scrollHeight; }
+            const timestamp = new Date().toLocaleTimeString('en-GB');
+            const statusLine = document.createElement('div');
+            let typeClass = 'text-gray-400 dark:text-dm-text-muted';
+             switch (type) {
+                case 'success': typeClass = 'text-green-500 dark:text-green-400'; break;
+                case 'error': typeClass = 'text-red-500 dark:text-red-400 font-semibold'; break;
+                case 'warning': typeClass = 'text-yellow-500 dark:text-yellow-300'; break;
+                case 'info': typeClass = 'text-blue-500 dark:text-blue-400'; break;
+            }
+            statusLine.className = `py-0.5 ${typeClass}`;
+            statusLine.textContent = `[${timestamp}] ${message}`;
+            const initialMsg = statusPanel.querySelector('div:only-child.text-gray-400, div:only-child.dark\\:text-dm-text-muted');
+            if (initialMsg && initialMsg.textContent.includes('Waiting')) {
+                statusPanel.innerHTML = '';
+            }
+            statusPanel.appendChild(statusLine);
+            statusPanel.scrollTop = statusPanel.scrollHeight;
+        }
+
         function setButtonLoading(isLoading) {
              generateButton.disabled = isLoading;
-             if (isLoading) { submitButtonText.classList.add('opacity-0'); submitButtonIcon?.classList.add('hidden'); submitButtonSpinner.classList.remove('hidden'); generateButton.classList.add('cursor-wait'); }
-             else { submitButtonText.classList.remove('opacity-0'); submitButtonIcon?.classList.remove('hidden'); submitButtonSpinner.classList.add('hidden'); generateButton.classList.remove('cursor-wait'); } }
-        function toggleCustomInput(selectElement, inputElement) {
-             if (selectElement.value === 'Other') { inputElement.classList.remove('hidden'); inputElement.required = true; }
-             else { inputElement.classList.add('hidden'); inputElement.required = false; inputElement.value = ''; } }
+             if (isLoading) {
+                 // Use opacity for text to avoid layout shift
+                 submitButtonText.classList.add('opacity-0');
+                 submitButtonIcon?.classList.add('hidden');
+                 submitButtonSpinner.classList.remove('hidden');
+                 generateButton.classList.add('cursor-wait');
+             } else {
+                 submitButtonText.classList.remove('opacity-0');
+                 submitButtonIcon?.classList.remove('hidden');
+                 submitButtonSpinner.classList.add('hidden');
+                 generateButton.classList.remove('cursor-wait');
+             }
+         }
 
-        // --- Settings Management (localStorage) ---
+        function toggleCustomInput(selectElement, inputElement) {
+             if (selectElement.value === 'Other') {
+                 inputElement.classList.remove('hidden');
+                 inputElement.required = true;
+             } else {
+                 inputElement.classList.add('hidden');
+                 inputElement.required = false;
+                 inputElement.value = '';
+             }
+        }
+
+        // --- Settings Management ---
         function saveSettings() {
              try {
                 localStorage.setItem(API_KEY_KEY, apiKeyInput.value.trim());
-                localStorage.setItem(MODEL_ID_KEY, modelIdInput.value.trim() || DEFAULT_MODEL); // Keep default logic
+                localStorage.setItem(MODEL_ID_KEY, modelIdInput.value.trim() || DEFAULT_MODEL);
                 localStorage.setItem(ARTICLE_LANG_KEY, articleLanguageSelect.value);
                 localStorage.setItem(CUSTOM_ARTICLE_LANG_KEY, customArticleLanguageInput.value.trim());
                 localStorage.setItem(PERSONA_KEY, authorPersonaSelect.value);
@@ -347,7 +417,6 @@
         function loadSettings() {
             try {
                 apiKeyInput.value = localStorage.getItem(API_KEY_KEY) || '';
-                // DİKKAT: Varsayılan model yükleme mantığı korunuyor.
                 modelIdInput.value = localStorage.getItem(MODEL_ID_KEY) || DEFAULT_MODEL;
 
                 const savedLang = localStorage.getItem(ARTICLE_LANG_KEY);
@@ -373,69 +442,120 @@
              currentModelDisplay.textContent = modelIdInput.value.trim() || DEFAULT_MODEL;
         }
 
+        // --- Theme Management ---
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                themeToggleIcon.setAttribute('data-feather', 'sun');
+                themeToggleButton.classList.remove('bg-primary');
+                themeToggleButton.classList.add('dark:bg-primary-light');
+                themeToggleButton.classList.remove('text-white');
+                themeToggleButton.classList.add('dark:text-black');
+            } else {
+                htmlElement.classList.remove('dark');
+                themeToggleIcon.setAttribute('data-feather', 'moon');
+                themeToggleButton.classList.add('bg-primary');
+                themeToggleButton.classList.remove('dark:bg-primary-light');
+                themeToggleButton.classList.add('text-white');
+                themeToggleButton.classList.remove('dark:text-black');
+            }
+            feather.replace();
+        }
+
+        function toggleTheme() {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+            try {
+                localStorage.setItem(THEME_KEY, newTheme);
+            } catch (e) {
+                console.error("LocalStorage Error (Theme Save):", e);
+                updateStatus("Could not save theme preference.", "warning");
+            }
+        }
+
+        function loadTheme() {
+            let savedTheme = 'dark'; // Default to dark
+            try {
+                const storedTheme = localStorage.getItem(THEME_KEY);
+                if (storedTheme === 'light') {
+                    savedTheme = 'light';
+                }
+            } catch (e) {
+                console.error("LocalStorage Error (Theme Load):", e);
+                updateStatus("Could not load theme preference, defaulting to dark.", "warning");
+            }
+            applyTheme(savedTheme);
+        }
+
         // --- File Reading Logic ---
         function readFileContent(file) {
             return new Promise((resolve, reject) => {
-                if (!file) { resolve(null); return; } // No file, resolve with null
-
+                if (!file) { resolve(null); return; }
                 const reader = new FileReader();
-                reader.onload = (e) => {
-                    resolve(e.target.result);
-                };
-                reader.onerror = (e) => {
-                     console.error("File Reading Error:", e);
-                     reject(new Error(`Error reading file: ${file.name}`));
-                };
-                 // Keep reading as text, let AI handle structure.
+                reader.onload = (e) => { resolve(e.target.result); };
+                reader.onerror = (e) => { console.error("File Reading Error:", e); reject(new Error(`Error reading file: ${file.name}`)); };
                  reader.readAsText(file, 'UTF-8');
             });
         }
 
         // --- Event Listeners ---
-        document.addEventListener('DOMContentLoaded', () => { loadSettings(); feather.replace(); });
-        // Save settings on change/blur
+        document.addEventListener('DOMContentLoaded', () => {
+            loadTheme(); // Load theme first
+            loadSettings();
+            feather.replace(); // Initial icon render
+        });
+
+        // Save settings on change
         apiKeyInput.addEventListener('change', saveSettings); modelIdInput.addEventListener('change', saveSettings); articleLanguageSelect.addEventListener('change', () => { toggleCustomInput(articleLanguageSelect, customArticleLanguageInput); saveSettings(); }); customArticleLanguageInput.addEventListener('change', saveSettings); authorPersonaSelect.addEventListener('change', () => { toggleCustomInput(authorPersonaSelect, customAuthorPersonaInput); saveSettings(); }); customAuthorPersonaInput.addEventListener('change', saveSettings); sourceOwnerInput.addEventListener('change', saveSettings); targetAudienceInput.addEventListener('change', saveSettings); primaryKeywordsInput.addEventListener('change', saveSettings); callToActionInput.addEventListener('change', saveSettings);
-        // Toggle API Key
+
+        // Toggle API Key visibility
         toggleApiKey.addEventListener('click', () => { const type = apiKeyInput.getAttribute('type') === 'password' ? 'text' : 'password'; apiKeyInput.setAttribute('type', type); toggleApiKeyIcon.setAttribute('data-feather', type === 'password' ? 'eye' : 'eye-off'); feather.replace(); });
-        // File Input Change
+
+        // File Input Change Handler
         sourceFileInput.addEventListener('change', (event) => {
-             sourceFile = event.target.files[0]; // Store the file object
+             sourceFile = event.target.files[0];
              if (sourceFile) {
                  const displayName = sourceFile.name.length > 40 ? sourceFile.name.substring(0, 15) + '...' + sourceFile.name.substring(sourceFile.name.length - 15) : sourceFile.name;
                  sourceFileNameDisplay.textContent = `Selected: ${displayName}`;
-                 sourceFileNameDisplay.classList.remove('text-gray-600'); sourceFileNameDisplay.classList.add('text-primary-dark', 'font-semibold');
+                 sourceFileNameDisplay.classList.remove('text-gray-600', 'dark:text-dm-text-secondary');
+                 sourceFileNameDisplay.classList.add('text-primary-dark', 'dark:text-primary-light', 'font-semibold');
              } else {
-                 sourceFileNameDisplay.textContent = 'No file selected'; sourceFileNameDisplay.classList.add('text-gray-600'); sourceFileNameDisplay.classList.remove('text-primary-dark', 'font-semibold');
-                 sourceFileContent = null; // Clear content if file is deselected
-                 sourceFile = null; // Clear file object
+                 sourceFileNameDisplay.textContent = 'No file selected';
+                 sourceFileNameDisplay.classList.add('text-gray-600', 'dark:text-dm-text-secondary');
+                 sourceFileNameDisplay.classList.remove('text-primary-dark', 'dark:text-primary-light', 'font-semibold');
+                 sourceFileContent = null;
+                 sourceFile = null;
              }
          });
+
+        // Theme Toggle Listener
+        themeToggleButton.addEventListener('click', toggleTheme);
 
         // --- Form Submission ---
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
             setButtonLoading(true);
             generatedArticleContent = null;
-            outputArticle.value = ''; // Clear output area
+            outputArticle.value = '';
             copyButton.disabled = true;
             downloadButton.disabled = true;
-            // Reset copy button state immediately
-            copyButton.classList.remove('bg-green-500', 'hover:bg-green-600', 'focus:ring-green-500', 'text-white'); // Reset styles
-            copyButton.classList.add('text-gray-700', 'hover:bg-gray-300'); // Restore original text color
+            // Reset copy button state
+            copyButton.classList.remove('bg-green-500', 'hover:bg-green-600', 'focus:ring-green-500', 'text-white', 'dark:bg-green-600', 'dark:text-white');
+            copyButton.classList.add('text-gray-700', 'hover:bg-gray-300', 'dark:text-dm-text-secondary', 'dark:hover:bg-opacity-75'); // Restore original styles including dark
             copyButton.innerHTML = '<i data-feather="clipboard" class="w-4 h-4 mr-1.5"></i> Copy';
-            feather.replace(); // Ensure icon is rendered correctly after reset
-            statusPanel.innerHTML = ''; // Clear status
+            feather.replace();
+            statusPanel.innerHTML = '';
 
             // Get input values
             const apiKey = apiKeyInput.value.trim();
-            // DİKKAT: Model ID, kullanıcı girdisi veya varsayılan olarak alınır.
             const modelId = modelIdInput.value.trim() || DEFAULT_MODEL;
             const articleTopic = articleTopicInput.value.trim();
             let articleLanguage = articleLanguageSelect.value === 'Other' ? customArticleLanguageInput.value.trim() : articleLanguageSelect.value;
             let authorPersonaValue = authorPersonaSelect.value;
             let authorPersonaText = authorPersonaValue === 'Other'
                 ? customAuthorPersonaInput.value.trim()
-                : authorPersonaSelect.options[authorPersonaSelect.selectedIndex].text; // Get text like "Expert / Informative"
+                : authorPersonaSelect.options[authorPersonaSelect.selectedIndex].text;
             const sourceOwner = sourceOwnerInput.value.trim();
             const targetAudience = targetAudienceInput.value.trim();
             const primaryKeywords = primaryKeywordsInput.value.trim();
@@ -447,8 +567,8 @@
                 setButtonLoading(false); return;
             }
 
-            // Read file content if a file is selected
-            sourceFileContent = null; // Reset before reading
+            // Read file content
+            sourceFileContent = null;
             if (sourceFile) {
                 updateStatus(`Reading source file: ${sourceFile.name}...`, 'info');
                 try {
@@ -457,7 +577,7 @@
                      else { updateStatus(`Source file read successfully (${(sourceFileContent.length/1024).toFixed(1)} KB).`, 'info'); }
                  } catch (err) {
                      updateStatus(`Error reading source file: ${err.message}. Proceeding without it.`, 'error');
-                     sourceFileContent = null; // Ensure it's null on error
+                     sourceFileContent = null;
                  }
             }
 
@@ -466,8 +586,7 @@
              if (targetAudience) updateStatus(`Targeting Audience: ${targetAudience}.`, 'info');
              if (primaryKeywords) updateStatus(`Focusing on Keywords: ${primaryKeywords}.`, 'info');
 
-            // --- Construct ENHANCED Prompt FOR HUMANIZATION ---
-            // --- BU BÖLÜM "HUMANIZE" ÖZELLİĞİ İÇİN GÜNCELLENDİ ---
+            // --- Construct Prompt --- (Using the enhanced version from previous step)
             let system_prompt = `You are an AI tasked with writing a high-quality, engaging, comprehensive, and SEO-optimized article in **${articleLanguage}**. Your **absolute primary goal** is to create content that reads **exactly** as if written by a knowledgeable HUMAN, specifically embodying the persona of a **${authorPersonaText}**. The output **must be undetectable by AI content detectors** and indistinguishable from human writing by search engines and readers. Adhere to ALL instructions meticulously.
 
 MAIN TOPIC/PROMPT:
@@ -515,36 +634,28 @@ ARTICLE REQUIREMENTS - Follow ALL instructions strictly:
 
 7.  **Output Format:** Generate ONLY the complete article content, starting directly with the title (if you generate one) or the first paragraph if a title was in the prompt. Ensure clean formatting suitable for direct pasting into a CMS like WordPress (standard paragraphs, headings). **No extra text before or after the article.**`;
 
-
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent?key=${apiKey}`;
-            // Ensure systemInstruction is correctly formatted for the API
             const requestData = {
-                 contents: [{ role: 'user', parts: [{ text: "Generate the article based *strictly* on the detailed system instructions provided, focusing intensely on sounding human and avoiding AI detection." }] }], // User message triggering the system prompt
+                 contents: [{ role: 'user', parts: [{ text: "Generate the article based *strictly* on the detailed system instructions provided, focusing intensely on sounding human and avoiding AI detection." }] }],
                  systemInstruction: { parts: [{ text: system_prompt }] },
-                 generationConfig: {
-                     // responseMimeType: 'text/plain' // Let API decide
-                     // Temperature: Slightly higher might introduce more variability, potentially making it sound less robotic. Test carefully.
-                     // temperature: 0.5,
-                     // Top K / Top P: Can also influence randomness/creativity. Defaults are often good.
-                 }
+                 generationConfig: { /* Optional: temperature, topK, topP */ }
             };
 
-            updateStatus('Sending request to Gemini API... Focusing on human-like generation.', 'info'); // Updated message
+            updateStatus('Sending request to Gemini API... Focusing on human-like generation.', 'info');
              try {
-                // --- API Call & Processing (Robust logic - unchanged from previous correct version) ---
                  const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(requestData), });
-                 const responseBody = await response.text(); // Get raw text first
+                 const responseBody = await response.text();
 
                  if (!response.ok) {
                      let eM = `API Error (${modelId}/${response.status}): ${response.statusText}`; let eD = '';
                      try { const eJ = JSON.parse(responseBody); eD = eJ.error?.message || JSON.stringify(eJ.error); console.error("API Error JSON:", eJ);
                          if (eJ.error?.message?.toLowerCase().includes("api key not valid")) throw new Error("API Key invalid/unauthorized. Please check your key.");
-                         if (eJ.error?.code === 404 || eJ.error?.message?.toLowerCase().includes("model") && eJ.error?.message?.toLowerCase().includes("not found")) throw new Error(`Model '${modelId}' not found or access denied. Check the Model ID.`); // Added more specific check
+                         if (eJ.error?.code === 404 || eJ.error?.message?.toLowerCase().includes("model") && eJ.error?.message?.toLowerCase().includes("not found")) throw new Error(`Model '${modelId}' not found or access denied. Check the Model ID.`);
                          if (eJ.error?.code === 429) throw new Error("API Quota exceeded or rate limit reached.");
                          if (eJ.error?.code >= 500) throw new Error("Google API server error.");
                      } catch (pE) {
-                         if (pE instanceof Error && (pE.message.includes("API Key invalid") || pE.message.includes("Model") ) ) { throw pE; } // Re-throw specific errors
-                         else { eD = responseBody.substring(0, 300) + '...'; } // Fallback detail
+                         if (pE instanceof Error && (pE.message.includes("API Key invalid") || pE.message.includes("Model") ) ) { throw pE; }
+                         else { eD = responseBody.substring(0, 300) + '...'; }
                      }
                      throw new Error(`${eM} - ${eD}`);
                  }
@@ -552,19 +663,18 @@ ARTICLE REQUIREMENTS - Follow ALL instructions strictly:
                  updateStatus('Response received, processing article...', 'info');
                  generatedArticleContent = null;
 
-                 try { // Process response - Expecting JSON containing text part
+                 try {
                      const result = JSON.parse(responseBody);
                      const candidate = result.candidates?.[0];
                      const blockReason = result.promptFeedback?.blockReason;
-                     const safetyRatings = candidate?.safetyRatings || result.promptFeedback?.safetyRatings; // Check both places
+                     const safetyRatings = candidate?.safetyRatings || result.promptFeedback?.safetyRatings;
 
                      if (blockReason) {
-                         throw new Error(`Request blocked: ${blockReason}. ${safetyRatings ? `Details: ${JSON.stringify(safetyRatings)}` : ''}. Try revising the prompt or checking safety settings if applicable.`); // Added suggestion
+                         throw new Error(`Request blocked: ${blockReason}. ${safetyRatings ? `Details: ${JSON.stringify(safetyRatings)}` : ''}. Try revising the prompt or checking safety settings if applicable.`);
                      }
 
                      if (candidate?.content?.parts?.[0]?.text) {
                          generatedArticleContent = candidate.content.parts[0].text;
-                         // Refine finish reason messages slightly
                          if (candidate.finishReason === 'STOP') {
                              updateStatus('Article generation completed successfully.', 'success');
                          } else if (candidate.finishReason === 'MAX_TOKENS') {
@@ -572,11 +682,11 @@ ARTICLE REQUIREMENTS - Follow ALL instructions strictly:
                              generatedArticleContent += `\n\n[SYSTEM WARNING: Output truncated due to maximum token limit.]`;
                          } else if (candidate.finishReason === 'SAFETY') {
                               updateStatus(`Article generation stopped due to SAFETY concerns. Output may be incomplete or empty. Details: ${JSON.stringify(safetyRatings || 'No specific rating details')}`, 'error');
-                              if (!generatedArticleContent?.trim()) generatedArticleContent = `[Content Blocked due to Safety Concerns: ${blockReason || 'Reason unspecified'}]`; // Provide placeholder if empty
+                              if (!generatedArticleContent?.trim()) generatedArticleContent = `[Content Blocked due to Safety Concerns: ${blockReason || 'Reason unspecified'}]`;
                          }
                           else {
                             updateStatus(`Generation finished with reason: ${candidate.finishReason}. ${safetyRatings ? `Safety: ${JSON.stringify(safetyRatings)}` : ''}`, 'warning');
-                            if (!generatedArticleContent?.trim()) { // If no content despite non-STOP/SAFETY reason
+                            if (!generatedArticleContent?.trim()) {
                                 throw new Error(`Generation finished with reason ${candidate.finishReason} but no content was returned.`);
                             }
                          }
@@ -589,24 +699,22 @@ ARTICLE REQUIREMENTS - Follow ALL instructions strictly:
                          updateStatus('API response was not valid JSON. Trying to use as plain text.', 'warning');
                          if (responseBody?.trim()) {
                              generatedArticleContent = responseBody;
-                             updateStatus('Used plain text response. Content might be malformed.', 'warning'); // Downgrade status
+                             updateStatus('Used plain text response. Content might be malformed.', 'warning');
                          } else {
                              throw new Error(`Non-JSON response was empty.`);
                          }
                      } else {
-                         throw e; // Re-throw other errors
+                         throw e;
                      }
                  }
 
-                 // Display result
                  if (generatedArticleContent?.trim()) {
-                     outputArticle.value = generatedArticleContent.trim(); // Display in textarea
+                     outputArticle.value = generatedArticleContent.trim();
                      copyButton.disabled = false; downloadButton.disabled = false;
-                     feather.replace(); // Ensure copy/download icons are shown correctly
+                     feather.replace();
                  } else {
-                    // This case should ideally be caught by errors above, but as a fallback:
                     updateStatus('Failed to generate valid article content after processing.', 'error');
-                    outputArticle.value = outputArticle.value || "Could not generate article. Check status panel for details."; // Keep existing error message if any
+                    outputArticle.value = outputArticle.value || "Could not generate article. Check status panel for details.";
                  }
 
             } catch (error) {
@@ -617,21 +725,23 @@ ARTICLE REQUIREMENTS - Follow ALL instructions strictly:
             finally {
                 setButtonLoading(false);
             }
-        }); // end form submit
+        });
 
-        // --- Copy/Download Functions (Unchanged) ---
+        // --- Copy/Download Functions ---
         function copyOutput() {
             if (!outputArticle.value) return;
             navigator.clipboard.writeText(outputArticle.value)
                 .then(() => {
                     copyButton.innerHTML = '<i data-feather="check" class="w-4 h-4 mr-1.5"></i> Copied!';
-                    copyButton.classList.add('bg-green-500', 'text-white', 'hover:bg-green-600', 'focus:ring-green-500'); // Added text-white for contrast
-                    copyButton.classList.remove('text-gray-700', 'hover:bg-gray-300');
+                    // Apply success styles for both light and dark mode
+                    copyButton.classList.remove('text-gray-700', 'hover:bg-gray-300', 'dark:text-dm-text-secondary', 'dark:hover:bg-opacity-75');
+                    copyButton.classList.add('bg-green-500', 'text-white', 'hover:bg-green-600', 'focus:ring-green-500', 'dark:bg-green-600', 'dark:text-white');
                     feather.replace();
                     setTimeout(() => {
                         copyButton.innerHTML = '<i data-feather="clipboard" class="w-4 h-4 mr-1.5"></i> Copy';
-                        copyButton.classList.remove('bg-green-500', 'text-white', 'hover:bg-green-600', 'focus:ring-green-500');
-                        copyButton.classList.add('text-gray-700', 'hover:bg-gray-300'); // Restore original classes
+                        // Restore original styles for both light and dark mode
+                        copyButton.classList.remove('bg-green-500', 'text-white', 'hover:bg-green-600', 'focus:ring-green-500', 'dark:bg-green-600', 'dark:text-white');
+                        copyButton.classList.add('text-gray-700', 'hover:bg-gray-300', 'dark:text-dm-text-secondary', 'dark:hover:bg-opacity-75');
                         feather.replace();
                     }, 2000);
                 })
@@ -644,11 +754,10 @@ ARTICLE REQUIREMENTS - Follow ALL instructions strictly:
             const blob = new Blob([textToSave], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a'); link.href = url;
-            // Generate filename from topic if possible
             const filenameBase = articleTopicInput.value.trim().toLowerCase()
-                                    .replace(/[^a-z0-9\s-]/g, '') // Remove special chars except space/hyphen
-                                    .replace(/\s+/g, '-') // Replace spaces with hyphens
-                                    .substring(0, 50) || 'ai-seo-article'; // Limit length
+                                    .replace(/[^a-z0-9\s-]/g, '')
+                                    .replace(/\s+/g, '-')
+                                    .substring(0, 50) || 'ai-seo-article';
             const timestamp = new Date().toISOString().slice(0, 10);
             link.download = `${filenameBase}_${timestamp}.txt`;
             link.style.display = 'none'; document.body.appendChild(link); link.click(); document.body.removeChild(link); window.URL.revokeObjectURL(url);
@@ -658,8 +767,6 @@ ARTICLE REQUIREMENTS - Follow ALL instructions strictly:
         copyButton.addEventListener('click', copyOutput);
         downloadButton.addEventListener('click', downloadOutput);
 
-        // Initial icon setup
-        feather.replace();
         // --- END: JavaScript Code ---
     </script>
 </body>
