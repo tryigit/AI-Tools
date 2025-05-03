@@ -23,6 +23,9 @@ Thank you for considering contributing to this project! To ensure a consistent a
     *   As a contributor, you are welcome to **add your name to the description section at the bottom** of the page or tool you created.
     *   Since the main project will be hosted on my primary website, delivering a **high-quality and seamless User Interface/User Experience (UI/UX)** to end-users is a top priority. Please ensure your contributions align with this goal.
 
+> [!TIP]
+> You can use a dark theme for tools that may require prolonged screen time (such as AI Translate).
+
 2.  **Code Integrity and Avoiding Duplication:**
     *   There is a future plan to **consolidate all tools onto a single "All Tools" page**. In light of this objective, please act in accordance with the project's nature and **refrain from duplicating code or creating unnecessary forks** of the existing structure.
     *   Focus on writing clean, easily integrable code. Unnecessary complexity will only complicate current maintenance and the future integration process.
