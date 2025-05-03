@@ -22,6 +22,7 @@ Thank you for considering contributing to this project! To ensure a consistent a
     *   When adding a new page or AI tool, please strictly follow the **coding structure and standards of the existing Content Management System (CMS)**. This is vital for maintaining project consistency.
     *   As a contributor, you are welcome to **add your name to the description section at the bottom** of the page or tool you created.
     *   Since the main project will be hosted on my primary website, delivering a **high-quality and seamless User Interface/User Experience (UI/UX)** to end-users is a top priority. Please ensure your contributions align with this goal.
+    *   You must add the [Google ads code](https://raw.githubusercontent.com/tryigit/AI-Tools/refs/heads/main/adscode.txt) correctly when opening the project.
 
 > [!TIP]
 > You can use a dark theme for tools that may require prolonged screen time (such as AI Translate).
