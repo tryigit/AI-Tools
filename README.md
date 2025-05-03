@@ -9,6 +9,9 @@ Tools to customize and effortlessly use advanced AI tools. Runs entirely on the 
 > [!WARNING]
 > You may see Google ads on the project pages, but this is very limited so as not to be intrusive, and the minimal revenues from Google ads will only be used for the development of the project and server costs.
 
+> [!CAUTION]
+> Tools that are dangerous to humanity and difficult to control cannot be released for development here. For these, legal limits must be established.
+
 # Contribution Guidelines
 
 Thank you for considering contributing to this project! To ensure a consistent and efficient development process, please adhere to the following guidelines:
