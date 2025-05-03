@@ -6,6 +6,8 @@ Tools to customize and effortlessly use advanced AI tools. Runs entirely on the 
 
 ## [AI Article Generator](https://tryigit.dev/ai/article/)
 
+> [!WARNING]
+> You may see Google ads on the project pages, but this is very limited so as not to be intrusive, and the minimal revenues from Google ads will only be used for the development of the project and server costs.
 
 # Contribution Guidelines
 
