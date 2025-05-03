@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- SEO Meta Tags -->
-    <title>Future of Translations | AI Subtitle Translator | Gemini Powered</title> <!-- Updated Title -->
-    <meta name="description" content="Translate .srt, .ass, or .txt subtitle files professionally using Google Gemini AI. Customize temperature for balance between quality and fluency. Preserves timing & format."> <!-- Updated Description -->
-    <meta name="keywords" content="subtitle translator, ai translation, gemini api, gemini-2.5-pro, gemini, srt translator, ass translator, text translator, ai subtitle, machine translation, localization, global, javascript, tailwind css, professional translation, tryigit, screen wake lock, safety settings, temperature setting, translation quality, translation fluency"> <!-- Added keywords -->
+    <title>Future of Translations | AI Subtitle Translator | Gemini Powered</title>
+    <meta name="description" content="Translate .srt, .ass, or .txt subtitle files professionally using Google Gemini AI. Customize temperature for balance between quality and fluency. Preserves timing & format.">
+    <meta name="keywords" content="subtitle translator, ai translation, gemini api, gemini, srt translator, ass translator, text translator, ai subtitle, machine translation, localization, global, professional translation, tryigit, screen wake lock, temperature setting, translation quality, translation fluency">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://tryigit.dev/ai/translate" /> <!-- Hypothetical URL -->
+    <link rel="canonical" href="https://tryigit.dev/ai/translate" />
 
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,6 +25,7 @@
     <!-- Tailwind Custom Configuration -->
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -32,14 +33,29 @@
                         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
                     },
                     colors: {
-                        primary: { light: '#7c3aed', DEFAULT: '#6d28d9', dark: '#5b21b6' },
+                        primary: { light: '#9333ea', DEFAULT: '#6d28d9', dark: '#5b21b6' }, // Adjusted light primary for better contrast on black
                         secondary: { light: '#2dd4bf', DEFAULT: '#14b8a6', dark: '#0d9488' },
-                        'status-bg': '#111827', 'status-text': '#e5e7eb', 'status-border': '#374151',
+                        // True Black Theme Colors
+                        'dm-bg': '#000000', // True black background
+                        'dm-card': '#111111', // Very dark gray for cards/fieldsets
+                        'dm-text-primary': '#e5e5e5', // Light gray for primary text (slightly brighter)
+                        'dm-text-secondary': '#a3a3a3', // Medium gray for secondary text
+                        'dm-text-muted': '#737373', // Darker gray for muted text
+                        'dm-border': '#333333', // Subtle border color
+                        'dm-input-bg': '#1a1a1a', // Slightly lighter than card for inputs
+                        'dm-input-border': '#404040', // Slightly lighter border for inputs
+                        'dm-input-placeholder': '#737373', // Muted text color for placeholders
+                        'dm-status-bg': '#0a0a0a', // Very dark, almost black status panel
+                        'dm-status-border': '#2a2a2a',
+                        'dm-status-text': '#cccccc', // Default status text
                     },
                     boxShadow: {
-                         'input-focus': '0 0 0 3px rgba(109, 40, 217, 0.3)', // primary/30
+                         'input-focus': '0 0 0 3px rgba(109, 40, 217, 0.3)',
                          'btn': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
                          'btn-hover': '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+                         'dark-input-focus': '0 0 0 3px rgba(147, 51, 234, 0.5)', // primary-light/50
+                         'dark-btn': '0 4px 6px -1px rgba(255, 255, 255, 0.05), 0 2px 4px -2px rgba(255, 255, 255, 0.05)', // Subtle glow for buttons on black
+                         'dark-btn-hover': '0 10px 15px -3px rgba(255, 255, 255, 0.07), 0 4px 6px -4px rgba(255, 255, 255, 0.07)',
                     }
                 },
             }
@@ -48,48 +64,57 @@
 
     <style type="text/tailwindcss">
         @layer base {
-            body { @apply bg-gray-100 font-sans antialiased; }
-            label { @apply block mb-1.5 text-sm font-semibold text-gray-700; }
-            input[type="text"], input[type="password"], input[type="number"], select, textarea { /* Added input[type="number"] */
-                @apply block w-full px-4 py-2.5 text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-150 ease-in-out sm:text-sm;
+            html.dark { color-scheme: dark; }
+            body { @apply bg-gray-100 font-sans antialiased text-gray-800 dark:bg-dm-bg dark:text-dm-text-primary transition-colors duration-300; }
+            label { @apply block mb-1.5 text-sm font-semibold text-gray-700 dark:text-dm-text-secondary; }
+            input[type="text"], input[type="password"], input[type="number"], select, textarea {
+                @apply block w-full px-4 py-2.5 text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-150 ease-in-out sm:text-sm
+                       dark:bg-dm-input-bg dark:border-dm-input-border dark:text-dm-text-primary dark:placeholder-dm-input-placeholder dark:focus:ring-primary-light/50 dark:focus:border-primary-light dark:shadow-none;
             }
              select {
                  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
                  background-position: right 0.7rem center; background-repeat: no-repeat; background-size: 1.25em 1.25em;
                  -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 2.8rem;
              }
+             html.dark select {
+                 background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a3a3a3' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e"); /* dm-text-secondary */
+             }
             textarea { @apply min-h-[90px] leading-relaxed; }
-            fieldset { @apply border border-gray-200 rounded-lg p-5 pt-3; }
-            legend { @apply px-2 text-base font-semibold text-gray-800; }
-            .description { @apply mt-1.5 text-xs text-gray-600; }
-            .description a { @apply text-primary font-medium hover:text-primary-dark hover:underline; }
-            .warning { @apply text-amber-600 font-medium; }
+            fieldset { @apply border border-gray-200 rounded-lg p-5 pt-3 dark:border-dm-border dark:bg-dm-card; } /* Added dark bg */
+            legend { @apply px-2 text-base font-semibold text-gray-800 dark:text-dm-text-primary; }
+            .description { @apply mt-1.5 text-xs text-gray-600 dark:text-dm-text-muted; }
+            .description a { @apply text-primary font-medium hover:text-primary-dark hover:underline dark:text-primary-light dark:hover:text-purple-400; } /* Adjusted dark hover */
+            .warning { @apply text-amber-600 dark:text-yellow-400 font-medium; } /* Adjusted dark warning */
             #statusPanel::-webkit-scrollbar { width: 6px; }
-            #statusPanel::-webkit-scrollbar-track { @apply bg-status-border rounded; }
-            #statusPanel::-webkit-scrollbar-thumb { @apply bg-gray-500 rounded; }
-            #statusPanel::-webkit-scrollbar-thumb:hover { @apply bg-gray-400; }
-            /* Style for the range slider */
+            #statusPanel::-webkit-scrollbar-track { @apply bg-dm-status-border rounded; } /* Use status border */
+            #statusPanel::-webkit-scrollbar-thumb { @apply bg-gray-600 dark:bg-gray-700 rounded; }
+            #statusPanel::-webkit-scrollbar-thumb:hover { @apply bg-gray-500 dark:bg-gray-600; }
             input[type="range"]::-webkit-slider-thumb {
                 -webkit-appearance: none; appearance: none;
                 width: 16px; height: 16px;
-                background: #6d28d9; /* primary */
+                @apply bg-primary dark:bg-primary-light;
                 cursor: pointer; border-radius: 50%;
             }
             input[type="range"]::-moz-range-thumb {
                 width: 16px; height: 16px;
-                background: #6d28d9; /* primary */
+                @apply bg-primary dark:bg-primary-light;
                 cursor: pointer; border-radius: 50%; border: none;
+            }
+            input[type="range"] {
+                 @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-primary/50 dark:focus:ring-primary-light/50 dark:focus:ring-offset-dm-bg;
             }
         }
         @layer components {
-            .file-input-area { @apply relative block w-full p-6 text-center border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 hover:border-primary/70 transition-colors duration-200 ease-in-out; }
-            .file-input-area .icon { @apply w-10 h-10 mx-auto text-gray-400 group-hover:text-primary/80 transition-colors; }
-            .file-input-area .text-main { @apply mt-2 block text-sm font-semibold text-gray-700; }
-            .file-input-area .text-sub { @apply block text-xs text-gray-500; }
+            .file-input-area { @apply relative block w-full p-6 text-center border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 hover:border-primary/70 transition-colors duration-200 ease-in-out
+                                   dark:bg-dm-card dark:border-dm-border dark:hover:bg-opacity-75 dark:hover:border-primary-light/70; } /* Adjusted dark hover */
+            .file-input-area .icon { @apply w-10 h-10 mx-auto text-gray-400 group-hover:text-primary/80 transition-colors dark:text-dm-text-muted dark:group-hover:text-primary-light/80; }
+            .file-input-area .text-main { @apply mt-2 block text-sm font-semibold text-gray-700 dark:text-dm-text-secondary; }
+            .file-input-area .text-sub { @apply block text-xs text-gray-500 dark:text-dm-text-muted; }
             .file-input-area input[type="file"] { @apply absolute inset-0 w-full h-full opacity-0 cursor-pointer; }
-            .btn { @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg shadow-btn focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-150 ease-in-out disabled:opacity-60 disabled:cursor-not-allowed; }
-            .btn-primary { @apply btn text-white bg-primary hover:bg-primary-dark focus:ring-primary; }
-            .btn-secondary { @apply btn text-white bg-secondary hover:bg-secondary-dark focus:ring-secondary; }
+            .btn { @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg shadow-btn focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-150 ease-in-out disabled:opacity-60 disabled:cursor-not-allowed dark:focus:ring-offset-dm-bg dark:shadow-dark-btn; }
+            .btn:hover:not(:disabled) { @apply dark:shadow-dark-btn-hover; }
+            .btn-primary { @apply btn text-white bg-primary hover:bg-primary-dark focus:ring-primary dark:bg-primary dark:hover:bg-primary-dark; } /* Ensure dark bg uses primary */
+            .btn-secondary { @apply btn text-white bg-secondary hover:bg-secondary-dark focus:ring-secondary dark:bg-secondary dark:hover:bg-secondary-dark; } /* Ensure dark bg uses secondary */
              @keyframes spin { to { transform: rotate(360deg); } }
              .spinner { animation: spin 1s linear infinite; @apply inline-block w-5 h-5 border-[3px] border-current border-t-transparent rounded-full; }
         }
@@ -98,14 +123,14 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1500862170490490"
      crossorigin="anonymous"></script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 dark:bg-dm-bg">
 
     <div class="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <header class="text-center mb-10 md:mb-12">
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900">
-                 Future of Subtitle Translations <span class="text-primary">AI</span>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-dm-text-primary">
+                 Future of Subtitle Translations <span class="text-primary dark:text-primary-light">AI</span>
              </h1>
-             <p class="mt-3 text-lg text-gray-600 max-w-2xl mx-auto">
+             <p class="mt-3 text-lg text-gray-600 dark:text-dm-text-secondary max-w-2xl mx-auto">
                  Translate subtitles effortlessly while preserving timing and quality, powered by Google Gemini.
              </p>
          </header>
@@ -117,9 +142,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 mt-4">
                     <div>
                         <label for="apiKey">Gemini API Key:</label>
-                        <div class="flex rounded-lg shadow-sm">
+                        <div class="flex rounded-lg">
                              <input type="password" id="apiKey" name="apiKey" required placeholder="Enter your Google AI Studio key" class="flex-1 min-w-0 rounded-none rounded-l-lg focus:z-10">
-                             <button type="button" id="toggleApiKey" title="Show/Hide Key" class="inline-flex items-center px-3 py-2 text-gray-500 bg-gray-50 border border-l-0 border-gray-300 rounded-r-lg hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary">
+                             <button type="button" id="toggleApiKey" title="Show/Hide Key" class="inline-flex items-center px-3 py-2 text-gray-500 bg-gray-50 border border-l-0 border-gray-300 rounded-r-lg hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary dark:bg-dm-input-bg dark:text-dm-text-muted dark:border-dm-input-border dark:hover:bg-opacity-75 dark:focus:ring-primary-light dark:focus:border-primary-light">
                                 <i data-feather="eye" class="w-4 h-4"></i>
                             </button>
                         </div>
@@ -132,7 +157,7 @@
                      <div>
                         <label for="modelId">Gemini Model ID:</label>
                         <input type="text" id="modelId" name="modelId" placeholder="e.g., gemini-2.5-pro-exp-03-25">
-                        <p class="description">Currently using: <code class="font-medium text-primary-dark"><span id="currentModelDisplay"></span></code></p>
+                        <p class="description">Currently using: <code class="font-medium text-primary-dark dark:text-primary-light"><span id="currentModelDisplay"></span></code></p>
                     </div>
                  </div>
             </fieldset>
@@ -190,14 +215,13 @@
                          <span class="text-sub">Supports .SRT, .ASS, and .TXT files</span>
                          <input type="file" id="subtitleFile" name="subtitleFile" accept=".srt,.ass,.txt" required>
                      </label>
-                     <div id="fileNameDisplay" class="mt-3 text-sm font-medium text-gray-600 text-center truncate px-2">No file selected</div>
+                     <div id="fileNameDisplay" class="mt-3 text-sm font-medium text-gray-600 dark:text-dm-text-secondary text-center truncate px-2">No file selected</div>
                 </div>
             </fieldset>
 
             <!-- Optional Context & Temperature -->
              <fieldset>
                  <legend>Optional Settings</legend>
-                 <!-- Changed legend -->
                  <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
                      <div>
                          <label for="optionalNotes">Additional Notes for AI:</label>
@@ -205,17 +229,15 @@
                          <p class="description warning">Usually not necessary. Use sparingly.</p>
                      </div>
                      <div>
-                         <!-- NEW: Temperature Setting -->
                          <label for="temperatureSetting">AI Temperature (0.0 - 2.0):</label>
                          <div class="flex items-center space-x-3">
-                             <input type="number" id="temperatureSetting" name="temperatureSetting" min="0.0" max="2.0" step="0.05" class="w-24 px-2 py-1.5 text-center !shadow-none focus:!ring-primary/50"> <!-- Adjusted style -->
-                             <span id="temperatureValueDisplay" class="font-semibold text-gray-800 w-10 text-center tabular-nums">0.45</span>
-                             <input type="range" id="temperatureSlider" min="0.0" max="2.0" step="0.05" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-primary/50">
+                             <input type="number" id="temperatureSetting" name="temperatureSetting" min="0.0" max="2.0" step="0.05" class="w-24 px-2 py-1.5 text-center !shadow-none focus:!ring-primary-light/50">
+                             <span id="temperatureValueDisplay" class="font-semibold text-gray-800 dark:text-dm-text-primary w-10 text-center tabular-nums">0.45</span>
+                             <input type="range" id="temperatureSlider" min="0.0" max="2.0" step="0.05">
                          </div>
                          <p class="description mt-2">
-                             Controls randomness. Default <strong class="text-primary-dark">0.45</strong> is optimized via simulation for <strong class="text-primary-dark">Netflix-level quality</strong> (balanced accuracy & fluency). Higher values increase fluency/creativity but also risk errors/hallucinations, likely requiring <strong class="text-amber-600">post-editing</strong>. Use high values for specific creative needs or highly professional/niche content where manual review is planned.
+                             Controls randomness. Default <strong class="text-primary-dark dark:text-primary-light">0.45</strong> is optimized via simulation for <strong class="text-primary-dark dark:text-primary-light">Netflix-level quality</strong> (balanced accuracy & fluency). Higher values increase fluency/creativity but also risk errors/hallucinations, likely requiring <strong class="text-amber-600 dark:text-yellow-400">post-editing</strong>. Use high values for specific creative needs or highly professional/niche content where manual review is planned.
                          </p>
-                         <!-- End NEW -->
                      </div>
                  </div>
              </fieldset>
@@ -232,9 +254,9 @@
 
         <!-- Status Panel -->
         <div class="mt-10">
-            <label for="statusPanel" class="block mb-2 text-base font-semibold text-gray-800">Processing Status</label>
-            <div id="statusPanel" class="h-56 p-4 overflow-y-auto rounded-lg bg-status-bg text-status-text border border-status-border font-mono text-sm shadow-inner leading-relaxed">
-                <div class="text-gray-400">Waiting for input...</div>
+            <label for="statusPanel" class="block mb-2 text-base font-semibold text-gray-800 dark:text-dm-text-primary">Processing Status</label>
+            <div id="statusPanel" class="h-56 p-4 overflow-y-auto rounded-lg bg-gray-900 text-gray-200 border border-gray-700 dark:bg-dm-status-bg dark:text-dm-status-text dark:border-dm-status-border font-mono text-sm shadow-inner leading-relaxed">
+                <div class="text-gray-400 dark:text-dm-text-muted">Waiting for input...</div>
             </div>
         </div>
 
@@ -246,10 +268,15 @@
             </button>
         </div>
 
-         <footer class="mt-10 pt-6 border-t border-gray-200 text-center text-xs text-gray-500">
+         <footer class="mt-10 pt-6 border-t border-gray-200 dark:border-dm-border text-center text-xs text-gray-500 dark:text-dm-text-muted">
              API key, settings, and file content are processed locally in your browser and sent directly to the Google API. No data is stored on our servers. Tool by Yiğit.
          </footer>
     </div>
+
+    <!-- Theme Toggle Button -->
+    <button id="themeToggleButton" title="Toggle Theme" class="fixed bottom-5 right-5 z-50 p-2.5 rounded-full bg-primary dark:bg-primary-light text-white dark:text-black shadow-lg hover:opacity-90 transition-opacity">
+        <i data-feather="sun" class="w-5 h-5"></i>
+    </button>
 
     <script>
         // --- JavaScript Code ---
@@ -268,11 +295,9 @@
         const fileInput = document.getElementById('subtitleFile');
         const fileNameDisplay = document.getElementById('fileNameDisplay');
         const optionalNotesInput = document.getElementById('optionalNotes');
-        // NEW: Temperature Elements
         const temperatureInput = document.getElementById('temperatureSetting');
         const temperatureDisplay = document.getElementById('temperatureValueDisplay');
         const temperatureSlider = document.getElementById('temperatureSlider');
-        // End NEW
         const submitButton = document.getElementById('submitButton');
         const submitButtonText = submitButton.querySelector('.button-text');
         const submitButtonIcon = submitButton.querySelector('i.icon');
@@ -280,23 +305,27 @@
         const statusPanel = document.getElementById('statusPanel');
         const downloadSection = document.getElementById('downloadSection');
         const downloadButton = document.getElementById('downloadButton');
+        const themeToggleButton = document.getElementById('themeToggleButton');
+        const themeToggleIcon = themeToggleButton.querySelector('i');
+        const htmlElement = document.documentElement;
 
         // --- localStorage Keys ---
-        const STORAGE_PREFIX = 'aiSubtitleTranslator_v4_';
+        const STORAGE_PREFIX = 'aiSubtitleTranslator_v5_'; // Incremented version for new theme defaults
         const API_KEY_KEY = STORAGE_PREFIX + 'apiKey';
         const MODEL_ID_KEY = STORAGE_PREFIX + 'modelId';
         const TARGET_LANG_KEY = STORAGE_PREFIX + 'targetLanguage';
         const CUSTOM_TARGET_LANG_KEY = STORAGE_PREFIX + 'customTargetLanguage';
         const CONTENT_TYPE_KEY = STORAGE_PREFIX + 'contentType';
         const CUSTOM_CONTENT_TYPE_KEY = STORAGE_PREFIX + 'customContentType';
-        const TEMPERATURE_KEY = STORAGE_PREFIX + 'temperature'; // NEW Key
+        const TEMPERATURE_KEY = STORAGE_PREFIX + 'temperature';
+        const THEME_KEY = STORAGE_PREFIX + 'theme';
 
         // --- State Variables ---
         let translatedContent = null;
         let originalFilename = '';
         let fileExtension = '';
         const DEFAULT_MODEL = 'gemini-2.5-pro-exp-03-25';
-        const DEFAULT_TEMPERATURE = 0.45; // NEW Default Temperature
+        const DEFAULT_TEMPERATURE = 0.45;
 
         // --- Wake Lock Variable ---
         let wakeLock = null;
@@ -305,16 +334,17 @@
         function updateStatus(message, type = 'info') {
             const timestamp = new Date().toLocaleTimeString('en-GB');
             const statusLine = document.createElement('div');
-            let typeClass = 'text-gray-400';
+            // Adjusted dark mode colors for better contrast on near-black status panel
+            let typeClass = 'text-gray-400 dark:text-dm-text-muted';
              switch (type) {
-                case 'success': typeClass = 'text-green-400'; break;
-                case 'error': typeClass = 'text-red-400 font-semibold'; break;
-                case 'warning': typeClass = 'text-yellow-400'; break;
-                case 'info': typeClass = 'text-blue-400'; break;
+                case 'success': typeClass = 'text-green-500 dark:text-green-400'; break; // Brighter green
+                case 'error': typeClass = 'text-red-500 dark:text-red-400 font-semibold'; break; // Brighter red
+                case 'warning': typeClass = 'text-yellow-500 dark:text-yellow-300'; break; // Brighter yellow
+                case 'info': typeClass = 'text-blue-500 dark:text-blue-400'; break; // Brighter blue
             }
             statusLine.className = `py-0.5 ${typeClass}`;
             statusLine.textContent = `[${timestamp}] ${message}`;
-            const initialMsg = statusPanel.querySelector('div:only-child.text-gray-400');
+            const initialMsg = statusPanel.querySelector('div:only-child.text-gray-400, div:only-child.dark\\:text-dm-text-muted');
             if (initialMsg && initialMsg.textContent.includes('Waiting')) {
                 statusPanel.innerHTML = '';
             }
@@ -357,7 +387,7 @@
                  localStorage.setItem(CUSTOM_TARGET_LANG_KEY, customTargetLanguageInput.value.trim());
                  localStorage.setItem(CONTENT_TYPE_KEY, contentTypeSelect.value);
                  localStorage.setItem(CUSTOM_CONTENT_TYPE_KEY, customContentTypeInput.value.trim());
-                 localStorage.setItem(TEMPERATURE_KEY, temperatureInput.value); // NEW Save Temperature
+                 localStorage.setItem(TEMPERATURE_KEY, temperatureInput.value);
                  updateCurrentModelDisplay();
              } catch (e) {
                  console.error("LocalStorage Error (Save):", e);
@@ -380,26 +410,21 @@
                 customContentTypeInput.value = localStorage.getItem(CUSTOM_CONTENT_TYPE_KEY) || '';
                 toggleCustomInput(contentTypeSelect, customContentTypeInput);
 
-                // NEW: Load Temperature
                 const savedTemp = localStorage.getItem(TEMPERATURE_KEY);
                 const tempValue = savedTemp !== null ? parseFloat(savedTemp) : DEFAULT_TEMPERATURE;
-                // Clamp value just in case invalid data was stored
                 const clampedTempValue = Math.max(0.0, Math.min(2.0, tempValue));
                 temperatureInput.value = clampedTempValue.toFixed(2);
                 temperatureSlider.value = clampedTempValue.toFixed(2);
                 temperatureDisplay.textContent = clampedTempValue.toFixed(2);
-                // End NEW
 
                 updateCurrentModelDisplay();
             } catch (e) {
                 console.error("LocalStorage Error (Load):", e);
                 updateStatus("Could not load saved settings from local storage.", "warning");
                 modelIdInput.value = DEFAULT_MODEL;
-                // NEW: Ensure default temp on error
                 temperatureInput.value = DEFAULT_TEMPERATURE.toFixed(2);
                 temperatureSlider.value = DEFAULT_TEMPERATURE.toFixed(2);
                 temperatureDisplay.textContent = DEFAULT_TEMPERATURE.toFixed(2);
-                // End NEW
                 updateCurrentModelDisplay();
             }
         }
@@ -408,8 +433,55 @@
             currentModelDisplay.textContent = modelIdInput.value.trim() || DEFAULT_MODEL;
         }
 
+        // --- Theme Management ---
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                htmlElement.classList.add('dark');
+                themeToggleIcon.setAttribute('data-feather', 'sun');
+                themeToggleButton.classList.remove('bg-primary');
+                themeToggleButton.classList.add('dark:bg-primary-light'); // Ensure correct dark bg
+                themeToggleButton.classList.remove('text-white');
+                themeToggleButton.classList.add('dark:text-black'); // Ensure correct dark text
+            } else {
+                htmlElement.classList.remove('dark');
+                themeToggleIcon.setAttribute('data-feather', 'moon');
+                themeToggleButton.classList.add('bg-primary'); // Ensure correct light bg
+                themeToggleButton.classList.remove('dark:bg-primary-light');
+                themeToggleButton.classList.add('text-white'); // Ensure correct light text
+                themeToggleButton.classList.remove('dark:text-black');
+            }
+            feather.replace();
+        }
+
+        function toggleTheme() {
+            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+            try {
+                localStorage.setItem(THEME_KEY, newTheme);
+            } catch (e) {
+                console.error("LocalStorage Error (Theme Save):", e);
+                updateStatus("Could not save theme preference.", "warning");
+            }
+        }
+
+        function loadTheme() {
+            let savedTheme = 'dark'; // Default to dark
+            try {
+                const storedTheme = localStorage.getItem(THEME_KEY);
+                if (storedTheme === 'light') {
+                    savedTheme = 'light';
+                }
+            } catch (e) {
+                console.error("LocalStorage Error (Theme Load):", e);
+                updateStatus("Could not load theme preference, defaulting to dark.", "warning");
+            }
+            applyTheme(savedTheme);
+        }
+
         // --- Event Listeners ---
         document.addEventListener('DOMContentLoaded', () => {
+            loadTheme();
             loadSettings();
             feather.replace();
         });
@@ -421,15 +493,11 @@
         contentTypeSelect.addEventListener('change', () => { toggleCustomInput(contentTypeSelect, customContentTypeInput); saveSettings(); });
         customContentTypeInput.addEventListener('change', saveSettings);
 
-        // NEW: Temperature Input/Slider Synchronization and Saving
         temperatureInput.addEventListener('input', () => {
             let value = parseFloat(temperatureInput.value);
-            if (isNaN(value)) {
-                value = DEFAULT_TEMPERATURE; // Fallback if input is invalid
-            }
-            // Clamp value between 0.0 and 2.0
+            if (isNaN(value)) { value = DEFAULT_TEMPERATURE; }
             value = Math.max(0.0, Math.min(2.0, value));
-            temperatureInput.value = value.toFixed(2); // Update input field with clamped/formatted value
+            temperatureInput.value = value.toFixed(2);
             temperatureSlider.value = value.toFixed(2);
             temperatureDisplay.textContent = value.toFixed(2);
             saveSettings();
@@ -441,7 +509,6 @@
             temperatureDisplay.textContent = value.toFixed(2);
             saveSettings();
         });
-        // End NEW
 
         toggleApiKey.addEventListener('click', () => {
             const type = apiKeyInput.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -457,16 +524,18 @@
                     ? `${file.name.substring(0, 18)}...${file.name.substring(file.name.length - 18)}`
                     : file.name;
                 fileNameDisplay.textContent = `Selected: ${displayName} (${(file.size / 1024).toFixed(1)} KB)`;
-                fileNameDisplay.classList.remove('text-gray-600');
-                fileNameDisplay.classList.add('text-primary-dark', 'font-semibold');
+                fileNameDisplay.classList.remove('text-gray-600', 'dark:text-dm-text-secondary');
+                fileNameDisplay.classList.add('text-primary-dark', 'dark:text-primary-light', 'font-semibold');
             } else {
                 fileNameDisplay.textContent = 'No file selected';
-                fileNameDisplay.classList.add('text-gray-600');
-                fileNameDisplay.classList.remove('text-primary-dark', 'font-semibold');
+                fileNameDisplay.classList.add('text-gray-600', 'dark:text-dm-text-secondary');
+                fileNameDisplay.classList.remove('text-primary-dark', 'dark:text-primary-light', 'font-semibold');
             }
             downloadSection.classList.add('hidden');
             translatedContent = null;
         });
+
+        themeToggleButton.addEventListener('click', toggleTheme);
 
         // --- Wake Lock Functions ---
         const requestWakeLock = async () => {
@@ -513,28 +582,24 @@
             statusPanel.innerHTML = '';
             updateStatus('Starting translation process...', 'info');
 
-            // --- Get Form Values ---
             const apiKey = apiKeyInput.value.trim();
             const modelId = modelIdInput.value.trim() || DEFAULT_MODEL;
             const file = fileInput.files[0];
             let targetLanguage = targetLanguageSelect.value === 'Other' ? customTargetLanguageInput.value.trim() : targetLanguageSelect.value;
             let contentType = contentTypeSelect.value === 'Other' ? customContentTypeInput.value.trim() : contentTypeSelect.value;
             const optionalNotes = optionalNotesInput.value.trim();
-            const temperature = parseFloat(temperatureInput.value) || DEFAULT_TEMPERATURE; // NEW: Get temperature
+            const temperature = parseFloat(temperatureInput.value) || DEFAULT_TEMPERATURE;
 
-            // --- Basic Validation ---
             let valid = true;
             if (!apiKey) { updateStatus('API Key is required.', 'error'); valid = false; }
             if (!modelId) { updateStatus('Model ID is required.', 'error'); valid = false; }
             if (!file) { updateStatus('Please select a subtitle file.', 'error'); valid = false; }
             if (!targetLanguage) { updateStatus('Target Language is required (Specify if "Other").', 'error'); valid = false; }
             if (!contentType) { updateStatus('Content Type is required (Specify if "Other").', 'error'); valid = false; }
-            // NEW: Validate temperature range (although input should handle it)
             if (isNaN(temperature) || temperature < 0.0 || temperature > 2.0) {
                 updateStatus('Invalid Temperature value. Must be between 0.0 and 2.0.', 'error');
                 valid = false;
             }
-            // End NEW
 
             if (!valid) {
                 setButtonLoading(false);
@@ -552,7 +617,6 @@
 
             updateStatus(`Reading file: ${originalFilename}...`, 'info');
 
-            // --- Read File Content ---
             const reader = new FileReader();
             reader.onload = async (e) => {
                 const fileContent = e.target.result;
@@ -562,12 +626,10 @@
                     return;
                 }
 
-                // UPDATED Status message to include Temperature
                 updateStatus(`File read (${(file.size / 1024).toFixed(1)} KB). Target=${targetLanguage}, Type=${contentType}, Model=${modelId}, Temp=${temperature.toFixed(2)}.`, 'info');
                  if (optionalNotes) updateStatus(`Optional notes provided.`, 'info');
                  updateStatus(`Safety filters set to BLOCK_NONE for all categories.`, 'warning');
 
-                // --- Construct the Prompt (No changes needed here) ---
                 let system_prompt = `You are an expert subtitle translator specializing in translating {contentType} content into fluent, natural-sounding {targetLanguage}.
 Your task is to translate the provided subtitle file content ({fileExtension} format).
 
@@ -592,7 +654,6 @@ Translate the following subtitle content:
 
                 updateStatus('Preparing request for Gemini API...', 'info');
 
-                // --- Prepare API Request Data ---
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent?key=${apiKey}`;
                 const requestData = {
                     systemInstruction: {
@@ -604,7 +665,7 @@ Translate the following subtitle content:
                     }],
                     generationConfig: {
                         responseMimeType: 'text/plain',
-                        temperature: temperature // UPDATED: Use the selected temperature
+                        temperature: temperature
                     },
                     safetySettings: [
                         { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
@@ -614,12 +675,9 @@ Translate the following subtitle content:
                     ]
                 };
 
-                // --- Request Wake Lock ---
                 await requestWakeLock();
-
                 updateStatus(`Sending request to Gemini API (${modelId})...${wakeLock ? ' (Screen kept active)' : ''}`, 'info');
 
-                 // --- Make API Call ---
                  try {
                     const response = await fetch(apiUrl, {
                         method: 'POST',
@@ -643,7 +701,6 @@ Translate the following subtitle content:
                     updateStatus('Response received, processing...', 'info');
                     translatedContent = null;
 
-                    // --- Parse Response ---
                     try {
                         const responseData = JSON.parse(responseBody);
                         const candidates = responseData?.candidates;
@@ -675,7 +732,6 @@ Translate the following subtitle content:
                         translatedContent = null;
                     }
 
-                    // --- Final Check and UI Update ---
                     if (translatedContent && translatedContent.trim().length > 0) {
                         let looksValid = true;
                         if (fileExtension === 'srt' && !translatedContent.match(/^\d+\s*\n\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}/m)) {
@@ -694,7 +750,7 @@ Translate the following subtitle content:
                              downloadSection.classList.remove('hidden');
                         }
                     } else if (!translatedContent) {
-                        // Status already updated during parsing
+                        // Status already updated
                     } else {
                          updateStatus('Received empty or whitespace-only translation.', 'warning');
                     }
@@ -706,7 +762,7 @@ Translate the following subtitle content:
                     setButtonLoading(false);
                     await releaseWakeLock();
                 }
-            }; // end reader.onload
+            };
 
             reader.onerror = (e) => {
                 updateStatus(`Error reading file: ${e.target.error}`, 'error');
@@ -716,7 +772,7 @@ Translate the following subtitle content:
 
             reader.readAsText(file, 'UTF-8');
 
-        }); // end form submit
+        });
 
         // --- Download Button Click ---
         downloadButton.addEventListener('click', () => {
@@ -736,7 +792,7 @@ Translate the following subtitle content:
             const outputFilename = `${baseName}_${langCode}.${fileExtension}`;
 
             try {
-                const BOM = "\uFEFF"; // UTF-8 BOM for better compatibility
+                const BOM = "\uFEFF";
                 const blob = new Blob([BOM + translatedContent], { type: 'text/plain;charset=utf-8' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
@@ -749,9 +805,6 @@ Translate the following subtitle content:
                  console.error("Download Error:", e);
             }
         });
-
-        // Initial call to setup icons
-        feather.replace();
 
     </script>
 </body>
