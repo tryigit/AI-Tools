@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="apple-touch-icon" sizes="180x180" href="/ai/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/ai/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/ai/favicon-16x16.png">
+<link rel="manifest" href="/ai/site.webmanifest">
+<link rel="shortcut icon" href="/ai/favicon.ico">
     <!-- SEO Meta Tags -->
     <title>Future of Translations | AI Subtitle Translator | Gemini Powered</title>
     <meta name="description" content="Translate .srt, .ass, or .txt subtitle files professionally using Google Gemini AI. Customize temperature for balance between quality and fluency. Preserves timing & format.">
