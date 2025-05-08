@@ -3,7 +3,7 @@ Tools to customize and effortlessly use advanced AI API's. Runs entirely on the 
 
 # Current Projects:
 ## [AI Subtitle Translator](https://tryigit.dev/ai/stranslate/)
-**V1.0.1**
+**V1.1.0**
 
 ## [AI Article Generator](https://tryigit.dev/ai/article/)
 **V1.0.1**
