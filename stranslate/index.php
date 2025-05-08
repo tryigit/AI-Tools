@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="180x180" href="/ai/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/ai/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/ai/favicon-16x16.png">
-<link rel="manifest" href="/ai/site.webmanifest">
-<link rel="shortcut icon" href="/ai/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/ai/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/ai/favicon-16x16.png">
+    <link rel="manifest" href="/ai/site.webmanifest">
+    <link rel="shortcut icon" href="/ai/favicon.ico">
     <!-- SEO Meta Tags -->
     <title>Future of Translations | AI Subtitle Translator | Gemini Powered</title>
-    <meta name="description" content="Translate .srt, .ass, or .txt subtitle files professionally using Google Gemini AI. Customize temperature for balance between quality and fluency. Preserves timing & format.">
-    <meta name="keywords" content="subtitle translator, ai translation, gemini api, gemini, srt translator, ass translator, text translator, ai subtitle, machine translation, localization, global, professional translation, tryigit, screen wake lock, temperature setting, translation quality, translation fluency">
+    <meta name="description" content="Translate .srt, .ass, or .txt subtitle files (including from .zip & .xz archives) professionally using Google Gemini AI. Customize temperature for balance between quality and fluency. Preserves timing & format.">
+    <meta name="keywords" content="subtitle translator, ai translation, gemini api, gemini, srt translator, ass translator, text translator, zip subtitle, xz subtitle, archive translation, ai subtitle, machine translation, localization, global, professional translation, tryigit, screen wake lock, temperature setting, translation quality, translation fluency">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://tryigit.dev/ai/translate" />
 
@@ -37,28 +37,27 @@
                         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
                     },
                     colors: {
-                        primary: { light: '#9333ea', DEFAULT: '#6d28d9', dark: '#5b21b6' }, // Adjusted light primary for better contrast on black
+                        primary: { light: '#9333ea', DEFAULT: '#6d28d9', dark: '#5b21b6' },
                         secondary: { light: '#2dd4bf', DEFAULT: '#14b8a6', dark: '#0d9488' },
-                        // True Black Theme Colors
-                        'dm-bg': '#000000', // True black background
-                        'dm-card': '#111111', // Very dark gray for cards/fieldsets
-                        'dm-text-primary': '#e5e5e5', // Light gray for primary text (slightly brighter)
-                        'dm-text-secondary': '#a3a3a3', // Medium gray for secondary text
-                        'dm-text-muted': '#737373', // Darker gray for muted text
-                        'dm-border': '#333333', // Subtle border color
-                        'dm-input-bg': '#1a1a1a', // Slightly lighter than card for inputs
-                        'dm-input-border': '#404040', // Slightly lighter border for inputs
-                        'dm-input-placeholder': '#737373', // Muted text color for placeholders
-                        'dm-status-bg': '#0a0a0a', // Very dark, almost black status panel
+                        'dm-bg': '#000000',
+                        'dm-card': '#111111',
+                        'dm-text-primary': '#e5e5e5',
+                        'dm-text-secondary': '#a3a3a3',
+                        'dm-text-muted': '#737373',
+                        'dm-border': '#333333',
+                        'dm-input-bg': '#1a1a1a',
+                        'dm-input-border': '#404040',
+                        'dm-input-placeholder': '#737373',
+                        'dm-status-bg': '#0a0a0a',
                         'dm-status-border': '#2a2a2a',
-                        'dm-status-text': '#cccccc', // Default status text
+                        'dm-status-text': '#cccccc',
                     },
                     boxShadow: {
                          'input-focus': '0 0 0 3px rgba(109, 40, 217, 0.3)',
                          'btn': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
                          'btn-hover': '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-                         'dark-input-focus': '0 0 0 3px rgba(147, 51, 234, 0.5)', // primary-light/50
-                         'dark-btn': '0 4px 6px -1px rgba(255, 255, 255, 0.05), 0 2px 4px -2px rgba(255, 255, 255, 0.05)', // Subtle glow for buttons on black
+                         'dark-input-focus': '0 0 0 3px rgba(147, 51, 234, 0.5)',
+                         'dark-btn': '0 4px 6px -1px rgba(255, 255, 255, 0.05), 0 2px 4px -2px rgba(255, 255, 255, 0.05)',
                          'dark-btn-hover': '0 10px 15px -3px rgba(255, 255, 255, 0.07), 0 4px 6px -4px rgba(255, 255, 255, 0.07)',
                     }
                 },
@@ -81,16 +80,16 @@
                  -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 2.8rem;
              }
              html.dark select {
-                 background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a3a3a3' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e"); /* dm-text-secondary */
+                 background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a3a3a3' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
              }
             textarea { @apply min-h-[90px] leading-relaxed; }
-            fieldset { @apply border border-gray-200 rounded-lg p-5 pt-3 dark:border-dm-border dark:bg-dm-card; } /* Added dark bg */
+            fieldset { @apply border border-gray-200 rounded-lg p-5 pt-3 dark:border-dm-border dark:bg-dm-card; }
             legend { @apply px-2 text-base font-semibold text-gray-800 dark:text-dm-text-primary; }
             .description { @apply mt-1.5 text-xs text-gray-600 dark:text-dm-text-muted; }
-            .description a { @apply text-primary font-medium hover:text-primary-dark hover:underline dark:text-primary-light dark:hover:text-purple-400; } /* Adjusted dark hover */
-            .warning { @apply text-amber-600 dark:text-yellow-400 font-medium; } /* Adjusted dark warning */
+            .description a { @apply text-primary font-medium hover:text-primary-dark hover:underline dark:text-primary-light dark:hover:text-purple-400; }
+            .warning { @apply text-amber-600 dark:text-yellow-400 font-medium; }
             #statusPanel::-webkit-scrollbar { width: 6px; }
-            #statusPanel::-webkit-scrollbar-track { @apply bg-dm-status-border rounded; } /* Use status border */
+            #statusPanel::-webkit-scrollbar-track { @apply bg-dm-status-border rounded; }
             #statusPanel::-webkit-scrollbar-thumb { @apply bg-gray-600 dark:bg-gray-700 rounded; }
             #statusPanel::-webkit-scrollbar-thumb:hover { @apply bg-gray-500 dark:bg-gray-600; }
             input[type="range"]::-webkit-slider-thumb {
@@ -107,18 +106,27 @@
             input[type="range"] {
                  @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-primary/50 dark:focus:ring-primary-light/50 dark:focus:ring-offset-dm-bg;
             }
+            .custom-checkbox {
+                @apply w-5 h-5 text-primary dark:text-primary-light bg-white dark:bg-dm-input-bg border-gray-300 dark:border-dm-input-border rounded focus:ring-primary dark:focus:ring-primary-light focus:ring-offset-0 dark:focus:ring-offset-dm-card;
+            }
+            .custom-checkbox:checked {
+                @apply bg-primary dark:bg-primary-light border-primary dark:border-primary-light;
+            }
+             .archive-file-item {
+                @apply flex items-center justify-between p-2.5 rounded-md bg-gray-50 dark:bg-dm-input-bg hover:bg-gray-100 dark:hover:bg-opacity-75 cursor-pointer transition-colors duration-150; /* Padding reduced to p-2.5 */
+            }
         }
         @layer components {
             .file-input-area { @apply relative block w-full p-6 text-center border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 hover:border-primary/70 transition-colors duration-200 ease-in-out
-                                   dark:bg-dm-card dark:border-dm-border dark:hover:bg-opacity-75 dark:hover:border-primary-light/70; } /* Adjusted dark hover */
+                                   dark:bg-dm-card dark:border-dm-border dark:hover:bg-opacity-75 dark:hover:border-primary-light/70; }
             .file-input-area .icon { @apply w-10 h-10 mx-auto text-gray-400 group-hover:text-primary/80 transition-colors dark:text-dm-text-muted dark:group-hover:text-primary-light/80; }
             .file-input-area .text-main { @apply mt-2 block text-sm font-semibold text-gray-700 dark:text-dm-text-secondary; }
             .file-input-area .text-sub { @apply block text-xs text-gray-500 dark:text-dm-text-muted; }
             .file-input-area input[type="file"] { @apply absolute inset-0 w-full h-full opacity-0 cursor-pointer; }
             .btn { @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg shadow-btn focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-150 ease-in-out disabled:opacity-60 disabled:cursor-not-allowed dark:focus:ring-offset-dm-bg dark:shadow-dark-btn; }
             .btn:hover:not(:disabled) { @apply dark:shadow-dark-btn-hover; }
-            .btn-primary { @apply btn text-white bg-primary hover:bg-primary-dark focus:ring-primary dark:bg-primary dark:hover:bg-primary-dark; } /* Ensure dark bg uses primary */
-            .btn-secondary { @apply btn text-white bg-secondary hover:bg-secondary-dark focus:ring-secondary dark:bg-secondary dark:hover:bg-secondary-dark; } /* Ensure dark bg uses secondary */
+            .btn-primary { @apply btn text-white bg-primary hover:bg-primary-dark focus:ring-primary dark:bg-primary dark:hover:bg-primary-dark; }
+            .btn-secondary { @apply btn text-white bg-secondary hover:bg-secondary-dark focus:ring-secondary dark:bg-secondary dark:hover:bg-secondary-dark; }
              @keyframes spin { to { transform: rotate(360deg); } }
              .spinner { animation: spin 1s linear infinite; @apply inline-block w-5 h-5 border-[3px] border-current border-t-transparent rounded-full; }
         }
@@ -126,6 +134,16 @@
     <!-- Reklam kodu -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1500862170490490"
      crossorigin="anonymous"></script>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B1N2MBK3GT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-B1N2MBK3GT');
+</script>
+<!-- End Google Analytics -->
 </head>
 <body class="bg-gray-100 dark:bg-dm-bg">
 
@@ -135,7 +153,7 @@
                  Future of Subtitle Translations <span class="text-primary dark:text-primary-light">AI</span>
              </h1>
              <p class="mt-3 text-lg text-gray-600 dark:text-dm-text-secondary max-w-2xl mx-auto">
-                 Translate subtitles effortlessly while preserving timing and quality, powered by Google Gemini.
+                 Translate subtitles effortlessly (SRT, ASS, TXT, ZIP, XZ) while preserving timing and quality, powered by Google Gemini.
              </p>
          </header>
 
@@ -212,14 +230,24 @@
              <fieldset>
                 <legend>Input File</legend>
                 <div class="mt-4">
-                    <label for="subtitleFile" class="sr-only">Subtitle File (.srt, .ass, .txt)</label>
+                    <label for="subtitleFile" class="sr-only">Subtitle File (.srt, .ass, .txt, .zip, .xz)</label>
                     <label for="subtitleFile" class="file-input-area group">
                         <i data-feather="upload-cloud" class="icon"></i>
                          <span class="text-main">Click to upload or drag & drop</span>
-                         <span class="text-sub">Supports .SRT, .ASS, and .TXT files</span>
-                         <input type="file" id="subtitleFile" name="subtitleFile" accept=".srt,.ass,.txt" required>
+                         <span class="text-sub">Supports .SRT, .ASS, .TXT, .ZIP, .XZ files</span>
+                         <input type="file" id="subtitleFile" name="subtitleFile" accept=".srt,.ass,.txt,.zip,.xz,.tar.gz,.gz,.tar.xz,.7z" required>
                      </label>
                      <div id="fileNameDisplay" class="mt-3 text-sm font-medium text-gray-600 dark:text-dm-text-secondary text-center truncate px-2">No file selected</div>
+                </div>
+                <div id="archiveContentsDisplay" class="mt-4 hidden">
+                    <label class="block mb-2 text-sm font-semibold text-gray-700 dark:text-dm-text-secondary">Files in archive (select .srt/.ass to translate):</label>
+                    <div id="archiveFilesList" class="max-h-60 overflow-y-auto space-y-1.5 rounded-lg border border-gray-300 dark:border-dm-border p-2 bg-white dark:bg-dm-input-bg shadow-sm">
+                        <!-- File items will be dynamically added here -->
+                    </div>
+                    <div class="mt-2.5 flex justify-between items-center px-1">
+                        <button type="button" id="selectAllArchiveFiles" class="text-xs font-medium text-primary dark:text-primary-light hover:underline focus:outline-none">Select All</button>
+                        <button type="button" id="deselectAllArchiveFiles" class="text-xs font-medium text-primary dark:text-primary-light hover:underline focus:outline-none">Deselect All</button>
+                    </div>
                 </div>
             </fieldset>
 
@@ -258,18 +286,26 @@
 
         <!-- Status Panel -->
         <div class="mt-10">
-            <label for="statusPanel" class="block mb-2 text-base font-semibold text-gray-800 dark:text-dm-text-primary">Processing Status</label>
+            <label for="statusPanel" class="block mb-2 text-base font-semibold text-gray-800 dark:text-dm-text-primary">Processing Log</label>
             <div id="statusPanel" class="h-56 p-4 overflow-y-auto rounded-lg bg-gray-900 text-gray-200 border border-gray-700 dark:bg-dm-status-bg dark:text-dm-status-text dark:border-dm-status-border font-mono text-sm shadow-inner leading-relaxed">
-                <div class="text-gray-400 dark:text-dm-text-muted">Waiting for input...</div>
+                <div class="text-gray-400 dark:text-dm-text-muted">Awaiting your command...</div>
             </div>
         </div>
 
         <!-- Download Section -->
-        <div id="downloadSection" class="mt-6 hidden">
-            <button id="downloadButton" class="w-full btn-secondary">
-                 <i data-feather="download" class="w-5 h-5 mr-2"></i>
-                 Download Translated File
-            </button>
+        <div id="downloadSection" class="mt-8 hidden space-y-4">
+            <div>
+                <button id="downloadAllButton" class="w-full btn-secondary">
+                    <i data-feather="download-cloud" class="w-5 h-5 mr-2"></i>
+                    <span id="downloadAllButtonText">Download Results</span>
+                </button>
+            </div>
+            <div id="individualDownloadsContainer" class="hidden">
+                <p class="text-sm font-medium text-gray-700 dark:text-dm-text-secondary mb-2">Individual translated files:</p>
+                <div id="individualDownloadsList" class="space-y-2 max-h-48 overflow-y-auto rounded-md border border-gray-300 dark:border-dm-border p-3 bg-gray-50 dark:bg-dm-card">
+                    <!-- Individual download links/buttons will appear here -->
+                </div>
+            </div>
         </div>
 
          <footer class="mt-10 pt-6 border-t border-gray-200 dark:border-dm-border text-center text-xs text-gray-500 dark:text-dm-text-muted">
@@ -281,6 +317,10 @@
     <button id="themeToggleButton" title="Toggle Theme" class="fixed bottom-5 right-5 z-50 p-2.5 rounded-full bg-primary dark:bg-primary-light text-white dark:text-black shadow-lg hover:opacity-90 transition-opacity">
         <i data-feather="sun" class="w-5 h-5"></i>
     </button>
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xz-wasm/dist/xz.min.js"></script>
 
     <script>
         // --- JavaScript Code ---
@@ -308,13 +348,22 @@
         const submitButtonSpinner = submitButton.querySelector('.spinner');
         const statusPanel = document.getElementById('statusPanel');
         const downloadSection = document.getElementById('downloadSection');
-        const downloadButton = document.getElementById('downloadButton');
+        const downloadAllButton = document.getElementById('downloadAllButton');
+        const downloadAllButtonText = document.getElementById('downloadAllButtonText');
+        const individualDownloadsContainer = document.getElementById('individualDownloadsContainer');
+        const individualDownloadsList = document.getElementById('individualDownloadsList');
         const themeToggleButton = document.getElementById('themeToggleButton');
         const themeToggleIcon = themeToggleButton.querySelector('i');
         const htmlElement = document.documentElement;
 
+        const archiveContentsDisplay = document.getElementById('archiveContentsDisplay');
+        const archiveFilesList = document.getElementById('archiveFilesList');
+        const selectAllArchiveFilesButton = document.getElementById('selectAllArchiveFiles');
+        const deselectAllArchiveFilesButton = document.getElementById('deselectAllArchiveFiles');
+
+
         // --- localStorage Keys ---
-        const STORAGE_PREFIX = 'aiSubtitleTranslator_v5_'; // Incremented version for new theme defaults
+        const STORAGE_PREFIX = 'aiSubtitleTranslator_v6_';
         const API_KEY_KEY = STORAGE_PREFIX + 'apiKey';
         const MODEL_ID_KEY = STORAGE_PREFIX + 'modelId';
         const TARGET_LANG_KEY = STORAGE_PREFIX + 'targetLanguage';
@@ -325,11 +374,11 @@
         const THEME_KEY = STORAGE_PREFIX + 'theme';
 
         // --- State Variables ---
-        let translatedContent = null;
-        let originalFilename = '';
-        let fileExtension = '';
+        let processedResults = [];
+        let currentArchiveEntries = [];
         const DEFAULT_MODEL = 'gemini-2.5-pro-exp-03-25';
         const DEFAULT_TEMPERATURE = 0.45;
+        let isXZWasmLoaded = false;
 
         // --- Wake Lock Variable ---
         let wakeLock = null;
@@ -338,23 +387,47 @@
         function updateStatus(message, type = 'info') {
             const timestamp = new Date().toLocaleTimeString('en-GB');
             const statusLine = document.createElement('div');
-            // Adjusted dark mode colors for better contrast on near-black status panel
             let typeClass = 'text-gray-400 dark:text-dm-text-muted';
-             switch (type) {
-                case 'success': typeClass = 'text-green-500 dark:text-green-400'; break; // Brighter green
-                case 'error': typeClass = 'text-red-500 dark:text-red-400 font-semibold'; break; // Brighter red
-                case 'warning': typeClass = 'text-yellow-500 dark:text-yellow-300'; break; // Brighter yellow
-                case 'info': typeClass = 'text-blue-500 dark:text-blue-400'; break; // Brighter blue
+            let icon = '';
+
+            switch (type) {
+                case 'success':
+                    typeClass = 'text-green-500 dark:text-green-400';
+                    icon = '<i data-feather="check-circle" class="inline-block w-4 h-4 mr-1.5 -mt-0.5"></i>';
+                    break;
+                case 'error':
+                    typeClass = 'text-red-500 dark:text-red-400 font-semibold';
+                    icon = '<i data-feather="alert-triangle" class="inline-block w-4 h-4 mr-1.5 -mt-0.5"></i>';
+                    break;
+                case 'warning':
+                    typeClass = 'text-yellow-500 dark:text-yellow-400';
+                    icon = '<i data-feather="alert-circle" class="inline-block w-4 h-4 mr-1.5 -mt-0.5"></i>';
+                    break;
+                case 'info':
+                    typeClass = 'text-blue-500 dark:text-blue-400';
+                    icon = '<i data-feather="info" class="inline-block w-4 h-4 mr-1.5 -mt-0.5"></i>';
+                    break;
+                case 'system':
+                     typeClass = 'text-purple-500 dark:text-purple-400';
+                     icon = '<i data-feather="tool" class="inline-block w-4 h-4 mr-1.5 -mt-0.5"></i>';
+                     break;
+                 case 'api':
+                     typeClass = 'text-cyan-500 dark:text-cyan-400';
+                     icon = '<i data-feather="send" class="inline-block w-4 h-4 mr-1.5 -mt-0.5"></i>';
+                     break;
             }
             statusLine.className = `py-0.5 ${typeClass}`;
-            statusLine.textContent = `[${timestamp}] ${message}`;
+            statusLine.innerHTML = `${icon}[${timestamp}] ${message}`;
+
             const initialMsg = statusPanel.querySelector('div:only-child.text-gray-400, div:only-child.dark\\:text-dm-text-muted');
-            if (initialMsg && initialMsg.textContent.includes('Waiting')) {
+            if (initialMsg && (initialMsg.textContent.includes('Awaiting your command...') || initialMsg.textContent.includes('Waiting for input...'))) {
                 statusPanel.innerHTML = '';
             }
             statusPanel.appendChild(statusLine);
             statusPanel.scrollTop = statusPanel.scrollHeight;
+            if (icon) feather.replace();
         }
+
 
          function setButtonLoading(isLoading) {
              submitButton.disabled = isLoading;
@@ -424,7 +497,7 @@
                 updateCurrentModelDisplay();
             } catch (e) {
                 console.error("LocalStorage Error (Load):", e);
-                updateStatus("Could not load saved settings from local storage.", "warning");
+                updateStatus("Could not load settings. Using defaults.", "warning");
                 modelIdInput.value = DEFAULT_MODEL;
                 temperatureInput.value = DEFAULT_TEMPERATURE.toFixed(2);
                 temperatureSlider.value = DEFAULT_TEMPERATURE.toFixed(2);
@@ -443,15 +516,15 @@
                 htmlElement.classList.add('dark');
                 themeToggleIcon.setAttribute('data-feather', 'sun');
                 themeToggleButton.classList.remove('bg-primary');
-                themeToggleButton.classList.add('dark:bg-primary-light'); // Ensure correct dark bg
+                themeToggleButton.classList.add('dark:bg-primary-light');
                 themeToggleButton.classList.remove('text-white');
-                themeToggleButton.classList.add('dark:text-black'); // Ensure correct dark text
+                themeToggleButton.classList.add('dark:text-black');
             } else {
                 htmlElement.classList.remove('dark');
                 themeToggleIcon.setAttribute('data-feather', 'moon');
-                themeToggleButton.classList.add('bg-primary'); // Ensure correct light bg
+                themeToggleButton.classList.add('bg-primary');
                 themeToggleButton.classList.remove('dark:bg-primary-light');
-                themeToggleButton.classList.add('text-white'); // Ensure correct light text
+                themeToggleButton.classList.add('text-white');
                 themeToggleButton.classList.remove('dark:text-black');
             }
             feather.replace();
@@ -470,7 +543,7 @@
         }
 
         function loadTheme() {
-            let savedTheme = 'dark'; // Default to dark
+            let savedTheme = 'dark';
             try {
                 const storedTheme = localStorage.getItem(THEME_KEY);
                 if (storedTheme === 'light') {
@@ -478,16 +551,166 @@
                 }
             } catch (e) {
                 console.error("LocalStorage Error (Theme Load):", e);
-                updateStatus("Could not load theme preference, defaulting to dark.", "warning");
+                updateStatus("Theme preference issue. Defaulting to dark.", "warning");
             }
             applyTheme(savedTheme);
         }
+
+        // --- Archive Handling ---
+        async function decompressXZ(file) {
+            if (!isXZWasmLoaded || !window.XZWASM || !window.XZWASM.XzReadableStream) {
+                throw new Error("XZ decompression library (XZWASM) is not available or failed to load. Your browser probably doesn't support it, or an extension could be blocking resources from 'cdn.jsdelivr.net'. Please check your internet connection, try disabling browser extensions, or manually decompress the .xz file before uploading.");
+            }
+            const { XzReadableStream } = window.XZWASM;
+            const xzReadableStream = new XzReadableStream(file.stream());
+            const decompressedBlob = await new Response(xzReadableStream).blob();
+            return decompressedBlob;
+        }
+
+        async function processUploadedFile(file) {
+            currentArchiveEntries = [];
+            archiveFilesList.innerHTML = '';
+            archiveContentsDisplay.classList.add('hidden');
+
+            const fileName = file.name;
+            const fileType = fileName.split('.').pop().toLowerCase();
+            const secondLastExt = fileName.split('.').slice(-2).join('.');
+
+            if (['zip', 'xz', 'gz', 'tar.gz', 'tar.xz', '7z'].includes(fileType) || ['tar.gz', 'tar.xz'].includes(secondLastExt)) {
+                updateStatus(`Processing archive: ${fileName}...`, 'info');
+                try {
+                    let archive;
+                    let entries = [];
+
+                    if (fileType === 'zip') {
+                        archive = await JSZip.loadAsync(file);
+                        for (const [relativePath, zipEntry] of Object.entries(archive.files)) {
+                            if (!zipEntry.dir) {
+                                const entryName = zipEntry.name;
+                                const entryExt = entryName.split('.').pop().toLowerCase();
+                                if (['srt', 'ass'].includes(entryExt)) {
+                                    entries.push({
+                                        name: entryName,
+                                        dataGetter: async () => zipEntry.async('string'),
+                                        type: entryExt
+                                    });
+                                }
+                            }
+                        }
+                    } else if (fileType === 'xz' && !fileName.endsWith('.tar.xz')) {
+                        if (!isXZWasmLoaded) {
+                             updateStatus("XZ decompression library is not loaded. Cannot process .xz file. Please check previous warnings or try manually decompressing.", "error");
+                             return;
+                        }
+                        const decompressedBlob = await decompressXZ(file);
+                        const entryName = fileName.replace(/\.xz$/, '');
+                        const entryExt = entryName.split('.').pop().toLowerCase();
+                        if (['srt', 'ass'].includes(entryExt)) {
+                             entries.push({
+                                name: entryName,
+                                dataGetter: async () => decompressedBlob.text(),
+                                type: entryExt
+                            });
+                        } else {
+                            updateStatus(`Decompressed .xz file '${entryName}' is not .srt or .ass.`, 'warning');
+                        }
+                    } else {
+                        updateStatus(`Archive type .${fileType} (or ${secondLastExt}) is recognized but internal file extraction is not yet supported. Please extract .srt/.ass files manually first.`, 'warning');
+                        return;
+                    }
+
+
+                    if (entries.length > 0) {
+                        currentArchiveEntries = entries;
+                        populateArchiveFilesList(entries);
+                        archiveContentsDisplay.classList.remove('hidden');
+                        updateStatus(`Found ${entries.length} subtitle file(s) in archive. Select files to translate.`, 'success');
+                    } else {
+                        updateStatus(`No .srt or .ass files found in '${fileName}'.`, 'warning');
+                    }
+                } catch (error) {
+                    updateStatus(`Error processing archive '${fileName}': ${error.message}`, 'error');
+                    console.error("Archive processing error:", error);
+                }
+            } else if (['srt', 'ass', 'txt'].includes(fileType)) {
+                // Single file, handled by main logic
+            } else {
+                updateStatus(`Unsupported file type: .${fileType}. Please upload .srt, .ass, .txt, .zip, or .xz.`, 'error');
+                fileInput.value = '';
+                fileNameDisplay.textContent = 'No file selected';
+            }
+        }
+
+        function populateArchiveFilesList(entries) {
+            archiveFilesList.innerHTML = '';
+            entries.forEach((entry, index) => {
+                const item = document.createElement('div');
+                item.className = 'archive-file-item';
+
+                const textWrapper = document.createElement('div');
+                textWrapper.className = 'flex-grow min-w-0 mr-2'; // min-w-0 is crucial for flex item wrapping
+
+                const fileNameSpan = document.createElement('span');
+                fileNameSpan.className = 'text-sm text-gray-800 dark:text-dm-text-primary break-all'; // Use break-all for aggressive breaking
+                fileNameSpan.textContent = entry.name;
+
+                const fileTypeSpan = document.createElement('span');
+                fileTypeSpan.className = 'text-xs text-gray-500 dark:text-dm-text-muted ml-1 whitespace-nowrap';
+                fileTypeSpan.textContent = ` (.${entry.type})`;
+
+                textWrapper.appendChild(fileNameSpan);
+                textWrapper.appendChild(fileTypeSpan);
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `archiveFile_${index}`;
+                checkbox.dataset.entryIndex = String(index);
+                checkbox.className = 'custom-checkbox flex-shrink-0';
+                checkbox.checked = true;
+
+                item.appendChild(textWrapper);
+                item.appendChild(checkbox);
+                archiveFilesList.appendChild(item);
+
+                item.addEventListener('click', (event) => {
+                    if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox') {
+                        return;
+                    }
+                    const cb = item.querySelector('input[type="checkbox"]');
+                    if (cb) {
+                        cb.checked = !cb.checked;
+                    }
+                });
+            });
+            feather.replace();
+        }
+
+
+        selectAllArchiveFilesButton.addEventListener('click', () => {
+            archiveFilesList.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = true);
+        });
+
+        deselectAllArchiveFilesButton.addEventListener('click', () => {
+            archiveFilesList.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        });
+
 
         // --- Event Listeners ---
         document.addEventListener('DOMContentLoaded', () => {
             loadTheme();
             loadSettings();
             feather.replace();
+
+            setTimeout(() => {
+                if (typeof XZWASM !== 'undefined' && typeof XZWASM.XzReadableStream !== 'undefined') {
+                    isXZWasmLoaded = true;
+                    updateStatus("XZ decompression library (XZWASM) loaded. .xz files can be processed.", "system");
+                } else {
+                    isXZWasmLoaded = false;
+                    console.warn("XZWASM library not loaded or not fully available after page load.");
+                    updateStatus("XZ decompression features might be unavailable. Your browser probably doesn't support it, or an extension is blocking resources from 'cdn.jsdelivr.net'. If .xz support is needed, try disabling extensions, use a different browser, or decompress .xz files manually before uploading.", "warning");
+                }
+            }, 1500);
         });
 
         apiKeyInput.addEventListener('change', saveSettings);
@@ -521,7 +744,15 @@
             feather.replace();
         });
 
-        fileInput.addEventListener('change', () => {
+        fileInput.addEventListener('change', async () => {
+            downloadSection.classList.add('hidden');
+            individualDownloadsContainer.classList.add('hidden');
+            individualDownloadsList.innerHTML = '';
+            processedResults = [];
+            archiveContentsDisplay.classList.add('hidden');
+            archiveFilesList.innerHTML = '';
+            currentArchiveEntries = [];
+
             if (fileInput.files.length > 0) {
                 const file = fileInput.files[0];
                 const displayName = file.name.length > 40
@@ -530,13 +761,12 @@
                 fileNameDisplay.textContent = `Selected: ${displayName} (${(file.size / 1024).toFixed(1)} KB)`;
                 fileNameDisplay.classList.remove('text-gray-600', 'dark:text-dm-text-secondary');
                 fileNameDisplay.classList.add('text-primary-dark', 'dark:text-primary-light', 'font-semibold');
+                await processUploadedFile(file);
             } else {
                 fileNameDisplay.textContent = 'No file selected';
                 fileNameDisplay.classList.add('text-gray-600', 'dark:text-dm-text-secondary');
                 fileNameDisplay.classList.remove('text-primary-dark', 'dark:text-primary-light', 'font-semibold');
             }
-            downloadSection.classList.add('hidden');
-            translatedContent = null;
         });
 
         themeToggleButton.addEventListener('click', toggleTheme);
@@ -546,20 +776,20 @@
             if ('wakeLock' in navigator) {
                 try {
                     wakeLock = await navigator.wakeLock.request('screen');
-                    updateStatus('Screen wake lock activated.', 'info');
+                    updateStatus('Screen kept active during translation.', 'system');
                     wakeLock.addEventListener('release', () => {
                         if (wakeLock) {
-                           updateStatus('Screen wake lock released by browser (e.g., tab hidden).', 'warning');
+                           updateStatus('Screen activity lock released by browser (e.g. tab hidden).', 'warning');
                            wakeLock = null;
                         }
                     });
                 } catch (err) {
                     console.error(`Wake Lock Error: ${err.name}, ${err.message}`);
-                    updateStatus(`Could not acquire screen wake lock: ${err.message}`, 'warning');
+                    updateStatus(`Could not keep screen active: ${err.message}`, 'warning');
                     wakeLock = null;
                 }
             } else {
-                updateStatus('Screen Wake Lock API not supported in this browser.', 'warning');
+                updateStatus('Screen Wake Lock API not supported by this browser.', 'warning');
             }
         };
 
@@ -569,7 +799,7 @@
                 wakeLock = null;
                 try {
                     await tempLock.release();
-                    updateStatus('Screen wake lock released.', 'info');
+                    updateStatus('Screen activity lock no longer needed.', 'system');
                 } catch (err) {
                     console.error(`Wake Lock Release Error: ${err.name}, ${err.message}`);
                 }
@@ -577,64 +807,13 @@
         };
 
 
-        // --- Form Submission ---
-        form.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            setButtonLoading(true);
-            downloadSection.classList.add('hidden');
-            translatedContent = null;
-            statusPanel.innerHTML = '';
-            updateStatus('Starting translation process...', 'info');
+        // --- Core Translation Logic ---
+        async function translateSingleContent(fileContent, originalName, originalExtension, translationParams) {
+            const { apiKey, modelId, targetLanguage, contentType, optionalNotes, temperature } = translationParams;
 
-            const apiKey = apiKeyInput.value.trim();
-            const modelId = modelIdInput.value.trim() || DEFAULT_MODEL;
-            const file = fileInput.files[0];
-            let targetLanguage = targetLanguageSelect.value === 'Other' ? customTargetLanguageInput.value.trim() : targetLanguageSelect.value;
-            let contentType = contentTypeSelect.value === 'Other' ? customContentTypeInput.value.trim() : contentTypeSelect.value;
-            const optionalNotes = optionalNotesInput.value.trim();
-            const temperature = parseFloat(temperatureInput.value) || DEFAULT_TEMPERATURE;
+            updateStatus(`Preparing '${originalName}' for translation to ${targetLanguage}...`, 'info');
 
-            let valid = true;
-            if (!apiKey) { updateStatus('API Key is required.', 'error'); valid = false; }
-            if (!modelId) { updateStatus('Model ID is required.', 'error'); valid = false; }
-            if (!file) { updateStatus('Please select a subtitle file.', 'error'); valid = false; }
-            if (!targetLanguage) { updateStatus('Target Language is required (Specify if "Other").', 'error'); valid = false; }
-            if (!contentType) { updateStatus('Content Type is required (Specify if "Other").', 'error'); valid = false; }
-            if (isNaN(temperature) || temperature < 0.0 || temperature > 2.0) {
-                updateStatus('Invalid Temperature value. Must be between 0.0 and 2.0.', 'error');
-                valid = false;
-            }
-
-            if (!valid) {
-                setButtonLoading(false);
-                return;
-            }
-
-            originalFilename = file.name;
-            fileExtension = originalFilename.split('.').pop()?.toLowerCase();
-
-            if (!['srt', 'ass', 'txt'].includes(fileExtension)) {
-                updateStatus(`Invalid file type: .${fileExtension}. Only .srt, .ass, .txt allowed.`, 'error');
-                setButtonLoading(false);
-                return;
-            }
-
-            updateStatus(`Reading file: ${originalFilename}...`, 'info');
-
-            const reader = new FileReader();
-            reader.onload = async (e) => {
-                const fileContent = e.target.result;
-                if (!fileContent) {
-                    updateStatus('Error: File content is empty or could not be read.', 'error');
-                    setButtonLoading(false);
-                    return;
-                }
-
-                updateStatus(`File read (${(file.size / 1024).toFixed(1)} KB). Target=${targetLanguage}, Type=${contentType}, Model=${modelId}, Temp=${temperature.toFixed(2)}.`, 'info');
-                 if (optionalNotes) updateStatus(`Optional notes provided.`, 'info');
-                 updateStatus(`Safety filters set to BLOCK_NONE for all categories.`, 'warning');
-
-                let system_prompt = `You are an expert subtitle translator specializing in translating {contentType} content into fluent, natural-sounding {targetLanguage}.
+            let system_prompt = `You are an expert subtitle translator specializing in translating {contentType} content into fluent, natural-sounding {targetLanguage}.
 Your task is to translate the provided subtitle file content ({fileExtension} format).
 
 RULES (Strictly Follow):
@@ -651,140 +830,327 @@ RULES (Strictly Follow):
 
 Translate the following subtitle content:
 `;
-                system_prompt = system_prompt.replace(/{contentType}/g, contentType);
-                system_prompt = system_prompt.replace(/{targetLanguage}/g, targetLanguage);
-                system_prompt = system_prompt.replace(/{fileExtension}/g, fileExtension);
-                system_prompt = system_prompt.replace('{optionalNotesSection}', optionalNotes ? `- Additional User Instructions:\n${optionalNotes}` : '');
+            system_prompt = system_prompt.replace(/{contentType}/g, contentType);
+            system_prompt = system_prompt.replace(/{targetLanguage}/g, targetLanguage);
+            system_prompt = system_prompt.replace(/{fileExtension}/g, originalExtension);
+            system_prompt = system_prompt.replace('{optionalNotesSection}', optionalNotes ? `- Additional User Instructions:\n${optionalNotes}` : '');
 
-                updateStatus('Preparing request for Gemini API...', 'info');
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent?key=${apiKey}`;
+            const requestData = {
+                systemInstruction: { parts: [{ text: system_prompt }] },
+                contents: [{ role: 'user', parts: [{ text: fileContent }] }],
+                generationConfig: { responseMimeType: 'text/plain', temperature: temperature },
+                safetySettings: [
+                    { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+                    { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+                    { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+                    { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
+                ]
+            };
 
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent?key=${apiKey}`;
-                const requestData = {
-                    systemInstruction: {
-                        parts: [{ text: system_prompt }]
-                    },
-                    contents: [{
-                        role: 'user',
-                        parts: [{ text: fileContent }]
-                    }],
-                    generationConfig: {
-                        responseMimeType: 'text/plain',
-                        temperature: temperature
-                    },
-                    safetySettings: [
-                        { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
-                        { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
-                        { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
-                        { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
-                    ]
-                };
+            updateStatus(`Sending '${originalName}' to Gemini (${modelId}, Temp: ${temperature.toFixed(2)})...`, 'api');
 
-                await requestWakeLock();
-                updateStatus(`Sending request to Gemini API (${modelId})...${wakeLock ? ' (Screen kept active)' : ''}`, 'info');
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', },
+                    body: JSON.stringify(requestData),
+                });
 
-                 try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', },
-                        body: JSON.stringify(requestData),
-                    });
+                const responseBody = await response.text();
 
-                    const responseBody = await response.text();
-
-                    if (!response.ok) {
-                        let errorDetails = `HTTP status ${response.status}`;
-                        try {
-                            const errorJson = JSON.parse(responseBody);
-                            errorDetails = errorJson?.error?.message || JSON.stringify(errorJson);
-                        } catch (parseError) {
-                            errorDetails += ` - ${responseBody}`;
-                        }
-                        throw new Error(`API Error: ${errorDetails}`);
-                    }
-
-                    updateStatus('Response received, processing...', 'info');
-                    translatedContent = null;
-
+                if (!response.ok) {
+                    let errorDetails = `HTTP status ${response.status}`;
                     try {
-                        const responseData = JSON.parse(responseBody);
-                        const candidates = responseData?.candidates;
-                        if (candidates && candidates.length > 0) {
-                            const content = candidates[0]?.content;
-                            if (content && content.parts && content.parts.length > 0) {
-                                translatedContent = content.parts[0]?.text;
-                            }
-                        }
-
-                        if (!translatedContent) {
-                             const finishReason = candidates?.[0]?.finishReason;
-                             if (finishReason && finishReason !== 'STOP') {
-                                 updateStatus(`Translation stopped by API. Reason: ${finishReason}`, 'error');
-                                 const safetyRatings = candidates?.[0]?.safetyRatings;
-                                 if (safetyRatings) {
-                                     console.warn("Safety Ratings (despite BLOCK_NONE):", safetyRatings);
-                                     updateStatus(`Potential Issue Detected by API: ${JSON.stringify(safetyRatings)}`, 'warning');
-                                 }
-                             } else {
-                                 updateStatus('Failed to extract translated text from API response structure.', 'error');
-                                 console.error('Unexpected API response structure:', responseData);
-                             }
-                        }
-
-                    } catch (e) {
-                        updateStatus(`Error parsing API response: ${e.message}`, 'error');
-                        console.error('Failed to parse JSON response:', responseBody);
-                        translatedContent = null;
+                        const errorJson = JSON.parse(responseBody);
+                        errorDetails = errorJson?.error?.message || JSON.stringify(errorJson);
+                    } catch (parseError) {
+                        errorDetails += ` - ${responseBody.substring(0, 200)}`;
                     }
-
-                    if (translatedContent && translatedContent.trim().length > 0) {
-                        let looksValid = true;
-                        if (fileExtension === 'srt' && !translatedContent.match(/^\d+\s*\n\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}/m)) {
-                            updateStatus('Warning: Translated content might not be in valid SRT format.', 'warning');
-                            looksValid = false;
-                        } else if (fileExtension === 'ass' && !translatedContent.includes('[Events]')) {
-                            updateStatus('Warning: Translated content might not be in valid ASS format (missing [Events] block).', 'warning');
-                            looksValid = false;
-                        }
-
-                        if (looksValid) {
-                             updateStatus('Translation processed successfully!', 'success');
-                             downloadSection.classList.remove('hidden');
-                        } else {
-                             updateStatus('Translation content received, but format seems incorrect. Check the result carefully.', 'warning');
-                             downloadSection.classList.remove('hidden');
-                        }
-                    } else if (!translatedContent) {
-                        // Status already updated
-                    } else {
-                         updateStatus('Received empty or whitespace-only translation.', 'warning');
-                    }
-
-                } catch (error) {
-                    updateStatus(`Operation Failed: ${error.message}`, 'error');
-                    console.error('API Request or Processing Failed:', error);
-                } finally {
-                    setButtonLoading(false);
-                    await releaseWakeLock();
+                    throw new Error(`API Error: ${errorDetails}`);
                 }
-            };
 
-            reader.onerror = (e) => {
-                updateStatus(`Error reading file: ${e.target.error}`, 'error');
+                updateStatus(`Response for '${originalName}' received, processing...`, 'api');
+                let translatedText = null;
+
+                try {
+                    const responseData = JSON.parse(responseBody);
+                    const candidates = responseData?.candidates;
+                    if (candidates && candidates.length > 0) {
+                        const content = candidates[0]?.content;
+                        if (content && content.parts && content.parts.length > 0) {
+                            translatedText = content.parts[0]?.text;
+                        }
+                    }
+
+                    if (!translatedText) {
+                         const finishReason = candidates?.[0]?.finishReason;
+                         if (finishReason && finishReason !== 'STOP') {
+                             let reasonMessage = `Translation for '${originalName}' stopped by API. Reason: ${finishReason}.`;
+                             const safetyRatings = candidates?.[0]?.safetyRatings;
+                             if (safetyRatings) {
+                                 console.warn("Safety Ratings:", safetyRatings);
+                                 reasonMessage += ` Details: ${JSON.stringify(safetyRatings)}`;
+                             }
+                             throw new Error(reasonMessage);
+                         } else {
+                             throw new Error(`Failed to extract translated text for '${originalName}' from API response.`);
+                         }
+                    }
+                } catch (e) {
+                    console.error('Error parsing API response for ' + originalName + ':', responseBody);
+                    throw new Error(`Error parsing API response for '${originalName}': ${e.message}`);
+                }
+
+                if (translatedText && translatedText.trim().length > 0) {
+                    let looksValid = true;
+                    if (originalExtension === 'srt' && !translatedText.match(/^\d+\s*\n\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}/m)) {
+                        updateStatus(`Warning: Translated '${originalName}' might not be valid SRT format.`, 'warning');
+                        looksValid = false;
+                    } else if (originalExtension === 'ass' && !translatedText.includes('[Events]')) {
+                        updateStatus(`Warning: Translated '${originalName}' might not be valid ASS format (missing [Events]).`, 'warning');
+                        looksValid = false;
+                    }
+
+                    if (looksValid) updateStatus(`'${originalName}' translated successfully!`, 'success');
+                    return translatedText;
+                } else {
+                    throw new Error(`Received empty or whitespace-only translation for '${originalName}'.`);
+                }
+
+            } catch (error) {
+                updateStatus(`Translation failed for '${originalName}': ${error.message}`, 'error');
+                console.error(`API Request or Processing Failed for ${originalName}:`, error);
+                throw error;
+            }
+        }
+
+
+        // --- Form Submission ---
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            setButtonLoading(true);
+            downloadSection.classList.add('hidden');
+            individualDownloadsContainer.classList.add('hidden');
+            individualDownloadsList.innerHTML = '';
+            processedResults = [];
+            statusPanel.innerHTML = '';
+            updateStatus('Translation process initiated.', 'info');
+
+            const apiKey = apiKeyInput.value.trim();
+            const modelIdToUse = modelIdInput.value.trim() || DEFAULT_MODEL;
+            const mainFile = fileInput.files[0];
+            let targetLanguage = targetLanguageSelect.value === 'Other' ? customTargetLanguageInput.value.trim() : targetLanguageSelect.value;
+            let contentType = contentTypeSelect.value === 'Other' ? customContentTypeInput.value.trim() : contentTypeSelect.value;
+            const optionalNotes = optionalNotesInput.value.trim();
+            const temperature = parseFloat(temperatureInput.value) || DEFAULT_TEMPERATURE;
+
+            let valid = true;
+            if (!apiKey) { updateStatus('API Key is required.', 'error'); valid = false; }
+            if (!modelIdToUse) { updateStatus('Model ID is required.', 'error'); valid = false; }
+            if (!mainFile) { updateStatus('Please select a file or archive.', 'error'); valid = false; }
+            if (!targetLanguage) { updateStatus('Target Language is required.', 'error'); valid = false; }
+            if (!contentType) { updateStatus('Content Type is required.', 'error'); valid = false; }
+            if (isNaN(temperature) || temperature < 0.0 || temperature > 2.0) {
+                updateStatus('Invalid Temperature. Must be 0.0-2.0.', 'error'); valid = false;
+            }
+
+            if (!valid) {
                 setButtonLoading(false);
-                releaseWakeLock();
-            };
-
-            reader.readAsText(file, 'UTF-8');
-
-        });
-
-        // --- Download Button Click ---
-        downloadButton.addEventListener('click', () => {
-            if (!translatedContent || translatedContent.trim().length === 0) {
-                updateStatus('No valid translated content available to download.', 'error');
                 return;
             }
-            const baseName = originalFilename.substring(0, originalFilename.lastIndexOf('.')) || originalFilename;
+
+            updateStatus(`Using model: ${modelIdToUse}, Target: ${targetLanguage}, Content: ${contentType}, Temp: ${temperature.toFixed(2)}.`, 'system');
+            if (optionalNotes) updateStatus(`Additional AI instructions provided.`, 'system');
+            updateStatus(`Permissive content safety filters are active.`, 'warning');
+
+
+            await requestWakeLock();
+
+            let filesToTranslate = [];
+
+            if (currentArchiveEntries.length > 0) {
+                const selectedCheckboxes = archiveFilesList.querySelectorAll('input[type="checkbox"]:checked');
+                if (selectedCheckboxes.length === 0) {
+                    updateStatus('No files selected from the archive for translation.', 'warning');
+                    setButtonLoading(false);
+                    await releaseWakeLock();
+                    return;
+                }
+                selectedCheckboxes.forEach(cb => {
+                    const entryIndex = parseInt(cb.dataset.entryIndex);
+                    if (entryIndex >= 0 && entryIndex < currentArchiveEntries.length) {
+                        const entry = currentArchiveEntries[entryIndex];
+                        filesToTranslate.push({
+                            name: entry.name,
+                            contentGetter: entry.dataGetter,
+                            extension: entry.type
+                        });
+                    }
+                });
+                updateStatus(`Processing ${filesToTranslate.length} file(s) selected from archive...`, 'info');
+            } else {
+                const mainFileName = mainFile.name;
+                const mainFileExtension = mainFileName.split('.').pop()?.toLowerCase();
+
+                if (mainFileExtension === 'xz') {
+                    if (!isXZWasmLoaded) {
+                        updateStatus(`Cannot process .xz file: XZ decompression library (XZWASM) is not loaded or failed. Please check your internet, browser extensions, or try manually decompressing the file first.`, 'error');
+                        setButtonLoading(false);
+                        await releaseWakeLock();
+                        return;
+                    }
+                    updateStatus(`Attempting to process single .xz file: ${mainFileName}...`, 'info');
+                    await processUploadedFile(mainFile);
+                    if (currentArchiveEntries.length > 0) {
+                         currentArchiveEntries.forEach(entry => {
+                            filesToTranslate.push({
+                                name: entry.name,
+                                contentGetter: entry.dataGetter,
+                                extension: entry.type
+                            });
+                        });
+                        if(filesToTranslate.length === 0) {
+                             updateStatus(`No .srt or .ass file found within the .xz archive '${mainFileName}'.`, 'warning');
+                             setButtonLoading(false); await releaseWakeLock(); return;
+                        }
+                        updateStatus(`Processing ${filesToTranslate.length} file(s) from .xz archive...`, 'info');
+                    } else {
+                         updateStatus(`Could not extract a valid subtitle file from '${mainFileName}'. It might be empty or not contain .srt/.ass.`, 'error');
+                         setButtonLoading(false); await releaseWakeLock(); return;
+                    }
+                } else if (['srt', 'ass', 'txt'].includes(mainFileExtension)) {
+                    filesToTranslate.push({
+                        name: mainFileName,
+                        contentGetter: () => new Promise((resolve, reject) => {
+                            const reader = new FileReader();
+                            reader.onload = (e) => resolve(e.target.result);
+                            reader.onerror = (e) => reject(e.target.error);
+                            reader.readAsText(mainFile, 'UTF-8');
+                        }),
+                        extension: mainFileExtension
+                    });
+                    updateStatus(`Processing single file: ${mainFileName} (${(mainFile.size / 1024).toFixed(1)} KB).`, 'info');
+                } else {
+                    updateStatus(`Invalid file type: .${mainFileExtension}. Only .srt, .ass, .txt, .zip, .xz allowed.`, 'error');
+                    setButtonLoading(false);
+                    await releaseWakeLock();
+                    return;
+                }
+            }
+
+            if (filesToTranslate.length === 0 && currentArchiveEntries.length === 0) {
+                updateStatus('No valid files to translate.', 'warning');
+                setButtonLoading(false);
+                await releaseWakeLock();
+                return;
+            }
+
+
+            const translationParams = { apiKey, modelId: modelIdToUse, targetLanguage, contentType, optionalNotes, temperature };
+            let successCount = 0;
+
+            for (let i = 0; i < filesToTranslate.length; i++) {
+                const fileTask = filesToTranslate[i];
+                updateStatus(`Translating file ${i + 1} of ${filesToTranslate.length}: '${fileTask.name}'...`, 'info');
+                try {
+                    const fileContent = await fileTask.contentGetter();
+                    if (!fileContent) {
+                        throw new Error("File content is empty or could not be read.");
+                    }
+                    const translatedText = await translateSingleContent(fileContent, fileTask.name, fileTask.extension, translationParams);
+                    processedResults.push({
+                        originalName: fileTask.name,
+                        translatedText: translatedText,
+                        error: null,
+                        originalExtension: fileTask.extension
+                    });
+                    successCount++;
+                } catch (error) {
+                    processedResults.push({
+                        originalName: fileTask.name,
+                        translatedText: null,
+                        error: error.message || "Unknown translation error",
+                        originalExtension: fileTask.extension
+                    });
+                    if (error.message && error.message.toLowerCase().includes("api key not valid")) {
+                         updateStatus("Critical API Key Error. Aborting further translations.", "error");
+                         break;
+                    }
+                     if (error.message && (error.message.includes("quota") || error.message.includes("limit"))) {
+                        updateStatus("API quota/limit likely reached. Further translations may fail.", "error");
+                    }
+                }
+            }
+
+            if (filesToTranslate.length > 0) {
+                 updateStatus(`Batch processing complete. ${successCount} of ${filesToTranslate.length} files translated successfully.`, successCount === filesToTranslate.length ? 'success' : (successCount > 0 ? 'warning' : 'error'));
+            }
+
+
+            if (processedResults.some(r => r.translatedText)) {
+                setupDownloadSection();
+            } else if (filesToTranslate.length > 0) {
+                updateStatus('No files were successfully translated.', 'error');
+            }
+
+
+            setButtonLoading(false);
+            await releaseWakeLock();
+        });
+
+        // --- Download Section Setup ---
+        function setupDownloadSection() {
+            downloadSection.classList.remove('hidden');
+            individualDownloadsList.innerHTML = '';
+            let successfulTranslations = processedResults.filter(r => r.translatedText);
+
+            if (successfulTranslations.length === 0) {
+                downloadSection.classList.add('hidden');
+                return;
+            }
+
+            if (successfulTranslations.length > 1) {
+                downloadAllButtonText.textContent = `Download All (${successfulTranslations.length}) as ZIP`;
+                individualDownloadsContainer.classList.remove('hidden');
+
+                successfulTranslations.forEach(result => {
+                    const item = document.createElement('div');
+                    item.className = 'flex items-center justify-between p-2.5 rounded-md bg-white dark:bg-dm-input-bg border border-gray-200 dark:border-dm-border shadow-sm';
+                    const baseName = result.originalName.substring(0, result.originalName.lastIndexOf('.')) || result.originalName;
+                    const langCode = getLanguageCode();
+                    const outputFilename = `${baseName}_${langCode}.${result.originalExtension}`;
+
+                    item.innerHTML = `
+                        <span class="text-sm text-gray-700 dark:text-dm-text-primary break-all flex-grow pr-2">${outputFilename}</span>
+                        <button data-filename="${outputFilename}" data-content="${escape(result.translatedText)}" class="btn btn-secondary !px-3 !py-1.5 !text-xs individual-download-btn">
+                            <i data-feather="download" class="w-4 h-4 mr-1.5"></i>Download
+                        </button>
+                    `;
+                    individualDownloadsList.appendChild(item);
+                });
+                feather.replace();
+
+                individualDownloadsList.querySelectorAll('.individual-download-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const btn = e.currentTarget;
+                        const filename = btn.dataset.filename;
+                        const content = unescape(btn.dataset.content);
+                        downloadSingleFile(content, filename);
+                    });
+                });
+
+            } else if (successfulTranslations.length === 1) {
+                const result = successfulTranslations[0];
+                const baseName = result.originalName.substring(0, result.originalName.lastIndexOf('.')) || result.originalName;
+                const langCode = getLanguageCode();
+                const outputFilename = `${baseName}_${langCode}.${result.originalExtension}`;
+                downloadAllButtonText.textContent = `Download ${outputFilename}`;
+                individualDownloadsContainer.classList.add('hidden');
+            }
+        }
+
+        function getLanguageCode() {
             let langCode = 'tr';
             const selectedLang = targetLanguageSelect.value;
             if (selectedLang === 'Other') {
@@ -793,20 +1159,69 @@ Translate the following subtitle content:
                  const langMap = { 'Turkish': 'tr', 'English': 'en', 'Spanish': 'es', 'French': 'fr', 'German': 'de', 'Japanese': 'ja', 'Korean': 'ko', 'Chinese (Simplified)': 'zh-cn', 'Portuguese (Brazil)': 'pt-br', 'Russian': 'ru', 'Arabic': 'ar' };
                  langCode = langMap[selectedLang] || selectedLang.substring(0, 2).toLowerCase();
             }
-            const outputFilename = `${baseName}_${langCode}.${fileExtension}`;
+            return langCode;
+        }
 
+        function downloadSingleFile(content, filename) {
+            if (!content || content.trim().length === 0) {
+                updateStatus(`No content to download for ${filename}.`, 'error');
+                return;
+            }
             try {
                 const BOM = "\uFEFF";
-                const blob = new Blob([BOM + translatedContent], { type: 'text/plain;charset=utf-8' });
+                const blob = new Blob([BOM + content], { type: 'text/plain;charset=utf-8' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
-                a.style.display = 'none'; a.href = url; a.download = outputFilename;
+                a.style.display = 'none'; a.href = url; a.download = filename;
                 document.body.appendChild(a); a.click();
                 window.URL.revokeObjectURL(url); document.body.removeChild(a);
-                updateStatus(`File "${outputFilename}" download initiated.`, 'success');
+                updateStatus(`Download initiated for "${filename}".`, 'success');
             } catch(e) {
-                 updateStatus(`Error creating download link: ${e.message}`, 'error');
+                 updateStatus(`Error creating download for "${filename}": ${e.message}`, 'error');
                  console.error("Download Error:", e);
+            }
+        }
+
+        downloadAllButton.addEventListener('click', async () => {
+            const successfulTranslations = processedResults.filter(r => r.translatedText);
+            if (successfulTranslations.length === 0) {
+                updateStatus('No successfully translated files to download.', 'error');
+                return;
+            }
+
+            if (successfulTranslations.length === 1) {
+                const result = successfulTranslations[0];
+                const baseName = result.originalName.substring(0, result.originalName.lastIndexOf('.')) || result.originalName;
+                const langCode = getLanguageCode();
+                const outputFilename = `${baseName}_${langCode}.${result.originalExtension}`;
+                downloadSingleFile(result.translatedText, outputFilename);
+            } else {
+                updateStatus('Preparing ZIP file for download...', 'info');
+                try {
+                    const zip = new JSZip();
+                    const langCode = getLanguageCode();
+                    const BOM = "\uFEFF";
+
+                    successfulTranslations.forEach(result => {
+                        const baseName = result.originalName.substring(0, result.originalName.lastIndexOf('.')) || result.originalName;
+                        const outputFilename = `${baseName}_${langCode}.${result.originalExtension}`;
+                        zip.file(outputFilename, BOM + result.translatedText);
+                    });
+
+                    const zipBlob = await zip.generateAsync({ type: "blob", compression: "DEFLATE", compressionOptions: { level: 6 } });
+                    const archiveBaseName = fileInput.files[0] ? (fileInput.files[0].name.substring(0, fileInput.files[0].name.lastIndexOf('.')) || fileInput.files[0].name) : 'translations';
+                    const zipFilename = `${archiveBaseName}_${langCode}_all.zip`;
+
+                    const url = URL.createObjectURL(zipBlob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none'; a.href = url; a.download = zipFilename;
+                    document.body.appendChild(a); a.click();
+                    window.URL.revokeObjectURL(url); document.body.removeChild(a);
+                    updateStatus(`ZIP file "${zipFilename}" download initiated.`, 'success');
+                } catch (e) {
+                    updateStatus(`Error creating ZIP file: ${e.message}`, 'error');
+                    console.error("ZIP Creation Error:", e);
+                }
             }
         });
 
