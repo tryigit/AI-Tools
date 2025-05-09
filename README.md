@@ -2,10 +2,10 @@
 Tools to customize and effortlessly use advanced AI API's. Runs entirely on the user's own device. The default AI settings of the projects I create and contribute to are decided by a Simulation made from closed source and mathematical/scientific methods.
 
 # Current Projects:
-## [AI Subtitle Translator](https://tryigit.dev/ai/stranslate/)
+## [AI Subtitle Alchemist](https://tryigit.dev/ai/stranslate/)
 **V1.1.0**
 
-## [AI Article Generator](https://tryigit.dev/ai/article/)
+## [AI Article Weaver](https://tryigit.dev/ai/article/)
 **V1.0.2**
 
 ## [AI Human Text Reframer](https://tryigit.dev/ai/manipulation/)
