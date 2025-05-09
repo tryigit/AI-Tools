@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,301 +8,357 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/ai/favicon-16x16.png">
     <link rel="manifest" href="/ai/site.webmanifest">
     <link rel="shortcut icon" href="/ai/favicon.ico">
-    <!-- SEO Meta Tags -->
-    <title>AI Article Generator | Human-Like SEO Content</title>
-    <meta name="description" content="Generate high-quality, human-like, SEO-optimized articles less detectable by AI checkers. Compatible with WordPress & CMS. Uses Google Gemini AI. Upload files, define topic, persona, audience, keywords for unique, rank-worthy content.">
-    <meta name="keywords" content="ai article generator, seo content writer, human-like ai content, undetectable ai writer, blog post generator, cms content, wordpress content, gemini api, content creation, ai writing tool, seo optimization, tryigit">
+
+    <title>Stealth Article Weaver | Undetectable AI SEO Content</title>
+    <meta name="description" content="Forge superior, human-quality, SEO-driven articles that elude AI detection. Seamlessly integrate with any CMS. Powered by Google Gemini. Define your narrative, audience, and keywords for unparalleled content.">
+    <meta name="keywords" content="ai article generator, undetectable ai writer, human-like ai content, seo content automation, stealth content, blog post generator, gemini api, tryigit, advanced ai writing, content alchemy">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://tryigit.dev/ai/article" />
 
-    <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Feather Icons -->
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-
-    <!-- Google Fonts (Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind Custom Configuration (True Black Theme) -->
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif'],
+                        heading: ['Manrope', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif'],
                         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
                     },
                     colors: {
-                        primary: { light: '#9333ea', DEFAULT: '#6d28d9', dark: '#5b21b6' },
-                        secondary: { light: '#2dd4bf', DEFAULT: '#14b8a6', dark: '#0d9488' },
-                        // True Black Theme Colors
-                        'dm-bg': '#000000',
-                        'dm-card': '#111111',
-                        'dm-text-primary': '#e5e5e5',
-                        'dm-text-secondary': '#a3a3a3',
-                        'dm-text-muted': '#737373',
-                        'dm-border': '#333333',
-                        'dm-input-bg': '#1a1a1a',
-                        'dm-input-border': '#404040',
-                        'dm-input-placeholder': '#737373',
-                        'dm-status-bg': '#0a0a0a',
-                        'dm-status-border': '#2a2a2a',
-                        'dm-status-text': '#cccccc',
-                        'dm-output-bg': '#0f0f0f', // Slightly different for output area contrast
-                        'dm-output-border': '#2f2f2f',
-                        'dm-output-text': '#d4d4d4',
+                        'dark-primary-bg': '#000000',
+                        'dark-secondary-bg': '#0B0B0D',
+                        'dark-card-bg': '#101013',
+                        'dark-border': '#242429',
+                        'dark-text-primary': '#F0F0F0',
+                        'dark-text-secondary': '#A8A8A8',
+                        'dark-text-muted': '#66666E',
+                        'dark-input-bg': '#141417',
+                        'dark-input-border': '#2D2D33',
+                        'dark-accent-start': '#581c87', // Violet 800
+                        'dark-accent-end': '#86198f',   // Fuchsia 800 (Darker, more intense)
+
+                        'light-primary-bg': '#FFFFFF',
+                        'light-secondary-bg': '#F7F8FA', // Very light gray
+                        'light-card-bg': '#FFFFFF',
+                        'light-border': '#E0E2E7',
+                        'light-text-primary': '#1A1D26', // Near black
+                        'light-text-secondary': '#4A5061',
+                        'light-text-muted': '#7A8091',
+                        'light-input-bg': '#FFFFFF',
+                        'light-input-border': '#CED3DB',
+                        'light-accent-start': '#1e293b', // Slate 800
+                        'light-accent-end': '#0f172a',   // Slate 900 (Dark, sharp accent)
+                    },
+                    animation: {
+                        'fade-in-deep': 'fadeInDeep 0.8s ease-out forwards',
+                        'slide-in-up-strong': 'slideInUpStrong 0.7s ease-out forwards',
+                        'pulse-accent': 'pulseAccent 2.8s infinite ease-in-out',
+                        'spin': 'spin 1s linear infinite',
+                    },
+                    keyframes: {
+                        fadeInDeep: { '0%': { opacity: 0.1 }, '100%': { opacity: 1 } },
+                        slideInUpStrong: { '0%': { opacity: 0, transform: 'translateY(12px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+                        pulseAccent: {
+                            '0%, 100%': { filter: 'brightness(0.9) saturate(0.9)' },
+                            '50%': { filter: 'brightness(1.15) saturate(1.15)' },
+                        },
                     },
                     boxShadow: {
-                         'input-focus': '0 0 0 3px rgba(109, 40, 217, 0.3)',
-                         'btn': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-                         'btn-hover': '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-                         'dark-input-focus': '0 0 0 3px rgba(147, 51, 234, 0.5)',
-                         'dark-btn': '0 4px 6px -1px rgba(255, 255, 255, 0.05), 0 2px 4px -2px rgba(255, 255, 255, 0.05)',
-                         'dark-btn-hover': '0 10px 15px -3px rgba(255, 255, 255, 0.07), 0 4px 6px -4px rgba(255, 255, 255, 0.07)',
+                        'focus-dark': '0 0 0 2px #000000, 0 0 0 4px #581c87', // Inner black, outer accent
+                        'focus-light': '0 0 0 2px #FFFFFF, 0 0 0 4px #1e293b', // Inner white, outer accent
+                        'card-dark': '0px 4px 25px -10px rgba(0, 0, 0, 0.5), 0px 0px 15px -8px rgba(88, 28, 135, 0.3)', // More pronounced shadow with accent hint
+                        'card-light': '0px 5px 20px -10px rgba(26, 29, 38, 0.12)',
                     }
-                },
+                }
             }
         }
     </script>
 
     <style type="text/tailwindcss">
         @layer base {
-            html.dark { color-scheme: dark; }
-            body { @apply bg-gray-100 font-sans antialiased text-gray-800 dark:bg-dm-bg dark:text-dm-text-primary transition-colors duration-300; }
-            label { @apply block mb-1.5 text-sm font-semibold text-gray-700 dark:text-dm-text-secondary; }
-            input[type="text"], input[type="password"], select, textarea:not(#outputArticle) { /* Exclude output area from general textarea style */
-                @apply block w-full px-4 py-2.5 text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition duration-150 ease-in-out sm:text-sm
-                       dark:bg-dm-input-bg dark:border-dm-input-border dark:text-dm-text-primary dark:placeholder-dm-input-placeholder dark:focus:ring-primary-light/50 dark:focus:border-primary-light dark:shadow-none;
+            html { @apply scroll-smooth; }
+            body {
+                @apply bg-light-primary-bg text-light-text-primary dark:bg-dark-primary-bg dark:text-dark-text-primary;
+                @apply font-sans antialiased transition-colors duration-300 ease-in-out;
+                -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+            }
+            h1, h2, h3, h4, h5, h6 { @apply font-heading; }
+
+            ::-webkit-scrollbar { @apply w-2 h-2; }
+            ::-webkit-scrollbar-track { @apply bg-transparent; }
+            ::-webkit-scrollbar-thumb { @apply rounded-full bg-light-text-muted/30 dark:bg-dark-text-muted/30; }
+            ::-webkit-scrollbar-thumb:hover { @apply bg-light-text-muted/50 dark:bg-dark-text-muted/50; }
+
+            .form-section-wrapper {
+                @apply bg-light-card-bg dark:bg-dark-card-bg p-6 sm:p-8 rounded-xl shadow-card-light dark:shadow-card-dark transition-all duration-300;
+            }
+            .form-section-title-text {
+                @apply text-lg font-semibold mb-6 tracking-tight text-light-text-primary dark:text-dark-text-primary;
+            }
+
+            label {
+                @apply block mb-2 text-sm font-semibold text-light-text-secondary dark:text-dark-text-secondary;
+            }
+            input[type="text"], input[type="password"], select, textarea:not(#outputArticle) {
+                @apply block w-full px-4 py-3.5 rounded-lg shadow-sm transition-all duration-200 ease-in-out;
+                @apply text-base text-light-text-primary placeholder-light-text-muted bg-light-input-bg border border-light-input-border;
+                @apply dark:text-dark-text-primary dark:placeholder-dark-text-muted dark:bg-dark-input-bg dark:border-dark-input-border;
+                @apply focus:outline-none focus:border-transparent focus:shadow-focus-light dark:focus:shadow-focus-dark;
             }
              select {
-                 background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-                 background-position: right 0.7rem center; background-repeat: no-repeat; background-size: 1.25em 1.25em;
-                 -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 2.8rem;
+                 background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%237A8091' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+                 background-position: right 0.9rem center; background-repeat: no-repeat; background-size: 1.1em 1.1em;
+                 -webkit-appearance: none; -moz-appearance: none; appearance: none; padding-right: 3rem;
              }
              html.dark select {
-                 background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a3a3a3' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e"); /* dm-text-secondary */
+                 background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23A8A8A8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
              }
-            textarea:not(#outputArticle) { @apply min-h-[90px] leading-relaxed; } /* Apply min-height only to non-output textareas */
-            fieldset { @apply border border-gray-200 rounded-lg p-5 pt-3 dark:border-dm-border dark:bg-dm-card; }
-            legend { @apply px-2 text-base font-semibold text-gray-800 dark:text-dm-text-primary; }
-            .description { @apply mt-1.5 text-xs text-gray-600 dark:text-dm-text-muted; }
-            .description a { @apply text-primary font-medium hover:text-primary-dark hover:underline dark:text-primary-light dark:hover:text-purple-400; }
-            .warning { @apply text-amber-600 dark:text-yellow-400 font-medium; }
-            #statusPanel::-webkit-scrollbar, #outputArticle::-webkit-scrollbar { width: 6px; }
-            #statusPanel::-webkit-scrollbar-track, #outputArticle::-webkit-scrollbar-track { @apply bg-dm-status-border rounded; }
-            #statusPanel::-webkit-scrollbar-thumb, #outputArticle::-webkit-scrollbar-thumb { @apply bg-gray-600 dark:bg-gray-700 rounded; }
-            #statusPanel::-webkit-scrollbar-thumb:hover, #outputArticle::-webkit-scrollbar-thumb:hover { @apply bg-gray-500 dark:bg-gray-600; }
-            /* Specific style for output textarea */
+            textarea:not(#outputArticle) { @apply min-h-[110px] leading-relaxed; }
+            .form-input-description { @apply mt-2 text-xs text-light-text-muted dark:text-dark-text-muted; }
+            .form-input-description a {
+                @apply font-medium hover:underline text-light-accent-end dark:text-dark-accent-end;
+            }
+
             #outputArticle {
-                @apply w-full p-4 bg-gray-50 border border-gray-300 rounded-lg shadow-sm font-sans text-sm leading-relaxed min-h-[400px]
-                       dark:bg-dm-output-bg dark:border-dm-output-border dark:text-dm-output-text dark:placeholder-dm-text-muted focus:outline-none focus:ring-1 focus:ring-primary-light/50 focus:border-primary-light;
+                @apply w-full p-5 bg-light-input-bg dark:bg-dark-input-bg border border-light-border dark:border-dark-border rounded-lg shadow-inner font-sans text-base leading-relaxed min-h-[450px];
+                @apply text-light-text-primary dark:text-dark-text-primary placeholder-light-text-muted dark:placeholder-dark-text-muted;
+                @apply focus:outline-none focus:shadow-focus-light dark:focus:shadow-focus-dark;
             }
         }
         @layer components {
-            .file-input-area { @apply relative block w-full p-6 text-center border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 hover:border-primary/70 transition-colors duration-200 ease-in-out
-                                   dark:bg-dm-card dark:border-dm-border dark:hover:bg-opacity-75 dark:hover:border-primary-light/70; }
-            .file-input-area .icon { @apply w-10 h-10 mx-auto text-gray-400 group-hover:text-primary/80 transition-colors dark:text-dm-text-muted dark:group-hover:text-primary-light/80; }
-            .file-input-area .text-main { @apply mt-2 block text-sm font-semibold text-gray-700 dark:text-dm-text-secondary; }
-            .file-input-area .text-sub { @apply block text-xs text-gray-500 dark:text-dm-text-muted; }
-            .file-input-area input[type="file"] { @apply absolute inset-0 w-full h-full opacity-0 cursor-pointer; }
-            .btn { @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-lg shadow-btn focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-150 ease-in-out disabled:opacity-60 disabled:cursor-not-allowed dark:focus:ring-offset-dm-bg dark:shadow-dark-btn; }
-            .btn:hover:not(:disabled) { @apply dark:shadow-dark-btn-hover; }
-            .btn-primary { @apply btn text-white bg-primary hover:bg-primary-dark focus:ring-primary dark:bg-primary dark:hover:bg-primary-dark; }
-            .btn-secondary { @apply btn text-sm px-4 py-2 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:ring-gray-400
-                                    dark:bg-dm-input-bg dark:text-dm-text-secondary dark:hover:bg-opacity-75 dark:focus:ring-gray-500 dark:border dark:border-dm-border dark:shadow-none; } /* Dark mode for secondary button */
-             @keyframes spin { to { transform: rotate(360deg); } }
-             .spinner { animation: spin 1s linear infinite; @apply inline-block w-5 h-5 border-[3px] border-current border-t-transparent rounded-full; }
+            .title-gradient-text {
+                @apply bg-clip-text text-transparent bg-gradient-to-r from-light-accent-start to-light-accent-end dark:from-dark-accent-start dark:to-dark-accent-end;
+            }
+            html.dark .title-gradient-text {
+                animation: pulseAccent 3s infinite ease-in-out;
+            }
+            .link-text-light { @apply text-light-accent-start hover:text-light-accent-end; }
+            .dark .link-text-dark { @apply text-dark-accent-start hover:text-dark-accent-end; }
+
+
+            .file-upload-area {
+                @apply relative block w-full p-8 text-center border-2 border-light-border dark:border-dark-border border-dashed rounded-xl cursor-pointer transition-all duration-200 ease-in-out;
+                @apply bg-light-secondary-bg hover:bg-light-card-bg dark:bg-dark-secondary-bg dark:hover:bg-dark-card-bg hover:border-light-accent-start dark:hover:border-dark-accent-start;
+            }
+            .file-upload-area .icon-upload { @apply w-10 h-10 mx-auto text-light-text-muted dark:text-dark-text-muted group-hover:text-light-accent-start dark:group-hover:text-dark-accent-start transition-colors; }
+            .file-upload-area .text-main-upload { @apply mt-3 block text-sm font-semibold text-light-text-secondary dark:text-dark-text-secondary; }
+            .file-upload-area .text-sub-upload { @apply block text-xs text-light-text-muted dark:text-dark-text-muted; }
+            .file-upload-area input[type="file"] { @apply absolute inset-0 w-full h-full opacity-0 cursor-pointer; }
+
+            .btn-submit-primary {
+                @apply inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-semibold rounded-lg shadow-lg focus:outline-none transition-all duration-300 ease-in-out disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none;
+                @apply text-white bg-gradient-to-r from-light-accent-start to-light-accent-end hover:shadow-xl hover:brightness-110;
+                @apply dark:from-dark-accent-start dark:to-dark-accent-end dark:hover:brightness-110;
+                @apply focus:ring-2 focus:ring-offset-2 focus:ring-offset-light-primary-bg dark:focus:ring-offset-dark-primary-bg focus:ring-light-accent-end dark:focus:ring-dark-accent-end;
+            }
+            .btn-submit-primary .spinner-animation {
+                @apply border-white border-t-transparent;
+            }
+
+            .btn-action-secondary {
+                @apply inline-flex items-center justify-center px-6 py-2.5 border-2 text-sm font-medium rounded-lg transition-all duration-200 ease-in-out disabled:opacity-50;
+                @apply border-light-border text-light-text-secondary hover:bg-light-border/60 focus:border-light-text-primary;
+                @apply dark:border-dark-border dark:text-dark-text-secondary dark:hover:bg-dark-border/60 dark:focus:border-dark-text-primary;
+                @apply focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-light-primary-bg dark:focus:ring-offset-dark-primary-bg;
+            }
+            .btn-action-secondary.success-state {
+                @apply bg-emerald-500 text-white border-emerald-500 hover:bg-emerald-600 focus:border-emerald-600;
+                @apply dark:bg-emerald-500 dark:text-white dark:border-emerald-500 dark:hover:bg-emerald-600 dark:focus:border-emerald-600;
+            }
+
+            .input-group-button {
+                @apply inline-flex items-center justify-center rounded-r-lg px-3.5 h-[54px] transition-colors duration-150 ease-in-out; /* Match input height */
+                @apply text-light-text-muted hover:text-light-text-primary bg-light-input-bg border border-l-0 border-light-input-border;
+                @apply dark:text-dark-text-muted dark:hover:text-dark-text-primary dark:bg-dark-input-bg dark:border-l-0 dark:border-dark-input-border;
+                @apply focus:outline-none focus:z-10 focus:shadow-focus-light dark:focus:shadow-focus-dark;
+            }
+
+            .spinner-animation { @apply inline-block w-5 h-5 border-[3px] rounded-full animate-spin; }
         }
     </style>
-    <!-- AdSense Script -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1500862170490490"
-         crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1500862170490490" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B1N2MBK3GT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-B1N2MBK3GT');
+    </script>
 </head>
-<body class="bg-gray-100 dark:bg-dm-bg">
+<body class="dark:bg-dark-primary-bg bg-light-primary-bg">
 
-    <div class="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-        <header class="text-center mb-10 md:mb-12">
-            <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-dm-text-primary">
-                 AI Article Generator
+    <div class="container max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+        <header class="text-center mb-12 md:mb-16 animate-fade-in-deep">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tighter text-light-text-primary dark:text-dark-text-primary">
+                 Stealth Article <span class="title-gradient-text">Weaver</span>
              </h1>
-             <p class="mt-3 text-lg text-gray-600 dark:text-dm-text-secondary max-w-2xl mx-auto">
-                 Create human-like, SEO-optimized articles from your context, powered by Google Gemini.
+             <p class="mt-5 text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto">
+                 Forge superior, human-quality articles that master SEO and elude AI detection. Your narrative, amplified.
              </p>
          </header>
 
-        <form id="articleForm" onsubmit="return false;" class="space-y-8">
+        <form id="articleForm" onsubmit="return false;" class="space-y-10">
 
-            <!-- Section 1: API & Model -->
-            <fieldset>
-                <legend>API Configuration</legend>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 mt-4">
+            <div class="form-section-wrapper animate-slide-in-up-strong" style="animation-delay: 0.1s;">
+                <h2 class="form-section-title-text">Core Configuration</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
                     <div>
                         <label for="apiKey">Gemini API Key:</label>
-                        <div class="flex rounded-lg">
-                             <input type="password" id="apiKey" name="apiKey" required placeholder="Enter your Google AI Studio key" class="flex-1 min-w-0 rounded-none rounded-l-lg focus:z-10">
-                             <button type="button" id="toggleApiKey" title="Show/Hide Key" class="inline-flex items-center px-3 py-2 text-gray-500 bg-gray-50 border border-l-0 border-gray-300 rounded-r-lg hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary dark:bg-dm-input-bg dark:text-dm-text-muted dark:border-dm-input-border dark:hover:bg-opacity-75 dark:focus:ring-primary-light dark:focus:border-primary-light">
-                                <i data-feather="eye" class="w-4 h-4"></i>
+                        <div class="flex">
+                             <input type="password" id="apiKey" name="apiKey" required placeholder="Your Google AI Studio Key" class="rounded-r-none flex-1">
+                             <button type="button" id="toggleApiKey" title="Show/Hide Key" class="input-group-button">
+                                <i data-feather="eye" class="w-5 h-5"></i>
                             </button>
                         </div>
-                         <p class="description">
-                             Get your key from
-                             <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer">Google AI Studio</a>.
-                             Stored locally.
+                         <p class="form-input-description">
+                             Access via <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" class="link-text-light dark:link-text-dark">Google AI Studio</a>. Stored locally.
                          </p>
                     </div>
                      <div>
                         <label for="modelId">Gemini Model ID:</label>
                         <input type="text" id="modelId" name="modelId" placeholder="Default: gemini-2.5-pro-exp-03-25">
-                        <p class="description">Using: <code class="font-medium text-primary-dark dark:text-primary-light"><span id="currentModelDisplay"></span></code> (Default cannot be changed per request)</p>
+                        <p class="form-input-description">Current: <code class="font-semibold"><span id="currentModelDisplay"></span></code>. Default: <code class="font-semibold">gemini-2.5-pro-exp-03-25</code>.</p>
                     </div>
                  </div>
-            </fieldset>
+            </div>
 
-             <!-- Section 2: Core Article Details -->
-            <fieldset>
-                <legend>Article Definition</legend>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 mt-4">
+            <div class="form-section-wrapper animate-slide-in-up-strong" style="animation-delay: 0.2s;">
+                <h2 class="form-section-title-text">Article Blueprint</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
                      <div>
-                        <label for="articleLanguage">Article Language:</label>
+                        <label for="articleLanguage">Output Language:</label>
                         <select id="articleLanguage" name="articleLanguage">
                               <option value="English">English</option>
                               <option value="Turkish">Turkish</option>
                               <option value="Spanish">Spanish</option>
                               <option value="French">French</option>
                               <option value="German">German</option>
-                              <option value="Japanese">Japanese</option>
-                              <option value="Korean">Korean</option>
-                              <option value="Chinese (Simplified)">Chinese (Simplified)</option>
                               <option value="Other">Other (Specify)</option>
                         </select>
-                        <input type="text" id="customArticleLanguage" name="customArticleLanguage" placeholder="Enter language if 'Other'" class="mt-2 hidden">
-                         <p class="description">The language of the generated article. Saved locally.</p>
+                        <input type="text" id="customArticleLanguage" name="customArticleLanguage" placeholder="Specify language" class="mt-2 hidden">
+                         <p class="form-input-description">Language for the generated article.</p>
                     </div>
                      <div>
-                        <label for="authorPersona">Author Persona:</label>
+                        <label for="authorPersona">Authorial Voice (Persona):</label>
                         <select id="authorPersona" name="authorPersona">
                               <option value="Expert">Expert / Informative</option>
                               <option value="Humorous">Humorous / Witty</option>
                               <option value="Journalist">Journalistic / Objective</option>
                               <option value="Storyteller">Storyteller / Narrative</option>
-                              <option value="Researcher">Researcher / Data-Driven</option>
-                              <option value="Photographer">Photographer / Visual Artist</option>
                               <option value="Developer">Developer / Technical</option>
                               <option value="Marketer">Marketer / Persuasive</option>
                               <option value="Casual">Casual / Conversational</option>
-                              <option value="Formal">Formal / Academic</option>
                               <option value="Other">Other (Specify)</option>
                         </select>
-                        <input type="text" id="customAuthorPersona" name="customAuthorPersona" placeholder="Describe persona vividly if 'Other'" class="mt-2 hidden">
-                         <p class="description">Crucial for tone & style. Be specific! (e.g., 'Skeptical Tech Reviewer'). Saved locally.</p>
+                        <input type="text" id="customAuthorPersona" name="customAuthorPersona" placeholder="Describe persona (e.g., 'Seasoned Tech Analyst')" class="mt-2 hidden">
+                         <p class="form-input-description">Defines tone & style. Specificity is key.</p>
                     </div>
                  </div>
-                 <div class="mt-5">
-                     <label for="articleTopic">Article Topic / Prompt:</label>
-                     <textarea id="articleTopic" name="articleTopic" rows="4" required placeholder="Enter the main topic, title idea, or a detailed prompt. E.g., 'Write a human-sounding blog post for photographers about the ethics of AI image generation.'"></textarea>
-                     <p class="description">Specificity matters for human-like, SEO content. Include target keywords if known.</p>
+                 <div class="mt-6">
+                     <label for="articleTopic">Core Topic / Detailed Prompt:</label>
+                     <textarea id="articleTopic" name="articleTopic" rows="4" required placeholder="e.g., 'Craft an in-depth analysis of the future of decentralized finance, targeting crypto enthusiasts.'"></textarea>
+                     <p class="form-input-description">The more detail, the more refined the output. Include keywords if desired.</p>
                  </div>
-            </fieldset>
+            </div>
 
-            <!-- Section 3: Source Material & Ownership (Optional) -->
-            <fieldset>
-                <legend>Source & Context (Optional)</legend>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 mt-4">
+            <div class="form-section-wrapper animate-slide-in-up-strong" style="animation-delay: 0.3s;">
+                <h2 class="form-section-title-text">Contextual Foundation (Optional)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6 items-start">
                     <div>
-                         <label for="sourceFile">Upload Source File (Context):</label>
-                         <label for="sourceFile" class="file-input-area group">
-                             <i data-feather="file-text" class="icon"></i>
-                             <span class="text-main">Click or drag & drop file</span>
-                             <span class="text-sub">PDF, DOCX, XLSX, TXT supported</span>
-                             <input type="file" id="sourceFile" name="sourceFile" accept=".pdf,.doc,.docx,.xls,.xlsx,.txt">
+                         <label for="sourceFile">Upload Context File:</label>
+                         <label for="sourceFile" class="file-upload-area group">
+                             <i data-feather="upload-cloud" class="icon-upload"></i>
+                             <span class="text-main-upload">Click or Drag & Drop File</span>
+                             <span class="text-sub-upload">PDF, DOCX, TXT supported (Max 5MB)</span>
+                             <input type="file" id="sourceFile" name="sourceFile" accept=".pdf,.doc,.docx,.txt">
                          </label>
-                         <div id="sourceFileNameDisplay" class="mt-3 text-sm font-medium text-gray-600 dark:text-dm-text-secondary text-center truncate px-2">No file selected</div>
-                         <p class="description">AI will use this file's content to add unique context & perspective.</p>
+                         <div id="sourceFileNameDisplay" class="mt-3 text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary text-center truncate px-2">No file selected</div>
+                         <p class="form-input-description">Provide foundational material for unique insights.</p>
                     </div>
                      <div>
-                         <label for="sourceOwner">Website / Owner (Optional):</label>
-                         <input type="text" id="sourceOwner" name="sourceOwner" placeholder="e.g., YourCompanyName or yourwebsite.com">
-                          <p class="description">Helps AI align with a specific brand voice or link contextually. Saved locally.</p>
+                         <label for="sourceOwner">Brand/Website Identity (Optional):</label>
+                         <input type="text" id="sourceOwner" name="sourceOwner" placeholder="e.g., YourBrand.com or Innovatech Corp">
+                          <p class="form-input-description">Aligns output with a specific brand voice.</p>
                      </div>
                 </div>
-            </fieldset>
+            </div>
 
-             <!-- Section 4: SEO & Target (Unique Feature) -->
-            <fieldset>
-                <legend>SEO & Target Audience</legend>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5 mt-4">
+            <div class="form-section-wrapper animate-slide-in-up-strong" style="animation-delay: 0.4s;">
+                <h2 class="form-section-title-text">SEO & Audience Targeting</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
                     <div>
-                         <label for="targetAudience">Target Audience:</label>
-                         <input type="text" id="targetAudience" name="targetAudience" placeholder="e.g., Beginner photographers, Experienced marketers">
-                          <p class="description">Crucial for tailoring language and depth. Saved locally.</p>
+                         <label for="targetAudience">Target Audience Profile:</label>
+                         <input type="text" id="targetAudience" name="targetAudience" placeholder="e.g., Tech-savvy early adopters, Novice investors">
+                          <p class="form-input-description">Define who you're speaking to.</p>
                      </div>
                     <div>
-                         <label for="primaryKeywords">Primary Keywords:</label>
-                         <input type="text" id="primaryKeywords" name="primaryKeywords" placeholder="e.g., AI photo ethics, best landscape lenses">
-                         <p class="description">List 1-3 main keywords/phrases (comma-separated). Saved locally.</p>
+                         <label for="primaryKeywords">Primary Keywords/Phrases:</label>
+                         <input type="text" id="primaryKeywords" name="primaryKeywords" placeholder="e.g., undetectable AI content, SEO article strategy">
+                         <p class="form-input-description">Comma-separated (1-3 recommended).</p>
                     </div>
                      <div class="md:col-span-2">
-                         <label for="callToAction">Call to Action (Optional):</label>
-                         <input type="text" id="callToAction" name="callToAction" placeholder="e.g., Share your thoughts below, Check out our portfolio">
-                          <p class="description">What should the reader do next? Keep it relevant. Saved locally.</p>
+                         <label for="callToAction">Desired Call to Action (Optional):</label>
+                         <input type="text" id="callToAction" name="callToAction" placeholder="e.g., Explore our advanced features, Join the discussion">
+                          <p class="form-input-description">Guide the reader's next step.</p>
                      </div>
                 </div>
-            </fieldset>
+            </div>
 
-
-            <!-- Submit Button -->
-            <div class="pt-2">
-                <button type="submit" id="generateButton" class="w-full btn-primary">
-                     <i data-feather="zap" class="w-5 h-5 mr-2 icon"></i>
-                     <span class="button-text">Generate SEO Article</span>
-                     <div class="spinner hidden ml-2"></div>
+            <div class="pt-4 text-center animate-slide-in-up-strong" style="animation-delay: 0.5s;">
+                <button type="submit" id="generateButton" class="btn-submit-primary w-full sm:w-auto">
+                     <span class="button-content-wrapper inline-flex items-center justify-center">
+                        <i data-feather="feather" class="w-5 h-5 mr-2.5 icon-main-btn"></i>
+                        <span class="button-text-main">Craft My Article</span>
+                     </span>
+                     <div class="spinner-animation hidden"></div>
                 </button>
             </div>
         </form>
 
-        <!-- Status Panel -->
-        <div class="mt-10">
-            <label for="statusPanel" class="block mb-2 text-base font-semibold text-gray-800 dark:text-dm-text-primary">Generation Status</label>
-            <div id="statusPanel" class="h-56 p-4 overflow-y-auto rounded-lg bg-gray-900 text-gray-200 border border-gray-700 dark:bg-dm-status-bg dark:text-dm-status-text dark:border-dm-status-border font-mono text-sm shadow-inner leading-relaxed">
-                <div class="text-gray-400 dark:text-dm-text-muted">Waiting for input...</div>
+        <div id="outputSection" class="mt-12 hidden opacity-0 transition-opacity duration-500 ease-in-out animate-slide-in-up-strong" style="animation-delay: 0.6s;">
+            <h3 class="text-xl font-semibold mb-4 text-light-text-primary dark:text-dark-text-primary">Crafted Article</h3>
+            <div class="output-area-wrapper mb-4">
+                <textarea id="outputArticle" rows="25" readonly placeholder="Your uniquely crafted article will manifest here..."></textarea>
             </div>
-        </div>
-
-        <!-- Output Section -->
-        <div id="outputSection" class="mt-10">
-            <label for="outputArticle" class="block mb-2 text-base font-semibold text-gray-800 dark:text-dm-text-primary">Generated Article</label>
-            <div class="output-area mb-3">
-                <textarea id="outputArticle" rows="20" readonly placeholder="The generated article will appear here..."></textarea>
-            </div>
-            <div class="output-actions text-center mt-4 space-x-3">
-                <button type="button" class="btn-secondary" id="copyButton" disabled title="Copy article to clipboard">
-                    <i data-feather="clipboard" class="w-4 h-4 mr-1.5"></i> Copy
+            <div class="output-actions-wrapper text-center mt-5 space-x-3">
+                <button type="button" class="btn-action-secondary" id="copyButton" disabled title="Copy article">
+                    <i data-feather="copy" class="w-4 h-4 mr-2"></i> Copy
                 </button>
-                <button type="button" class="btn-secondary" id="downloadButton" disabled title="Download article as .txt">
-                    <i data-feather="download" class="w-4 h-4 mr-1.5"></i> Download (.txt)
+                <button type="button" class="btn-action-secondary" id="downloadButton" disabled title="Download as .txt">
+                    <i data-feather="download" class="w-4 h-4 mr-2"></i> Download
                 </button>
             </div>
         </div>
 
-         <footer class="mt-10 pt-6 border-t border-gray-200 dark:border-dm-border text-center text-xs text-gray-500 dark:text-dm-text-muted">
-             API key, settings, and file content are processed locally in your browser and sent directly to the Google API. No data is stored on our servers. Tool by Yiğit.
+        <div id="statusSection" class="mt-12 hidden opacity-0 transition-opacity duration-500 ease-in-out animate-slide-in-up-strong" style="animation-delay: 0.7s;">
+            <h3 class="text-xl font-semibold mb-4 text-light-text-primary dark:text-dark-text-primary">Generation Log</h3>
+            <div id="statusPanel" class="h-60 p-4 overflow-y-auto rounded-lg bg-light-input-bg dark:bg-dark-input-bg border border-light-border dark:border-dark-border font-mono text-xs shadow-inner">
+                <div class="text-light-text-muted dark:text-dark-text-muted">Awaiting instructions...</div>
+            </div>
+        </div>
+
+
+         <footer class="mt-16 pt-8 border-t border-light-border dark:border-dark-border text-center text-xs text-light-text-muted dark:text-dark-text-muted animate-fade-in-deep" style="animation-delay: 0.8s;">
+             API key, settings, and file content are processed locally and sent directly to Google API. No data stored on our servers. Tool by Yiğit.
          </footer>
-
     </div>
 
-    <!-- Theme Toggle Button -->
-    <button id="themeToggleButton" title="Toggle Theme" class="fixed bottom-5 right-5 z-50 p-2.5 rounded-full bg-primary dark:bg-primary-light text-white dark:text-black shadow-lg hover:opacity-90 transition-opacity">
-        <i data-feather="sun" class="w-5 h-5"></i>
+    <button id="themeToggleButton" title="Toggle Theme" class="fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-light-primary-bg dark:focus:ring-offset-dark-primary-bg focus:ring-light-accent-end dark:focus:ring-dark-accent-end
+        bg-gradient-to-br from-slate-700 to-slate-900 text-slate-100
+        dark:bg-gradient-to-br dark:from-dark-accent-start dark:to-dark-accent-end dark:text-slate-100
+    ">
+        <i data-feather="sun" class="w-6 h-6 block dark:hidden"></i>
+        <i data-feather="moon" class="w-6 h-6 hidden dark:block"></i>
     </button>
 
     <script>
-        // --- START: JavaScript Code ---
-
-        // --- Element References ---
         const form = document.getElementById('articleForm');
         const apiKeyInput = document.getElementById('apiKey');
         const toggleApiKey = document.getElementById('toggleApiKey');
@@ -321,20 +377,18 @@
         const primaryKeywordsInput = document.getElementById('primaryKeywords');
         const callToActionInput = document.getElementById('callToAction');
         const generateButton = document.getElementById('generateButton');
-        const submitButtonText = generateButton.querySelector('.button-text');
-        const submitButtonIcon = generateButton.querySelector('i.icon');
-        const submitButtonSpinner = generateButton.querySelector('.spinner');
+        const submitButtonContentWrapper = generateButton.querySelector('.button-content-wrapper');
+        const submitButtonSpinner = generateButton.querySelector('.spinner-animation');
         const statusPanel = document.getElementById('statusPanel');
+        const statusSection = document.getElementById('statusSection');
         const outputArticle = document.getElementById('outputArticle');
         const outputSection = document.getElementById('outputSection');
         const copyButton = document.getElementById('copyButton');
         const downloadButton = document.getElementById('downloadButton');
-        const themeToggleButton = document.getElementById('themeToggleButton'); // Theme Toggle Button
-        const themeToggleIcon = themeToggleButton.querySelector('i'); // Theme Toggle Icon
-        const htmlElement = document.documentElement; // HTML Element
+        const themeToggleButton = document.getElementById('themeToggleButton');
+        const htmlElement = document.documentElement;
 
-        // --- localStorage Keys ---
-        const STORAGE_PREFIX = 'aiArticleGenerator_v3_'; // Incremented version
+        const STORAGE_PREFIX = 'stealthArticleWeaver_v5_';
         const API_KEY_KEY = STORAGE_PREFIX + 'apiKey';
         const MODEL_ID_KEY = STORAGE_PREFIX + 'modelId';
         const ARTICLE_LANG_KEY = STORAGE_PREFIX + 'articleLanguage';
@@ -345,46 +399,52 @@
         const TARGET_AUDIENCE_KEY = STORAGE_PREFIX + 'targetAudience';
         const KEYWORDS_KEY = STORAGE_PREFIX + 'primaryKeywords';
         const CTA_KEY = STORAGE_PREFIX + 'callToAction';
-        const THEME_KEY = STORAGE_PREFIX + 'theme'; // Theme Key
+        const THEME_KEY = STORAGE_PREFIX + 'theme';
 
-        // --- State Variables ---
         let generatedArticleContent = null;
         let sourceFileContent = null;
-        let sourceFile = null;
+        let currentSourceFile = null;
         const DEFAULT_MODEL = 'gemini-2.5-pro-exp-03-25';
+        const MAX_FILE_SIZE_MB = 5;
+        const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
-        // --- Helper Functions ---
+
         function updateStatus(message, type = 'info') {
+            if (statusSection.classList.contains('hidden')) {
+                statusSection.classList.remove('hidden');
+                setTimeout(() => statusSection.classList.remove('opacity-0'), 50);
+            }
             const timestamp = new Date().toLocaleTimeString('en-GB');
             const statusLine = document.createElement('div');
-            let typeClass = 'text-gray-400 dark:text-dm-text-muted';
-             switch (type) {
-                case 'success': typeClass = 'text-green-500 dark:text-green-400'; break;
-                case 'error': typeClass = 'text-red-500 dark:text-red-400 font-semibold'; break;
-                case 'warning': typeClass = 'text-yellow-500 dark:text-yellow-300'; break;
-                case 'info': typeClass = 'text-blue-500 dark:text-blue-400'; break;
+            let typeClass = 'text-light-text-muted dark:text-dark-text-muted';
+            let iconType = 'info';
+
+            switch (type) {
+                case 'success': typeClass = 'text-green-500 dark:text-green-400'; iconType = 'check-circle'; break;
+                case 'error': typeClass = 'text-red-500 dark:text-red-400 font-medium'; iconType = 'x-circle'; break;
+                case 'warning': typeClass = 'text-yellow-500 dark:text-yellow-400'; iconType = 'alert-triangle'; break;
+                case 'info': typeClass = 'text-blue-500 dark:text-blue-400'; iconType = 'info'; break;
             }
-            statusLine.className = `py-0.5 ${typeClass}`;
-            statusLine.textContent = `[${timestamp}] ${message}`;
-            const initialMsg = statusPanel.querySelector('div:only-child.text-gray-400, div:only-child.dark\\:text-dm-text-muted');
-            if (initialMsg && initialMsg.textContent.includes('Waiting')) {
+            statusLine.className = `py-1 flex items-center ${typeClass} animate-fade-in-deep`;
+            statusLine.innerHTML = `<i data-feather="${iconType}" class="w-4 h-4 mr-2 flex-shrink-0"></i><span>[${timestamp}] ${message}</span>`;
+            
+            const initialMsg = statusPanel.querySelector('div:only-child');
+            if (initialMsg && initialMsg.textContent.includes('Awaiting instructions...')) {
                 statusPanel.innerHTML = '';
             }
             statusPanel.appendChild(statusLine);
             statusPanel.scrollTop = statusPanel.scrollHeight;
+            feather.replace();
         }
 
         function setButtonLoading(isLoading) {
              generateButton.disabled = isLoading;
              if (isLoading) {
-                 // Use opacity for text to avoid layout shift
-                 submitButtonText.classList.add('opacity-0');
-                 submitButtonIcon?.classList.add('hidden');
+                 submitButtonContentWrapper.classList.add('hidden');
                  submitButtonSpinner.classList.remove('hidden');
                  generateButton.classList.add('cursor-wait');
              } else {
-                 submitButtonText.classList.remove('opacity-0');
-                 submitButtonIcon?.classList.remove('hidden');
+                 submitButtonContentWrapper.classList.remove('hidden');
                  submitButtonSpinner.classList.add('hidden');
                  generateButton.classList.remove('cursor-wait');
              }
@@ -401,7 +461,6 @@
              }
         }
 
-        // --- Settings Management ---
         function saveSettings() {
              try {
                 localStorage.setItem(API_KEY_KEY, apiKeyInput.value.trim());
@@ -421,7 +480,8 @@
         function loadSettings() {
             try {
                 apiKeyInput.value = localStorage.getItem(API_KEY_KEY) || '';
-                modelIdInput.value = localStorage.getItem(MODEL_ID_KEY) || DEFAULT_MODEL;
+                const savedModelId = localStorage.getItem(MODEL_ID_KEY);
+                modelIdInput.value = savedModelId ? savedModelId : DEFAULT_MODEL;
 
                 const savedLang = localStorage.getItem(ARTICLE_LANG_KEY);
                 if (savedLang) articleLanguageSelect.value = savedLang;
@@ -441,102 +501,106 @@
                  updateCurrentModelDisplay();
             } catch (e) { console.error("LocalStorage Error (Load):", e); updateStatus("Could not load settings.", "warning"); }
         }
-
+        
         function updateCurrentModelDisplay() {
              currentModelDisplay.textContent = modelIdInput.value.trim() || DEFAULT_MODEL;
         }
 
-        // --- Theme Management ---
         function applyTheme(theme) {
             if (theme === 'dark') {
                 htmlElement.classList.add('dark');
-                themeToggleIcon.setAttribute('data-feather', 'sun');
-                themeToggleButton.classList.remove('bg-primary');
-                themeToggleButton.classList.add('dark:bg-primary-light');
-                themeToggleButton.classList.remove('text-white');
-                themeToggleButton.classList.add('dark:text-black');
             } else {
                 htmlElement.classList.remove('dark');
-                themeToggleIcon.setAttribute('data-feather', 'moon');
-                themeToggleButton.classList.add('bg-primary');
-                themeToggleButton.classList.remove('dark:bg-primary-light');
-                themeToggleButton.classList.add('text-white');
-                themeToggleButton.classList.remove('dark:text-black');
             }
             feather.replace();
         }
 
         function toggleTheme() {
-            const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const newTheme = htmlElement.classList.contains('dark') ? 'light' : 'dark';
             applyTheme(newTheme);
-            try {
-                localStorage.setItem(THEME_KEY, newTheme);
-            } catch (e) {
-                console.error("LocalStorage Error (Theme Save):", e);
-                updateStatus("Could not save theme preference.", "warning");
-            }
+            try { localStorage.setItem(THEME_KEY, newTheme); }
+            catch (e) { console.error("LocalStorage Error (Theme Save):", e); }
         }
 
         function loadTheme() {
-            let savedTheme = 'dark'; // Default to dark
+            let savedTheme = 'dark';
             try {
                 const storedTheme = localStorage.getItem(THEME_KEY);
-                if (storedTheme === 'light') {
+                if (storedTheme === 'light' || (storedTheme === null && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                     savedTheme = 'light';
                 }
-            } catch (e) {
-                console.error("LocalStorage Error (Theme Load):", e);
-                updateStatus("Could not load theme preference, defaulting to dark.", "warning");
-            }
+            } catch (e) { console.error("LocalStorage Error (Theme Load):", e); }
             applyTheme(savedTheme);
         }
 
-        // --- File Reading Logic ---
-        function readFileContent(file) {
+        function readFileContent(fileToRead) {
             return new Promise((resolve, reject) => {
-                if (!file) { resolve(null); return; }
+                if (!fileToRead) { resolve(null); return; }
+                if (fileToRead.size > MAX_FILE_SIZE_BYTES) {
+                    reject(new Error(`File is too large (${(fileToRead.size / (1024*1024)).toFixed(1)}MB). Max ${MAX_FILE_SIZE_MB}MB.`));
+                    return;
+                }
                 const reader = new FileReader();
                 reader.onload = (e) => { resolve(e.target.result); };
-                reader.onerror = (e) => { console.error("File Reading Error:", e); reject(new Error(`Error reading file: ${file.name}`)); };
-                 reader.readAsText(file, 'UTF-8');
+                reader.onerror = (e) => { console.error("File Reading Error:", e); reject(new Error(`Error reading file: ${fileToRead.name}`)); };
+                reader.readAsText(fileToRead, 'UTF-8');
             });
         }
 
-        // --- Event Listeners ---
         document.addEventListener('DOMContentLoaded', () => {
-            loadTheme(); // Load theme first
+            loadTheme();
             loadSettings();
-            feather.replace(); // Initial icon render
+            feather.replace();
+            document.querySelectorAll('.animate-fade-in-deep, .animate-slide-in-up-strong').forEach(el => {
+                el.style.opacity = '0';
+                setTimeout(() => el.style.opacity = '1', 50 + (parseFloat(el.style.animationDelay) || 0) * 1000);
+            });
         });
 
-        // Save settings on change
-        apiKeyInput.addEventListener('change', saveSettings); modelIdInput.addEventListener('change', saveSettings); articleLanguageSelect.addEventListener('change', () => { toggleCustomInput(articleLanguageSelect, customArticleLanguageInput); saveSettings(); }); customArticleLanguageInput.addEventListener('change', saveSettings); authorPersonaSelect.addEventListener('change', () => { toggleCustomInput(authorPersonaSelect, customAuthorPersonaInput); saveSettings(); }); customAuthorPersonaInput.addEventListener('change', saveSettings); sourceOwnerInput.addEventListener('change', saveSettings); targetAudienceInput.addEventListener('change', saveSettings); primaryKeywordsInput.addEventListener('change', saveSettings); callToActionInput.addEventListener('change', saveSettings);
+        apiKeyInput.addEventListener('change', saveSettings);
+        modelIdInput.addEventListener('change', saveSettings);
+        articleLanguageSelect.addEventListener('change', () => { toggleCustomInput(articleLanguageSelect, customArticleLanguageInput); saveSettings(); });
+        customArticleLanguageInput.addEventListener('change', saveSettings);
+        authorPersonaSelect.addEventListener('change', () => { toggleCustomInput(authorPersonaSelect, customAuthorPersonaInput); saveSettings(); });
+        customAuthorPersonaInput.addEventListener('change', saveSettings);
+        sourceOwnerInput.addEventListener('change', saveSettings);
+        targetAudienceInput.addEventListener('change', saveSettings);
+        primaryKeywordsInput.addEventListener('change', saveSettings);
+        callToActionInput.addEventListener('change', saveSettings);
 
-        // Toggle API Key visibility
-        toggleApiKey.addEventListener('click', () => { const type = apiKeyInput.getAttribute('type') === 'password' ? 'text' : 'password'; apiKeyInput.setAttribute('type', type); toggleApiKeyIcon.setAttribute('data-feather', type === 'password' ? 'eye' : 'eye-off'); feather.replace(); });
+        toggleApiKey.addEventListener('click', () => {
+            const type = apiKeyInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            apiKeyInput.setAttribute('type', type);
+            toggleApiKeyIcon.setAttribute('data-feather', type === 'password' ? 'eye' : 'eye-off');
+            feather.replace();
+        });
 
-        // File Input Change Handler
         sourceFileInput.addEventListener('change', (event) => {
-             sourceFile = event.target.files[0];
-             if (sourceFile) {
-                 const displayName = sourceFile.name.length > 40 ? sourceFile.name.substring(0, 15) + '...' + sourceFile.name.substring(sourceFile.name.length - 15) : sourceFile.name;
+             currentSourceFile = event.target.files[0];
+             if (currentSourceFile) {
+                 if (currentSourceFile.size > MAX_FILE_SIZE_BYTES) {
+                    updateStatus(`File "${currentSourceFile.name}" is too large (Max ${MAX_FILE_SIZE_MB}MB). Please choose a smaller file.`, 'error');
+                    sourceFileNameDisplay.textContent = `Error: File too large`;
+                    sourceFileNameDisplay.classList.remove('text-light-accent-start', 'dark:text-dark-accent-start', 'font-semibold');
+                    sourceFileNameDisplay.classList.add('text-red-500', 'dark:text-red-400');
+                    currentSourceFile = null;
+                    sourceFileInput.value = '';
+                    return;
+                 }
+                 const displayName = currentSourceFile.name.length > 35 ? currentSourceFile.name.substring(0, 15) + '...' + currentSourceFile.name.substring(currentSourceFile.name.length - 15) : currentSourceFile.name;
                  sourceFileNameDisplay.textContent = `Selected: ${displayName}`;
-                 sourceFileNameDisplay.classList.remove('text-gray-600', 'dark:text-dm-text-secondary');
-                 sourceFileNameDisplay.classList.add('text-primary-dark', 'dark:text-primary-light', 'font-semibold');
+                 sourceFileNameDisplay.classList.add('text-light-accent-start', 'dark:text-dark-accent-start', 'font-semibold');
+                 sourceFileNameDisplay.classList.remove('text-red-500', 'dark:text-red-400');
              } else {
                  sourceFileNameDisplay.textContent = 'No file selected';
-                 sourceFileNameDisplay.classList.add('text-gray-600', 'dark:text-dm-text-secondary');
-                 sourceFileNameDisplay.classList.remove('text-primary-dark', 'dark:text-primary-light', 'font-semibold');
+                 sourceFileNameDisplay.classList.remove('text-light-accent-start', 'dark:text-dark-accent-start', 'font-semibold', 'text-red-500', 'dark:text-red-400');
                  sourceFileContent = null;
-                 sourceFile = null;
+                 currentSourceFile = null;
              }
          });
 
-        // Theme Toggle Listener
         themeToggleButton.addEventListener('click', toggleTheme);
 
-        // --- Form Submission ---
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
             setButtonLoading(true);
@@ -544,14 +608,13 @@
             outputArticle.value = '';
             copyButton.disabled = true;
             downloadButton.disabled = true;
-            // Reset copy button state
-            copyButton.classList.remove('bg-green-500', 'hover:bg-green-600', 'focus:ring-green-500', 'text-white', 'dark:bg-green-600', 'dark:text-white');
-            copyButton.classList.add('text-gray-700', 'hover:bg-gray-300', 'dark:text-dm-text-secondary', 'dark:hover:bg-opacity-75'); // Restore original styles including dark
-            copyButton.innerHTML = '<i data-feather="clipboard" class="w-4 h-4 mr-1.5"></i> Copy';
+            copyButton.classList.remove('success-state');
+            copyButton.innerHTML = '<i data-feather="copy" class="w-4 h-4 mr-2"></i> Copy';
             feather.replace();
-            statusPanel.innerHTML = '';
+            if (statusPanel.querySelector('div:only-child')?.textContent.includes('Awaiting instructions...')) {
+                statusPanel.innerHTML = '';
+            }
 
-            // Get input values
             const apiKey = apiKeyInput.value.trim();
             const modelId = modelIdInput.value.trim() || DEFAULT_MODEL;
             const articleTopic = articleTopicInput.value.trim();
@@ -565,19 +628,20 @@
             const primaryKeywords = primaryKeywordsInput.value.trim();
             const callToAction = callToActionInput.value.trim();
 
-            // Validation
-            if (!apiKey || !modelId || !articleTopic || !articleLanguage || (!authorPersonaValue || (authorPersonaValue === 'Other' && !authorPersonaText))) {
-                 if (!apiKey) updateStatus('API Key is required.', 'error'); if (!modelId) updateStatus('Model ID is required.', 'error'); if (!articleTopic) updateStatus('Article Topic/Prompt is required.', 'error'); if (!articleLanguage) updateStatus('Article Language is required.', 'error'); if (!authorPersonaValue || (authorPersonaValue === 'Other' && !authorPersonaText)) updateStatus('Author Persona is required.', 'error');
+            if (!apiKey || !articleTopic || !articleLanguage || (!authorPersonaValue || (authorPersonaValue === 'Other' && !authorPersonaText))) {
+                if (!apiKey) updateStatus('API Key is required.', 'error');
+                if (!articleTopic) updateStatus('Article Topic/Prompt is required.', 'error');
+                if (!articleLanguage) updateStatus('Article Language is required.', 'error');
+                if (!authorPersonaValue || (authorPersonaValue === 'Other' && !authorPersonaText)) updateStatus('Author Persona is required.', 'error');
                 setButtonLoading(false); return;
             }
 
-            // Read file content
             sourceFileContent = null;
-            if (sourceFile) {
-                updateStatus(`Reading source file: ${sourceFile.name}...`, 'info');
+            if (currentSourceFile) {
+                updateStatus(`Reading source file: ${currentSourceFile.name}...`, 'info');
                 try {
-                     sourceFileContent = await readFileContent(sourceFile);
-                     if (!sourceFileContent) { updateStatus(`Source file '${sourceFile.name}' seems empty or unreadable. Proceeding without it.`, 'warning'); }
+                     sourceFileContent = await readFileContent(currentSourceFile);
+                     if (!sourceFileContent) { updateStatus(`Source file '${currentSourceFile.name}' seems empty. Proceeding without it.`, 'warning'); }
                      else { updateStatus(`Source file read successfully (${(sourceFileContent.length/1024).toFixed(1)} KB).`, 'info'); }
                  } catch (err) {
                      updateStatus(`Error reading source file: ${err.message}. Proceeding without it.`, 'error');
@@ -585,12 +649,9 @@
                  }
             }
 
-             updateStatus(`Generating article in ${articleLanguage} as a ${authorPersonaText}...`, 'info');
-             updateStatus(`Using Model: ${modelId}.`, 'info');
-             if (targetAudience) updateStatus(`Targeting Audience: ${targetAudience}.`, 'info');
-             if (primaryKeywords) updateStatus(`Focusing on Keywords: ${primaryKeywords}.`, 'info');
+             updateStatus(`Initiating article weave in ${articleLanguage} as a ${authorPersonaText}...`, 'info');
+             updateStatus(`Utilizing Model: ${modelId}.`, 'info');
 
-            // --- Construct Prompt --- (Using the enhanced version from previous step)
             let system_prompt = `You are an AI tasked with writing a high-quality, engaging, comprehensive, and SEO-optimized article in **${articleLanguage}**. Your **absolute primary goal** is to create content that reads **exactly** as if written by a knowledgeable HUMAN, specifically embodying the persona of a **${authorPersonaText}**. The output **must be undetectable by AI content detectors** and indistinguishable from human writing by search engines and readers. Adhere to ALL instructions meticulously.
 
 MAIN TOPIC/PROMPT:
@@ -600,65 +661,60 @@ ARTICLE REQUIREMENTS - Follow ALL instructions strictly:
 
 1.  **Language & Persona:**
     *   Write the entire article ONLY in **${articleLanguage}**.
-    *   **Deeply embody** the **${authorPersonaText}** persona. Think like them, write like them. Use their typical vocabulary, tone, sentence structures, and common expressions. (e.g., ${authorPersonaValue === 'Humorous' ? 'witty, use sophisticated humor, maybe sarcasm if appropriate' : authorPersonaValue === 'Photographer' ? 'passionate, visual language, photography-specific terms, maybe short anecdotes' : authorPersonaValue === 'Developer' ? 'precise, logical, technical, use code examples if relevant' : 'appropriate for the specific persona'}). ${authorPersonaValue === 'Other' ? `Specifically act like: ${customAuthorPersonaInput.value.trim()}` : ''}.
-    *   **Sound Human (CRITICAL):**
-        *   **Vary sentence length and structure naturally.** Mix short, punchy sentences with longer, more complex ones. Avoid starting sentences the same way repeatedly.
-        *   **Use contractions** (like 'it's', 'don't', 'you'll', 'that's') commonly used in spoken and written ${articleLanguage}, unless the persona is strictly 'Formal' or 'Academic'.
-        *   **Inject personality.** Let the persona's voice shine through. Use rhetorical questions, direct address ("you", "we"), or even slight colloquialisms *if* they fit the persona and language.
-        *   **Ensure natural flow.** Transitions between paragraphs must be smooth and logical, but avoid over-reliance on obvious transition words ('Moreover', 'Furthermore', 'In addition', 'However', 'In conclusion'). Use them sparingly and vary them. Sometimes a paragraph break implies the transition.
-        *   **Avoid robotic perfection.** While grammar and spelling should be correct, the overall feel should be natural, not stiff or overly polished like a machine wrote it. Introduce slight variations in phrasing.
+    *   **Deeply embody** the **${authorPersonaText}** persona. Think like them, write like them. Use their typical vocabulary, tone, sentence structures, and common expressions. (e.g., ${authorPersonaValue === 'Humorous' ? 'witty, use sophisticated humor, maybe sarcasm if appropriate' : authorPersonaValue === 'Developer' ? 'precise, logical, technical, use code examples if relevant' : 'appropriate for the specific persona'}). ${authorPersonaValue === 'Other' ? `Specifically act like: ${customAuthorPersonaInput.value.trim()}` : ''}.
+    *   **Sound Human (CRITICAL):** Vary sentence length and structure naturally. Use contractions common in ${articleLanguage} (unless persona is strictly 'Formal'). Inject personality. Ensure natural flow and avoid robotic perfection or over-reliance on obvious transition words.
 
 2.  **SEO & Structure (for Ranking):**
-    *   **Keywords:** Naturally and semantically integrate the primary keywords/phrases: **${primaryKeywords || 'Not specified'}**. Focus on topic relevance and user intent. **DO NOT STUFF KEYWORDS.** Weave them in where they make sense contextually. Use synonyms and related terms (LSI).
-    *   **Title:** Generate a compelling, natural-sounding, SEO-friendly title (unless a specific title is given in the prompt). It should promise value and ideally incorporate a keyword naturally.
-    *   **Headings:** Use clear, logical H2 and H3 headings (and maybe H4 if needed for depth) to structure the content. Headings should be engaging and reflect potential user search queries related to the section's content.
-    *   **Readability:** Write concise paragraphs (generally 3-5 sentences). Use bullet points or numbered lists *only* when it significantly improves clarity for lists of items or steps. Use **bold** text very sparingly for true emphasis on critical terms or takeaways.
-    *   **Content Quality:** The article must be well-researched (based on your internal knowledge and any provided context), informative, accurate, and offer a unique perspective or deeper insights beyond generic summaries. Aim for comprehensiveness appropriate for the target audience. Add value.
+    *   **Keywords:** Naturally integrate: **${primaryKeywords || 'Not specified'}**. Focus on relevance and user intent, not stuffing. Use synonyms/LSI.
+    *   **Title:** Generate a compelling, SEO-friendly title (unless given in prompt).
+    *   **Headings:** Use clear H2, H3 (and H4 if needed) for structure.
+    *   **Readability:** Concise paragraphs (3-5 sentences). Use lists/bold sparingly.
+    *   **Content Quality:** Well-researched, informative, accurate, unique perspective. Add value.
 
 3.  **Target Audience:**
-    *   Tailor the language, examples, depth, and complexity specifically for: **${targetAudience || 'a general audience'}**. Write as if you are having a conversation with someone from this group. Anticipate their questions and level of understanding.
+    *   Tailor language, examples, depth for: **${targetAudience || 'a general audience'}**.
 
 4.  **Context Integration (If Provided):**
-    *   **Source File:** ${sourceFileContent ? `**Crucially, use the following text from the user-uploaded file** as foundational context, specific examples, data points, or unique perspectives. Integrate this information **smoothly and naturally** into the article's flow. Do not just list or quote it directly unless essential. Synthesize it. Build upon it significantly.\n\`\`\`\n${sourceFileContent.substring(0, 6000) + (sourceFileContent.length > 6000 ? '...' : '')}\n\`\`\`\n` : 'No external file provided. Rely solely on your general knowledge and the prompt details.'}
-    *   **Source Owner/Website:** ${sourceOwner ? `Subtly align the perspective, tone, or examples with the identity of **${sourceOwner}** where relevant and natural. Avoid overt promotion unless the persona is explicitly 'Marketer'. The connection should feel organic.` : 'No specific source owner/website context provided.'}
+    *   **Source File:** ${sourceFileContent ? `**Crucially, use the following text from the user-uploaded file** as foundational context, examples, or unique perspectives. Integrate this **smoothly and naturally**. Synthesize it. Build upon it.\n\`\`\`\n${sourceFileContent.substring(0, 8000) + (sourceFileContent.length > 8000 ? '...' : '')}\n\`\`\`\n` : 'No external file provided.'}
+    *   **Source Owner/Website:** ${sourceOwner ? `Subtly align perspective with **${sourceOwner}** where relevant. Avoid overt promotion unless persona is 'Marketer'.` : ''}
 
 5.  **Call to Action (If Provided):**
-    *   ${callToAction ? `Naturally weave in or conclude with a relevant and non-generic call to action: "${callToAction}". Make it fit the article's flow and tone.` : 'No specific call to action requested.'}
+    *   ${callToAction ? `Naturally weave in or conclude with: "${callToAction}".` : ''}
 
 6.  **ABSOLUTELY AVOID COMMON AI TELLS (ESSENTIAL FOR UNDETECTABILITY):**
-    *   **Do NOT sound like a generic AI assistant, language model, or chatbot.** BE THE PERSONA.
-    *   **Do NOT use overly complex or academic vocabulary** unless the persona (e.g., Researcher, Formal) specifically requires it. Prefer clear, common language.
-    *   **Do NOT overuse transition words** unnaturally (especially 'Moreover', 'Furthermore', 'In conclusion', 'Additionally', 'However'). Find more organic ways to connect ideas.
-    *   **Do NOT write overly "perfect", sanitized, or bland text.** Allow for a natural, slightly imperfect human voice.
-    *   **Do NOT output generic lists** unless they are essential and well-integrated into the surrounding text. Avoid "listicles" unless the topic demands it.
-    *   **Do NOT include any preambles, apologies, self-corrections, summaries *about* the article you just wrote, or notes to the user.**
-    *   **Do NOT use markdown code fences (\`\`\`)** around the final article content or any part of it.
-    *   **Do NOT use repetitive sentence structures or phrasing.** Introduce variety.
-    *   **Do NOT hedge excessively** (e.g., "it may be possible that," "some might suggest"). Be reasonably confident where appropriate for the persona.
+    *   **Do NOT sound like a generic AI.** BE THE PERSONA.
+    *   **Do NOT use overly complex vocabulary** unless persona requires.
+    *   **Do NOT overuse transition words** unnaturally.
+    *   **Do NOT write overly "perfect" or bland text.**
+    *   **Do NOT output generic lists** unless essential.
+    *   **Do NOT include preambles, apologies, self-corrections, or notes to the user.**
+    *   **Do NOT use markdown code fences (\`\`\`)** in the final article.
+    *   **Do NOT use repetitive sentence structures.**
+    *   **Do NOT hedge excessively.**
 
-7.  **Output Format:** Generate ONLY the complete article content, starting directly with the title (if you generate one) or the first paragraph if a title was in the prompt. Ensure clean formatting suitable for direct pasting into a CMS like WordPress (standard paragraphs, headings). **No extra text before or after the article.**`;
+7.  **Output Format:** ONLY the complete article content, starting with the title or first paragraph. Clean formatting for CMS. **No extra text before or after.**`;
 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent?key=${apiKey}`;
             const requestData = {
                  contents: [{ role: 'user', parts: [{ text: "Generate the article based *strictly* on the detailed system instructions provided, focusing intensely on sounding human and avoiding AI detection." }] }],
                  systemInstruction: { parts: [{ text: system_prompt }] },
-                 generationConfig: { /* Optional: temperature, topK, topP */ }
+                 generationConfig: { temperature: 0.75, topP: 0.95, topK: 40 }
             };
 
-            updateStatus('Sending request to Gemini API... Focusing on human-like generation.', 'info');
+            updateStatus('Sending request to Gemini API... This may take a moment.', 'info');
              try {
                  const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(requestData), });
                  const responseBody = await response.text();
 
                  if (!response.ok) {
-                     let eM = `API Error (${modelId}/${response.status}): ${response.statusText}`; let eD = '';
-                     try { const eJ = JSON.parse(responseBody); eD = eJ.error?.message || JSON.stringify(eJ.error); console.error("API Error JSON:", eJ);
-                         if (eJ.error?.message?.toLowerCase().includes("api key not valid")) throw new Error("API Key invalid/unauthorized. Please check your key.");
-                         if (eJ.error?.code === 404 || eJ.error?.message?.toLowerCase().includes("model") && eJ.error?.message?.toLowerCase().includes("not found")) throw new Error(`Model '${modelId}' not found or access denied. Check the Model ID.`);
-                         if (eJ.error?.code === 429) throw new Error("API Quota exceeded or rate limit reached.");
+                     let eM = `API Error (${response.status}): ${response.statusText}`; let eD = '';
+                     try { const eJ = JSON.parse(responseBody); eD = eJ.error?.message || JSON.stringify(eJ.error);
+                         if (eJ.error?.message?.toLowerCase().includes("api key not valid")) throw new Error("API Key invalid/unauthorized.");
+                         if (eJ.error?.code === 404 || eJ.error?.message?.toLowerCase().includes("model") && eJ.error?.message?.toLowerCase().includes("not found")) throw new Error(`Model '${modelId}' not found.`);
+                         if (eJ.error?.code === 429) throw new Error("API Quota exceeded or rate limit.");
                          if (eJ.error?.code >= 500) throw new Error("Google API server error.");
                      } catch (pE) {
-                         if (pE instanceof Error && (pE.message.includes("API Key invalid") || pE.message.includes("Model") ) ) { throw pE; }
+                         if (pE instanceof Error && (pE.message.includes("API Key") || pE.message.includes("Model") ) ) { throw pE; }
                          else { eD = responseBody.substring(0, 300) + '...'; }
                      }
                      throw new Error(`${eM} - ${eD}`);
@@ -674,104 +730,103 @@ ARTICLE REQUIREMENTS - Follow ALL instructions strictly:
                      const safetyRatings = candidate?.safetyRatings || result.promptFeedback?.safetyRatings;
 
                      if (blockReason) {
-                         throw new Error(`Request blocked: ${blockReason}. ${safetyRatings ? `Details: ${JSON.stringify(safetyRatings)}` : ''}. Try revising the prompt or checking safety settings if applicable.`);
+                         throw new Error(`Request blocked: ${blockReason}. ${safetyRatings ? `Details: ${JSON.stringify(safetyRatings)}` : ''}.`);
                      }
-
                      if (candidate?.content?.parts?.[0]?.text) {
                          generatedArticleContent = candidate.content.parts[0].text;
-                         if (candidate.finishReason === 'STOP') {
-                             updateStatus('Article generation completed successfully.', 'success');
-                         } else if (candidate.finishReason === 'MAX_TOKENS') {
-                             updateStatus(`Article generation stopped due to MAX_TOKENS limit. Output may be incomplete.`, 'warning');
+                         if (candidate.finishReason === 'STOP') updateStatus('Article weaving complete.', 'success');
+                         else if (candidate.finishReason === 'MAX_TOKENS') {
+                             updateStatus(`Article weaving stopped (MAX_TOKENS). Output may be incomplete.`, 'warning');
                              generatedArticleContent += `\n\n[SYSTEM WARNING: Output truncated due to maximum token limit.]`;
                          } else if (candidate.finishReason === 'SAFETY') {
-                              updateStatus(`Article generation stopped due to SAFETY concerns. Output may be incomplete or empty. Details: ${JSON.stringify(safetyRatings || 'No specific rating details')}`, 'error');
-                              if (!generatedArticleContent?.trim()) generatedArticleContent = `[Content Blocked due to Safety Concerns: ${blockReason || 'Reason unspecified'}]`;
-                         }
-                          else {
-                            updateStatus(`Generation finished with reason: ${candidate.finishReason}. ${safetyRatings ? `Safety: ${JSON.stringify(safetyRatings)}` : ''}`, 'warning');
-                            if (!generatedArticleContent?.trim()) {
-                                throw new Error(`Generation finished with reason ${candidate.finishReason} but no content was returned.`);
-                            }
-                         }
-                     } else {
-                         console.error("API Response Structure Problem:", result);
-                         throw new Error('API returned a successful response, but no valid text content was found in the expected structure.');
-                     }
-                 } catch (e) {
-                     if (e instanceof SyntaxError) {
-                         updateStatus('API response was not valid JSON. Trying to use as plain text.', 'warning');
-                         if (responseBody?.trim()) {
-                             generatedArticleContent = responseBody;
-                             updateStatus('Used plain text response. Content might be malformed.', 'warning');
+                              updateStatus(`Article weaving stopped (SAFETY). Output may be incomplete/empty. Details: ${JSON.stringify(safetyRatings || 'N/A')}`, 'error');
+                              if (!generatedArticleContent?.trim()) generatedArticleContent = `[Content Blocked (Safety): ${blockReason || 'Reason unspecified'}]`;
                          } else {
-                             throw new Error(`Non-JSON response was empty.`);
+                            updateStatus(`Generation finished: ${candidate.finishReason}. ${safetyRatings ? `Safety: ${JSON.stringify(safetyRatings)}` : ''}`, 'warning');
+                            if (!generatedArticleContent?.trim()) throw new Error(`Finished: ${candidate.finishReason}, but no content.`);
                          }
-                     } else {
-                         throw e;
-                     }
+                     } else throw new Error('API success, but no valid text content found.');
+                 } catch (e) {
+                     if (e instanceof SyntaxError && responseBody?.trim()) {
+                         updateStatus('API response not valid JSON. Using plain text.', 'warning');
+                         generatedArticleContent = responseBody;
+                     } else throw e;
                  }
 
                  if (generatedArticleContent?.trim()) {
                      outputArticle.value = generatedArticleContent.trim();
+                     if (!outputSection.classList.contains('hidden')) {
+                        outputSection.style.opacity = 0;
+                        setTimeout(() => { outputSection.style.opacity = 1; }, 50);
+                     } else {
+                        outputSection.classList.remove('hidden');
+                        setTimeout(() => outputSection.classList.remove('opacity-0'), 50);
+                     }
                      copyButton.disabled = false; downloadButton.disabled = false;
-                     feather.replace();
                  } else {
-                    updateStatus('Failed to generate valid article content after processing.', 'error');
-                    outputArticle.value = outputArticle.value || "Could not generate article. Check status panel for details.";
+                    updateStatus('Failed to generate valid article content.', 'error');
+                    outputArticle.value = outputArticle.value || "Could not generate article. Check log.";
                  }
 
             } catch (error) {
                 updateStatus(`Error: ${error.message}`, 'error');
                 console.error('Operation Failed:', error);
                 outputArticle.value = `Error generating article. Details:\n${error.message}`;
+                 if (outputSection.classList.contains('hidden')) {
+                    outputSection.classList.remove('hidden');
+                    setTimeout(() => outputSection.classList.remove('opacity-0'), 50);
+                 }
             }
             finally {
                 setButtonLoading(false);
             }
         });
 
-        // --- Copy/Download Functions ---
         function copyOutput() {
             if (!outputArticle.value) return;
             navigator.clipboard.writeText(outputArticle.value)
                 .then(() => {
-                    copyButton.innerHTML = '<i data-feather="check" class="w-4 h-4 mr-1.5"></i> Copied!';
-                    // Apply success styles for both light and dark mode
-                    copyButton.classList.remove('text-gray-700', 'hover:bg-gray-300', 'dark:text-dm-text-secondary', 'dark:hover:bg-opacity-75');
-                    copyButton.classList.add('bg-green-500', 'text-white', 'hover:bg-green-600', 'focus:ring-green-500', 'dark:bg-green-600', 'dark:text-white');
+                    copyButton.innerHTML = '<i data-feather="check-circle" class="w-4 h-4 mr-2"></i> Copied!';
+                    copyButton.classList.add('success-state');
                     feather.replace();
                     setTimeout(() => {
-                        copyButton.innerHTML = '<i data-feather="clipboard" class="w-4 h-4 mr-1.5"></i> Copy';
-                        // Restore original styles for both light and dark mode
-                        copyButton.classList.remove('bg-green-500', 'text-white', 'hover:bg-green-600', 'focus:ring-green-500', 'dark:bg-green-600', 'dark:text-white');
-                        copyButton.classList.add('text-gray-700', 'hover:bg-gray-300', 'dark:text-dm-text-secondary', 'dark:hover:bg-opacity-75');
+                        copyButton.innerHTML = '<i data-feather="copy" class="w-4 h-4 mr-2"></i> Copy';
+                        copyButton.classList.remove('success-state');
                         feather.replace();
-                    }, 2000);
+                    }, 2500);
                 })
-                .catch(err => { console.error('Copy failed: ', err); updateStatus('Could not copy article to clipboard.', 'error'); });
+                .catch(err => { console.error('Copy failed: ', err); updateStatus('Could not copy article.', 'error'); });
         }
 
         function downloadOutput() {
             if (!outputArticle.value) return;
             const textToSave = outputArticle.value;
-            const blob = new Blob([textToSave], { type: 'text/plain;charset=utf-8' });
+            const BOM = "\uFEFF";
+            const blob = new Blob([BOM + textToSave], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a'); link.href = url;
             const filenameBase = articleTopicInput.value.trim().toLowerCase()
                                     .replace(/[^a-z0-9\s-]/g, '')
                                     .replace(/\s+/g, '-')
-                                    .substring(0, 50) || 'ai-seo-article';
+                                    .substring(0, 40) || 'stealth-article';
             const timestamp = new Date().toISOString().slice(0, 10);
             link.download = `${filenameBase}_${timestamp}.txt`;
-            link.style.display = 'none'; document.body.appendChild(link); link.click(); document.body.removeChild(link); window.URL.revokeObjectURL(url);
+            document.body.appendChild(link); link.click(); document.body.removeChild(link); window.URL.revokeObjectURL(url);
             updateStatus(`File "${link.download}" download initiated.`, 'success');
         }
 
         copyButton.addEventListener('click', copyOutput);
         downloadButton.addEventListener('click', downloadOutput);
 
-        // --- END: JavaScript Code ---
+        const observer = new MutationObserver((mutationsList, obs) => {
+            for(const mutation of mutationsList) {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    feather.replace();
+                    return;
+                }
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
     </script>
 </body>
 </html>
