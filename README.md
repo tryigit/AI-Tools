@@ -6,10 +6,10 @@ Tools to customize and effortlessly use advanced AI API's. Runs entirely on the 
 **V1.1.0**
 
 ## [AI Article Generator](https://tryigit.dev/ai/article/)
-**V1.0.1**
+**V1.0.2**
 
 ## [AI Human Text Reframer](https://tryigit.dev/ai/manipulation/)
-**V1.0.1**
+**V1.0.2**
 
 > [!WARNING]
 > You may see Google ads on the project pages, but this is very limited so as not to be intrusive, and the minimal revenues from Google ads will only be used for the development of the project and server costs.
