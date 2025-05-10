@@ -9,7 +9,7 @@
     <link rel="manifest" href="/ai/site.webmanifest">
     <link rel="shortcut icon" href="/ai/favicon.ico">
     <title>AI Subtitle Alchemist | Gemini Powered Translations</title>
-    <meta name="description" content="Translate .srt, .ass, or .txt subtitle files (including from .zip & .xz archives) with unparalleled precision using Google Gemini AI. Customize for quality and fluency, preserving timing & format.">
+    <meta name="description" content="Translate .srt, .ass, or .txt subtitle files (including from .zip archives) with unparalleled precision using Google Gemini AI. Customize for quality and fluency, preserving timing & format.">
     <meta name="keywords" content="subtitle translator, ai translation, gemini api, srt translator, ass translator, ai subtitle, machine translation, localization, professional translation, tryigit, subtitle alchemy">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://tryigit.dev/ai/translate" />
@@ -220,7 +220,7 @@
                 AI Subtitle <span class="page-title-gradient">Alchemist</span>
             </h1>
             <p class="mt-5 text-lg md:text-xl text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto">
-                Transmute subtitles with unparalleled precision. SRT, ASS, TXT, ZIP, XZ – powered by Google Gemini.
+                Transmute subtitles with unparalleled precision. SRT, ASS, TXT, ZIP – powered by Google Gemini.
             </p>
         </header>
 
@@ -269,8 +269,8 @@
                     <label for="subtitleFile" class="file-upload-input-area group">
                         <i data-feather="upload-cloud" class="upload-icon"></i>
                          <span class="upload-text-main">Click to upload or drag & drop</span>
-                         <span class="upload-text-sub">Supports .SRT, .ASS, .TXT, .ZIP, .XZ files</span>
-                         <input type="file" id="subtitleFile" name="subtitleFile" accept=".srt,.ass,.txt,.zip,.xz,.tar.gz,.gz,.tar.xz,.7z" required>
+                         <span class="upload-text-sub">Supports .SRT, .ASS, .TXT, .ZIP files</span>
+                         <input type="file" id="subtitleFile" name="subtitleFile" accept=".srt,.ass,.txt,.zip,.tar.gz,.gz,.7z" required>
                      </label>
                 </div>
                  <div id="fileSelectionDisplay" class="mt-4 text-center overflow-hidden flex flex-col items-center pb-1">
@@ -339,7 +339,7 @@
          </footer>
     </div>
 
-    <button id="themeToggleButton" title="Toggle Theme" class="fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 
+    <button id="themeToggleButton" title="Toggle Theme" class="fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-xl transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2
         bg-gradient-to-br from-slate-800 to-slate-950 text-slate-100 focus:ring-slate-500 focus:ring-offset-light-primary-bg
         dark:bg-gradient-to-br dark:from-dark-accent-start dark:to-dark-accent-end dark:text-slate-100 dark:focus:ring-dark-accent-end dark:focus:ring-offset-dark-primary-bg
     ">
@@ -367,7 +367,6 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/xz-wasm/dist/xz.min.js"></script>
 
     <script>
         const form = document.getElementById('translateForm');
@@ -411,7 +410,7 @@
 
         const STORAGE_PREFIX = 'aiSubtitleAlchemist_v3_';
         const API_KEY_KEY = STORAGE_PREFIX + 'apiKey'; const MODEL_ID_KEY = STORAGE_PREFIX + 'modelId'; const TARGET_LANG_KEY = STORAGE_PREFIX + 'targetLanguage'; const CUSTOM_TARGET_LANG_KEY = STORAGE_PREFIX + 'customTargetLanguage'; const CONTENT_TYPE_KEY = STORAGE_PREFIX + 'contentType'; const CUSTOM_CONTENT_TYPE_KEY = STORAGE_PREFIX + 'customContentType'; const TEMPERATURE_KEY = STORAGE_PREFIX + 'temperature'; const THEME_KEY = STORAGE_PREFIX + 'theme';
-        let processedResults = []; let currentArchiveEntries = []; let selectedArchiveIndices = []; let currentArchiveFilename = ''; const DEFAULT_MODEL = 'gemini-2.5-pro-exp-03-25'; const DEFAULT_TEMPERATURE = 0.45; let isXZWasmLoaded = false; let wakeLock = null;
+        let processedResults = []; let currentArchiveEntries = []; let selectedArchiveIndices = []; let currentArchiveFilename = ''; const DEFAULT_MODEL = 'gemini-2.5-pro-exp-03-25'; const DEFAULT_TEMPERATURE = 0.45; let wakeLock = null;
 
         function updateStatus(message, type = 'info') {
             if (statusSection.classList.contains('hidden')) {
@@ -450,7 +449,6 @@
         function applyTheme(theme) { if (theme === 'dark') { htmlElement.classList.add('dark'); } else { htmlElement.classList.remove('dark'); } feather.replace(); }
         function toggleTheme() { const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light'; const newTheme = currentTheme === 'dark' ? 'light' : 'dark'; applyTheme(newTheme); try { localStorage.setItem(THEME_KEY, newTheme); } catch (e) { console.error("LS Theme Error:", e); } }
         function loadTheme() { let savedTheme = 'dark'; try { const storedTheme = localStorage.getItem(THEME_KEY); if (storedTheme === 'light' || (storedTheme === null && !window.matchMedia('(prefers-color-scheme: dark)').matches)) { savedTheme = 'light'; } } catch (e) { console.error("LS Theme Load Error:", e); } applyTheme(savedTheme); }
-        async function decompressXZ(file) { if (!isXZWasmLoaded || !window.XZWASM || !window.XZWASM.XzReadableStream) { throw new Error("XZ library not available."); } const { XzReadableStream } = window.XZWASM; const xzReadableStream = new XzReadableStream(file.stream()); return await new Response(xzReadableStream).blob(); }
         function displaySelectedFile(file) { const fullFileName = file.name; const displayFileName = fullFileName.length > 50 ? `${fullFileName.substring(0, 25)}...${fullFileName.substring(fullFileName.length - 20)}` : fullFileName; fileNameDisplay.textContent = `Selected: ${displayFileName} (${(file.size / 1024).toFixed(1)} KB)`; fileNameDisplay.title = fullFileName; fileNameDisplay.classList.remove('text-light-text-secondary', 'dark:text-dark-text-secondary'); fileNameDisplay.classList.add('text-light-accent-start', 'dark:text-dark-accent-start', 'font-semibold'); showArchiveModalButton.classList.add('hidden'); archiveSelectionSummary.textContent = ''; }
         function displayArchiveSelection(file, count) { const fullFileName = file.name; const displayFileName = fullFileName.length > 50 ? `${fullFileName.substring(0, 25)}...${fullFileName.substring(fullFileName.length - 20)}` : fullFileName; fileNameDisplay.textContent = `Archive: ${displayFileName}`; fileNameDisplay.title = fullFileName; fileNameDisplay.classList.remove('text-light-text-secondary', 'dark:text-dark-text-secondary'); fileNameDisplay.classList.add('text-light-accent-start', 'dark:text-dark-accent-start', 'font-semibold'); showArchiveModalButton.classList.remove('hidden'); feather.replace({ width: '1em', height: '1em', class: 'inline-block -mt-0.5' }); updateArchiveSelectionSummary(); }
         function updateArchiveSelectionSummary() { const count = selectedArchiveIndices.length; archiveSelectionSummary.textContent = count > 0 ? `(${count} file${count > 1 ? 's' : ''} selected)` : '(No files selected)'; }
@@ -460,8 +458,53 @@
         function getBaseName(path) { return path.substring(path.lastIndexOf('/') + 1); }
         function populateArchiveModalList() { archiveModalList.innerHTML = ''; archiveModalTitle.textContent = `Select Files from ${currentArchiveFilename}`; const filesByDirectory = currentArchiveEntries.reduce((acc, entry, index) => { const dir = getDirectory(entry.name); if (!acc[dir]) { acc[dir] = []; } acc[dir].push({ ...entry, originalIndex: index }); return acc; }, {}); Object.keys(filesByDirectory).sort().forEach(dir => { const files = filesByDirectory[dir]; const dirId = `dir-${dir.replace(/[^a-zA-Z0-9]/g, '-') || 'root'}`; const dirHeader = document.createElement('div'); dirHeader.className = 'modal-directory-header'; const dirCheckbox = document.createElement('input'); dirCheckbox.type = 'checkbox'; dirCheckbox.id = dirId; dirCheckbox.className = 'custom-form-checkbox dir-checkbox'; dirCheckbox.dataset.directory = dir; const dirNameLabel = document.createElement('label'); dirNameLabel.htmlFor = dirId; dirNameLabel.className = 'modal-directory-name-label'; dirNameLabel.textContent = dir === '' ? '(Root Directory)' : dir; dirHeader.appendChild(dirCheckbox); dirHeader.appendChild(dirNameLabel); archiveModalList.appendChild(dirHeader); files.forEach(entry => { const item = document.createElement('div'); item.className = 'modal-file-item'; item.dataset.directory = dir; const textContainer = document.createElement('div'); textContainer.className = 'min-w-0 overflow-hidden'; const fileNameSpan = document.createElement('span'); fileNameSpan.className = 'modal-file-name'; fileNameSpan.textContent = getBaseName(entry.name); fileNameSpan.title = entry.name; const fileTypeSpan = document.createElement('span'); fileTypeSpan.className = 'text-xs text-light-text-muted dark:text-dark-text-muted ml-1 whitespace-nowrap'; fileTypeSpan.textContent = ` (.${entry.extension})`; fileNameSpan.appendChild(fileTypeSpan); textContainer.appendChild(fileNameSpan); const fileCheckbox = document.createElement('input'); fileCheckbox.type = 'checkbox'; fileCheckbox.id = `modalFile_${entry.originalIndex}`; fileCheckbox.value = String(entry.originalIndex); fileCheckbox.className = 'custom-form-checkbox file-checkbox'; fileCheckbox.checked = selectedArchiveIndices.includes(entry.originalIndex); fileCheckbox.dataset.directory = dir; item.appendChild(textContainer); item.appendChild(fileCheckbox); archiveModalList.appendChild(item); item.addEventListener('click', (event) => { if (event.target.tagName === 'INPUT' && event.target.type === 'checkbox') { return; } const cb = item.querySelector('input[type="checkbox"]'); if (cb) { cb.checked = !cb.checked; updateDirectoryCheckboxState(dir); } }); fileCheckbox.addEventListener('change', () => { updateDirectoryCheckboxState(dir); }); }); dirCheckbox.addEventListener('change', (e) => { const isChecked = e.target.checked; archiveModalList.querySelectorAll(`.file-checkbox[data-directory="${dir}"]`).forEach(cb => { cb.checked = isChecked; }); }); updateDirectoryCheckboxState(dir); }); }
         function updateDirectoryCheckboxState(dir) { const dirCheckbox = archiveModalList.querySelector(`.dir-checkbox[data-directory="${dir}"]`); if (!dirCheckbox) return; const fileCheckboxes = archiveModalList.querySelectorAll(`.file-checkbox[data-directory="${dir}"]`); const totalFiles = fileCheckboxes.length; let checkedCount = 0; fileCheckboxes.forEach(cb => { if (cb.checked) checkedCount++; }); if (checkedCount === 0) { dirCheckbox.checked = false; dirCheckbox.indeterminate = false; } else if (checkedCount === totalFiles) { dirCheckbox.checked = true; dirCheckbox.indeterminate = false; } else { dirCheckbox.checked = false; dirCheckbox.indeterminate = true; } }
-        async function processUploadedFile(file) { currentArchiveEntries = []; selectedArchiveIndices = []; currentArchiveFilename = file.name; const fileName = file.name; const fileType = fileName.split('.').pop().toLowerCase(); const secondLastExt = fileName.split('.').slice(-2).join('.'); showArchiveModalButton.classList.add('hidden'); archiveSelectionSummary.textContent = ''; if (['zip', 'xz', 'gz', 'tar.gz', 'tar.xz', '7z'].includes(fileType) || ['tar.gz', 'tar.xz'].includes(secondLastExt)) { updateStatus(`Processing archive: ${fileName}...`, 'info'); try { let archive; let entries = []; if (fileType === 'zip') { archive = await JSZip.loadAsync(file); for (const [relativePath, zipEntry] of Object.entries(archive.files)) { if (!zipEntry.dir) { const entryName = zipEntry.name; const entryExt = entryName.split('.').pop().toLowerCase(); if (['srt', 'ass', 'txt'].includes(entryExt)) { entries.push({ name: entryName, getContent: async () => zipEntry.async('string'), extension: entryExt }); } } } } else if (fileType === 'xz' && !fileName.endsWith('.tar.xz')) { if (!isXZWasmLoaded) { updateStatus("XZ library not loaded.", "error"); displaySelectedFile(file); return; } const decompressedBlob = await decompressXZ(file); const entryName = fileName.replace(/\.xz$/, ''); const entryExt = entryName.split('.').pop().toLowerCase(); if (['srt', 'ass', 'txt'].includes(entryExt)) { entries.push({ name: entryName, getContent: async () => decompressedBlob.text(), extension: entryExt }); } else { updateStatus(`Decompressed .xz not .srt/.ass/.txt.`, 'warning'); } } else { updateStatus(`Archive type .${fileType} not fully supported for direct multi-file extraction. Please extract and upload files individually.`, 'warning'); displaySelectedFile(file); return; } if (entries.length > 0) { currentArchiveEntries = entries; selectedArchiveIndices = entries.map((_, i) => i); displayArchiveSelection(file, entries.length); updateStatus(`Found ${entries.length} subtitle/text file(s). Click 'Select Files' to modify.`, 'success'); } else { updateStatus(`No .srt/.ass/.txt found in '${fileName}'.`, 'warning'); displaySelectedFile(file); } } catch (error) { updateStatus(`Archive error: ${error.message}`, 'error'); console.error("Archive error:", error); displaySelectedFile(file); } } else if (['srt', 'ass', 'txt'].includes(fileType)) { displaySelectedFile(file); currentArchiveEntries = []; selectedArchiveIndices = []; } else { updateStatus(`Unsupported type: .${fileType}.`, 'error'); fileInput.value = ''; fileNameDisplay.textContent = 'No file selected'; fileNameDisplay.title = ''; showArchiveModalButton.classList.add('hidden'); archiveSelectionSummary.textContent = ''; } }
-        document.addEventListener('DOMContentLoaded', () => { loadTheme(); loadSettings(); feather.replace(); setTimeout(() => { if (typeof XZWASM !== 'undefined' && typeof XZWASM.XzReadableStream !== 'undefined') { isXZWasmLoaded = true; updateStatus("XZ library loaded.", "system"); } else { isXZWasmLoaded = false; console.warn("XZWASM not loaded."); updateStatus("XZ features may be limited.", "warning"); } }, 1500); });
+        async function processUploadedFile(file) {
+            currentArchiveEntries = []; selectedArchiveIndices = []; currentArchiveFilename = file.name;
+            const fileName = file.name; const fileType = fileName.split('.').pop().toLowerCase();
+            const secondLastExt = fileName.split('.').slice(-2).join('.');
+            showArchiveModalButton.classList.add('hidden'); archiveSelectionSummary.textContent = '';
+
+            if (['zip', 'gz', 'tar.gz', '7z'].includes(fileType) || ['tar.gz'].includes(secondLastExt)) {
+                updateStatus(`Processing archive: ${fileName}...`, 'info');
+                try {
+                    let archive; let entries = [];
+                    if (fileType === 'zip') {
+                        archive = await JSZip.loadAsync(file);
+                        for (const [relativePath, zipEntry] of Object.entries(archive.files)) {
+                            if (!zipEntry.dir) {
+                                const entryName = zipEntry.name;
+                                const entryExt = entryName.split('.').pop().toLowerCase();
+                                if (['srt', 'ass', 'txt'].includes(entryExt)) {
+                                    entries.push({ name: entryName, getContent: async () => zipEntry.async('string'), extension: entryExt });
+                                }
+                            }
+                        }
+                    } else {
+                        updateStatus(`Archive type .${fileType} not fully supported for direct multi-file extraction. Please extract and upload files individually.`, 'warning');
+                        displaySelectedFile(file); return;
+                    }
+
+                    if (entries.length > 0) {
+                        currentArchiveEntries = entries; selectedArchiveIndices = entries.map((_, i) => i);
+                        displayArchiveSelection(file, entries.length);
+                        updateStatus(`Found ${entries.length} subtitle/text file(s). Click 'Select Files' to modify.`, 'success');
+                    } else {
+                        updateStatus(`No .srt/.ass/.txt found in '${fileName}'.`, 'warning');
+                        displaySelectedFile(file);
+                    }
+                } catch (error) {
+                    updateStatus(`Archive error: ${error.message}`, 'error'); console.error("Archive error:", error);
+                    displaySelectedFile(file);
+                }
+            } else if (['srt', 'ass', 'txt'].includes(fileType)) {
+                displaySelectedFile(file); currentArchiveEntries = []; selectedArchiveIndices = [];
+            } else {
+                updateStatus(`Unsupported type: .${fileType}.`, 'error');
+                fileInput.value = ''; fileNameDisplay.textContent = 'No file selected'; fileNameDisplay.title = '';
+                showArchiveModalButton.classList.add('hidden'); archiveSelectionSummary.textContent = '';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => { loadTheme(); loadSettings(); feather.replace(); });
         apiKeyInput.addEventListener('change', saveSettings); modelIdInput.addEventListener('change', saveSettings); targetLanguageSelect.addEventListener('change', () => { toggleCustomInput(targetLanguageSelect, customTargetLanguageInput); saveSettings(); }); customTargetLanguageInput.addEventListener('change', saveSettings); contentTypeSelect.addEventListener('change', () => { toggleCustomInput(contentTypeSelect, customContentTypeInput); saveSettings(); }); customContentTypeInput.addEventListener('change', saveSettings);
         temperatureInput.addEventListener('input', () => { let v = parseFloat(temperatureInput.value); if (isNaN(v)) { v = DEFAULT_TEMPERATURE; } v = Math.max(0.0, Math.min(2.0, v)); temperatureInput.value = v.toFixed(2); temperatureSlider.value = v.toFixed(2); temperatureDisplay.textContent = v.toFixed(2); saveSettings(); });
         temperatureSlider.addEventListener('input', () => { const v = parseFloat(temperatureSlider.value); temperatureInput.value = v.toFixed(2); temperatureDisplay.textContent = v.toFixed(2); saveSettings(); });
@@ -477,7 +520,208 @@
         modalConfirmButton.addEventListener('click', () => { selectedArchiveIndices = []; archiveModalList.querySelectorAll('.file-checkbox:checked').forEach(cb => { selectedArchiveIndices.push(parseInt(cb.value)); }); updateArchiveSelectionSummary(); closeArchiveModal(); if (selectedArchiveIndices.length === 0) { updateStatus("Warning: No files selected from archive.", "warning"); } });
         const requestWakeLock = async () => { if ('wakeLock' in navigator) { try { wakeLock = await navigator.wakeLock.request('screen'); updateStatus('Screen kept active during translation.', 'system'); wakeLock.addEventListener('release', () => { if (wakeLock) { updateStatus('Screen lock auto-released by browser.', 'warning'); wakeLock = null; } }); } catch (err) { console.error(`Wake Lock Error: ${err.name}, ${err.message}`); updateStatus(`Could not keep screen active.`, 'warning'); wakeLock = null; } } else { updateStatus('Wake Lock API not supported on this browser.', 'warning'); } };
         const releaseWakeLock = async () => { if (wakeLock !== null) { const tempLock = wakeLock; wakeLock = null; try { await tempLock.release(); updateStatus('Screen lock released.', 'system'); } catch (err) { console.error(`Wake Lock Release Error: ${err.name}, ${err.message}`); } } };
-        async function translateSingleContent(fileContent, originalName, fileExtension, translationParams) { const { apiKey, modelId, targetLanguage, contentType, optionalNotes, temperature } = translationParams; const displayName = originalName.includes('/') ? originalName.substring(originalName.lastIndexOf('/') + 1) : originalName; updateStatus(`Preparing '${displayName}'...`, 'info'); let system_prompt = `You are an expert subtitle translator specializing in translating {contentType} content into fluent, natural-sounding {targetLanguage}. Your task is to translate the provided subtitle file content ({fileExtension} format). RULES (Strictly Follow): 1. Translate the dialogue text accurately and naturally into {targetLanguage}. 2. Preserve the original subtitle format ({fileExtension}) STRICTLY. - For SRT: Maintain the sequence numbers, timecodes (start --> end), and line breaks exactly as in the original, replacing only the text content. - For ASS: Maintain ALL original [Script Info], [V4+ Styles], and [Events] formatting lines (Style, Name, MarginL, MarginR, MarginV, Effect, etc.). ONLY translate the text part of the 'Dialogue:' lines. Preserve the original Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect fields for each Dialogue event. - For TXT: Translate each line, preserving the original line structure. 3. Adjust ASS timing slightly ONLY IF NECESSARY for {targetLanguage} reading speed, but prioritize maintaining original sync. Keep short lines short on screen. 4. Maintain consistency in character names, places, and specific terminology mentioned in the optional notes (if provided). 5. CRITICAL: Output ONLY the raw, fully translated subtitle content in the original {fileExtension} format. Do NOT include ANY introductory text, explanations, summaries, apologies, markdown formatting (like \`\`\`ass ... \`\`\`), or concluding remarks in your response. Your entire output must be ONLY the translated subtitle data, ready to be saved as a .{fileExtension} file. {optionalNotesSection} Translate the following subtitle content: `; system_prompt = system_prompt.replace(/{contentType}/g, contentType).replace(/{targetLanguage}/g, targetLanguage).replace(/{fileExtension}/g, fileExtension).replace('{optionalNotesSection}', optionalNotes ? `- Additional User Instructions:\n${optionalNotes}` : ''); const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent?key=${apiKey}`; const requestData = { systemInstruction: { parts: [{ text: system_prompt }] }, contents: [{ role: 'user', parts: [{ text: fileContent }] }], generationConfig: { responseMimeType: 'text/plain', temperature: temperature }, safetySettings: [{ category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },{ category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },{ category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },{ category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }] }; updateStatus(`Sending '${displayName}' to Gemini (${modelId})...`, 'api'); try { const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(requestData), }); const responseBody = await response.text(); if (!response.ok) { let err = `HTTP ${response.status}`; try { const j = JSON.parse(responseBody); err = j?.error?.message || JSON.stringify(j); } catch (p) { err += ` - ${responseBody.substring(0, 200)}`; } throw new Error(`API Error: ${err}`); } updateStatus(`Response for '${displayName}' received.`, 'api'); let translatedText = null; try { const d = JSON.parse(responseBody); const c = d?.candidates; if (c && c.length > 0) { const ct = c[0]?.content; if (ct && ct.parts && ct.parts.length > 0) { translatedText = ct.parts[0]?.text; } } if (!translatedText) { const fr = c?.[0]?.finishReason; if (fr && fr !== 'STOP') { let msg = `API stop: ${fr}.`; const sr = c?.[0]?.safetyRatings; if (sr) { console.warn("Safety:", sr); msg += ` Details: ${JSON.stringify(sr)}`; } throw new Error(msg); } else { throw new Error(`Failed text extraction.`); } } } catch (e) { console.error('Parse Error:', responseBody); throw new Error(`Parse Error: ${e.message}`); } if (translatedText && translatedText.trim().length > 0) { let valid = true; if (fileExtension === 'srt' && !translatedText.match(/^\d+\s*\n\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}/m)) { updateStatus(`Warning: '${displayName}' output may not be valid SRT. Review carefully.`, 'warning'); valid = false; } else if (fileExtension === 'ass' && (!translatedText.includes('[Events]') || !translatedText.includes('Dialogue:'))) { updateStatus(`Warning: '${displayName}' output may not be valid ASS. Review carefully.`, 'warning'); valid = false; } if (valid) updateStatus(`'${displayName}' translated!`, 'success'); return translatedText; } else { throw new Error(`Empty translation for '${displayName}'.`); } } catch (error) { updateStatus(`Failed '${displayName}': ${error.message}`, 'error'); console.error(`Error for ${displayName}:`, error); throw error; } }
+
+        async function translateSingleContent(fileContent, originalName, fileExtension, translationParams) {
+            const { apiKey, modelId, targetLanguage, contentType, optionalNotes, temperature } = translationParams;
+            const displayName = originalName.includes('/') ? originalName.substring(originalName.lastIndexOf('/') + 1) : originalName;
+            updateStatus(`Preparing '${displayName}'...`, 'info');
+
+            let system_prompt_text = "";
+            const user_content_text = fileContent;
+
+            if (fileExtension === 'ass') {
+                system_prompt_text = `You are an expert .ASS subtitle file translator. Your ONLY task is to translate the text content of the provided .ASS file into {targetLanguage}, while STRICTLY preserving ALL original formatting, structure, and metadata.
+
+Content Type Context: {contentType}
+{optionalNotesSection}
+
+CRITICAL RULES - YOU MUST FOLLOW THESE EXACTLY:
+
+1.  **DO NOT CHANGE STRUCTURE OR METADATA:**
+    *   ALL section headers (e.g., '[Script Info]', '[V4+ Styles]', '[Events]') MUST remain IDENTICAL and in their original positions.
+    *   ALL lines within '[Script Info]' (e.g., 'Title:', 'ScriptType:', 'WrapStyle:') MUST remain IDENTICAL.
+    *   ALL lines within '[V4+ Styles]' (e.g., 'Format: Name, Fontname, ...', 'Style: Default,Arial,20,...') MUST remain IDENTICAL.
+    *   Within the '[Events]' section:
+        *   The 'Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text' line (or similar) MUST remain IDENTICAL.
+        *   Any lines starting with 'Comment:' MUST remain IDENTICAL.
+
+2.  **TRANSLATE ONLY THE DIALOGUE TEXT FIELD:**
+    *   Your SOLE focus for translation is lines starting with 'Dialogue:'.
+    *   A 'Dialogue:' line has multiple comma-separated fields (e.g., 'Dialogue: 0,0:00:01.23,0:00:04.56,Default,,0,0,0,,Original Text Here').
+    *   You MUST translate ONLY the VERY LAST field (the 'Text' field) of these 'Dialogue:' lines.
+    *   ALL other fields in 'Dialogue:' lines (Layer, Start time, End time, Style, Name, MarginL, MarginR, MarginV, Effect) MUST remain ABSOLUTELY UNCHANGED from the original. DO NOT alter timecodes, style names, actor names, margins, or effect data.
+
+3.  **OUTPUT REQUIREMENTS (EXTREMELY IMPORTANT):**
+    *   Your entire response MUST be ONLY the fully translated .ASS file content.
+    *   There should be NO introductory phrases, NO explanations, NO apologies, NO summaries, NO markdown code blocks (like \`\`\`ass ... \`\`\`), and NO text whatsoever before or after the .ASS content.
+    *   The output MUST be a valid .ASS file, ready to be saved directly.
+
+Failure to adhere to these rules, especially regarding preserving formatting and outputting only the .ASS content, will result in an unusable translation.
+
+Translate the following .ASS content into {targetLanguage} according to these rules:`;
+
+            } else if (fileExtension === 'srt') {
+                system_prompt_text = `You are an expert .SRT subtitle file translator. Your ONLY task is to translate the text content of the provided .SRT file into {targetLanguage}, while STRICTLY preserving ALL original formatting (sequence numbers, timecodes).
+
+Content Type Context: {contentType}
+{optionalNotesSection}
+
+CRITICAL RULES - YOU MUST FOLLOW THESE EXACTLY:
+
+1.  **DO NOT CHANGE STRUCTURE OR TIMING:**
+    *   Subtitle sequence numbers (e.g., '1', '2', '3') MUST remain IDENTICAL.
+    *   Timecodes (e.g., '00:00:01,234 --> 00:00:05,678') MUST remain ABSOLUTELY UNCHANGED.
+2.  **TRANSLATE ONLY THE SUBTITLE TEXT:**
+    *   For each subtitle block, translate only the text lines that appear below the timecode.
+3.  **OUTPUT REQUIREMENTS (EXTREMELY IMPORTANT):**
+    *   Your entire response MUST be ONLY the fully translated .SRT file content.
+    *   There should be NO introductory phrases, NO explanations, NO apologies, NO summaries, NO markdown code blocks (like \`\`\`srt ... \`\`\`), and NO text whatsoever before or after the .SRT content.
+    *   The output MUST be a valid .SRT file, ready to be saved directly.
+
+Translate the following .SRT content into {targetLanguage} according to these rules:`;
+
+            } else if (fileExtension === 'txt') {
+                system_prompt_text = `You are a text line translator. Your task is to translate the provided text content into {targetLanguage}, line by line.
+
+Content Type Context: {contentType}
+{optionalNotesSection}
+
+CRITICAL RULES - YOU MUST FOLLOW THESE EXACTLY:
+
+1.  Translate the text content of each line.
+2.  Preserve the line-by-line structure.
+3.  **OUTPUT REQUIREMENTS (EXTREMELY IMPORTANT):**
+    *   Your entire response MUST be ONLY the translated text.
+    *   There should be NO introductory phrases, NO explanations, NO apologies, NO summaries, NO markdown code blocks, and NO text whatsoever before or after the translated content.
+
+Translate the following text content into {targetLanguage} according to these rules:`;
+            } else {
+                updateStatus(`Unsupported file extension: ${fileExtension}`, 'error');
+                throw new Error(`Unsupported file extension for translation: ${fileExtension}`);
+            }
+
+            const final_system_prompt = system_prompt_text
+                .replace(/{targetLanguage}/g, targetLanguage)
+                .replace(/{contentType}/g, contentType)
+                .replace('{optionalNotesSection}', optionalNotes ? `\nConsider these User Notes:\n${optionalNotes}` : '');
+
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:generateContent?key=${apiKey}`;
+            const requestData = {
+                systemInstruction: { parts: [{ text: final_system_prompt }] },
+                contents: [{ role: 'user', parts: [{ text: user_content_text }] }],
+                generationConfig: { responseMimeType: 'text/plain', temperature: temperature },
+                safetySettings: [
+                    { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
+                    { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
+                    { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
+                    { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
+                ]
+            };
+
+            updateStatus(`Sending '${displayName}' to Gemini (${modelId})...`, 'api');
+            // console.log("System Prompt for " + displayName + ":", final_system_prompt);
+            // console.log("User Content for " + displayName + " length:", user_content_text.length);
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', },
+                    body: JSON.stringify(requestData),
+                });
+                const responseBody = await response.text();
+
+                if (!response.ok) {
+                    let errDetail = responseBody;
+                    try {
+                        const jsonError = JSON.parse(responseBody);
+                        errDetail = jsonError?.error?.message || responseBody;
+                        if (jsonError?.error?.details) {
+                            errDetail += ` Details: ${JSON.stringify(jsonError.error.details)}`;
+                        }
+                    } catch (e) { /* no-op, use raw responseBody */ }
+                    throw new Error(`API Error HTTP ${response.status}: ${errDetail.substring(0, 1000)}`);
+                }
+
+                updateStatus(`Response for '${displayName}' received. Processing...`, 'api');
+                let translatedText = null;
+                try {
+                    const d = JSON.parse(responseBody);
+                    const candidates = d?.candidates;
+                    if (candidates && candidates.length > 0) {
+                        const candidate = candidates[0];
+                        if (candidate.finishReason === "SAFETY") {
+                             updateStatus(`Translation for '${displayName}' blocked due to safety reasons. Ratings: ${JSON.stringify(candidate.safetyRatings)}`, 'error');
+                             throw new Error(`Content blocked by safety filters for '${displayName}'.`);
+                        }
+                        if (candidate.finishReason === "MAX_TOKENS") {
+                            updateStatus(`Translation for '${displayName}' may be incomplete: MAX_TOKENS reached.`, 'warning');
+                        }
+                         if (candidate.finishReason && candidate.finishReason !== 'STOP' && candidate.finishReason !== 'MAX_TOKENS') {
+                            updateStatus(`Translation for '${displayName}' stopped due to: ${candidate.finishReason}. Safety: ${JSON.stringify(candidate.safetyRatings)}`, 'warning');
+                        }
+
+                        const content = candidate?.content;
+                        if (content && content.parts && content.parts.length > 0) {
+                            translatedText = content.parts[0]?.text;
+                        } else if (candidate.finishReason !== 'SAFETY') {
+                            throw new Error(`Empty content parts in API response for '${displayName}'. Finish Reason: ${candidate.finishReason}`);
+                        }
+                    } else {
+                        throw new Error(`No candidates in API response for '${displayName}'. Full response: ${responseBody.substring(0, 200)}`);
+                    }
+                } catch (e) {
+                    console.error(`Error parsing API response for ${displayName}:`, e, "\nRaw Response Body (first 500 chars):\n", responseBody.substring(0,500));
+                    throw new Error(`API Response Parse/Process Error for '${displayName}': ${e.message}`);
+                }
+
+                if (translatedText && translatedText.trim().length > 0) {
+                    const markdownRegex = /^```(?:[a-zA-Z0-9]+)?\s*\n([\s\S]*?)\n```$/;
+                    const match = translatedText.match(markdownRegex);
+                    if (match && match[1]) {
+                        updateStatus(`Markdown detected and stripped from '${displayName}' response.`, 'system');
+                        translatedText = match[1].trim();
+                    } else {
+                        translatedText = translatedText.trim();
+                    }
+
+                    let isValid = true;
+                    if (fileExtension === 'srt') {
+                        if (!translatedText.match(/^\d+\s*\r?\n\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}/m)) {
+                            updateStatus(`Warning: Output for '${displayName}' (SRT) might be invalid. Review carefully. Start of AI response: ${translatedText.substring(0,150)}...`, 'warning');
+                            isValid = false;
+                        }
+                    } else if (fileExtension === 'ass') {
+                        if (!translatedText.toLowerCase().includes('[events]') || !translatedText.toLowerCase().includes('dialogue:')) {
+                            updateStatus(`Warning: Output for '${displayName}' (ASS) seems invalid (missing [Events] or Dialogue:). Review carefully. Start of AI response: ${translatedText.substring(0,150)}...`, 'warning');
+                            isValid = false;
+                        }
+                        if (fileContent.toLowerCase().includes('[script info]') && !translatedText.toLowerCase().includes('[script info]')) {
+                            updateStatus(`Warning: '[Script Info]' section might be missing in translated ASS for '${displayName}'.`, 'warning');
+                        }
+                         if (fileContent.toLowerCase().includes('[v4+ styles]') && !translatedText.toLowerCase().includes('[v4+ styles]')) {
+                            updateStatus(`Warning: '[V4+ Styles]' section might be missing in translated ASS for '${displayName}'.`, 'warning');
+                        }
+                    }
+
+                    if (isValid) {
+                        updateStatus(`'${displayName}' translated!`, 'success');
+                    }
+                    return translatedText;
+                } else if (processedResults.find(r => r.originalName === originalName && r.error && r.error.includes("Content blocked by safety filters"))) {
+                    return "";
+                }
+                else {
+                    throw new Error(`Empty translation content received for '${displayName}' after processing.`);
+                }
+            } catch (error) {
+                if (!statusPanel.innerHTML.includes(error.message.substring(0,50))) { // Hatanın tamamı çok uzun olabilir
+                    updateStatus(`Translation failed for '${displayName}': ${error.message}`, 'error');
+                }
+                console.error(`Full error during translation attempt for ${displayName}:`, error);
+                throw error;
+            }
+        }
+
         form.addEventListener('submit', async (event) => {
             event.preventDefault(); setButtonLoading(true); downloadSection.classList.add('hidden'); processedResults = []; statusPanel.innerHTML = ''; updateStatus('Translation process initiated.', 'info');
             const apiKey = apiKeyInput.value.trim(); const modelIdToUse = modelIdInput.value.trim() || DEFAULT_MODEL; const mainFile = fileInput.files[0]; let targetLanguage = targetLanguageSelect.value === 'Other' ? customTargetLanguageInput.value.trim() : targetLanguageSelect.value; let contentType = contentTypeSelect.value === 'Other' ? customContentTypeInput.value.trim() : contentTypeSelect.value; const optionalNotes = optionalNotesInput.value.trim(); const temperature = parseFloat(temperatureInput.value) || DEFAULT_TEMPERATURE;
@@ -485,7 +729,7 @@
             updateStatus(`Using model: ${modelIdToUse}, Target: ${targetLanguage}, Temp: ${temperature.toFixed(2)}.`, 'system'); if (optionalNotes) updateStatus(`Additional notes provided.`, 'system'); updateStatus(`Safety filters are set to BLOCK_NONE. Please ensure your input is appropriate.`, 'warning');
             await requestWakeLock(); let filesToProcess = [];
             if (currentArchiveEntries.length > 0 && selectedArchiveIndices.length > 0) { selectedArchiveIndices.forEach(index => { if (index >= 0 && index < currentArchiveEntries.length) { filesToProcess.push(currentArchiveEntries[index]); } }); updateStatus(`Processing ${filesToProcess.length} selected file(s) from archive...`, 'info'); }
-            else if (mainFile) { const mainFileName = mainFile.name; const mainFileExtension = mainFileName.split('.').pop()?.toLowerCase(); if (mainFileExtension === 'xz' && !mainFileName.endsWith('.tar.xz')) { if (!isXZWasmLoaded) { updateStatus(`Cannot process .xz: XZ library not loaded. Please try a different file or browser.`, 'error'); setButtonLoading(false); await releaseWakeLock(); return; } updateStatus(`Decompressing single .xz file...`, 'info'); try { const decompressedBlob = await decompressXZ(mainFile); const entryName = mainFileName.replace(/\.xz$/, ''); const entryExt = entryName.split('.').pop().toLowerCase(); if (['srt', 'ass', 'txt'].includes(entryExt)) { filesToProcess.push({ name: entryName, getContent: async () => decompressedBlob.text(), extension: entryExt }); updateStatus(`Processing 1 file from .xz...`, 'info'); } else { updateStatus(`Decompressed .xz is not a supported subtitle/text type.`, 'warning'); setButtonLoading(false); await releaseWakeLock(); return; } } catch (xzError) { updateStatus(`Error decompressing .xz: ${xzError.message}`, 'error'); setButtonLoading(false); await releaseWakeLock(); return; } } else if (['srt', 'ass', 'txt'].includes(mainFileExtension)) { filesToProcess.push({ name: mainFileName, getContent: () => mainFile.text(), extension: mainFileExtension }); updateStatus(`Processing single file: ${mainFileName}`, 'info'); } else if (!['zip', 'tar.gz', 'tar.xz', '7z'].includes(mainFileExtension) && !['tar.gz', 'tar.xz'].includes(mainFileName.split('.').slice(-2).join('.'))) { updateStatus(`Invalid file type: .${mainFileExtension}. Supported: SRT, ASS, TXT, ZIP, XZ.`, 'error'); setButtonLoading(false); await releaseWakeLock(); return; } else if (currentArchiveEntries.length === 0 && mainFile) { updateStatus('File is an archive, but no specific files were selected. Please use "Select Files" or upload a non-archive subtitle file.', 'warning'); setButtonLoading(false); await releaseWakeLock(); return; } } else { updateStatus('No file selected or no files chosen from archive.', 'error'); setButtonLoading(false); await releaseWakeLock(); return; }
+            else if (mainFile) { const mainFileName = mainFile.name; const mainFileExtension = mainFileName.split('.').pop()?.toLowerCase(); if (['srt', 'ass', 'txt'].includes(mainFileExtension)) { filesToProcess.push({ name: mainFileName, getContent: () => mainFile.text(), extension: mainFileExtension }); updateStatus(`Processing single file: ${mainFileName}`, 'info'); } else if (!['zip', 'tar.gz', 'gz', '7z'].includes(mainFileExtension) && !['tar.gz'].includes(mainFileName.split('.').slice(-2).join('.'))) { updateStatus(`Invalid file type: .${mainFileExtension}. Supported: SRT, ASS, TXT, ZIP.`, 'error'); setButtonLoading(false); await releaseWakeLock(); return; } else if (currentArchiveEntries.length === 0 && mainFile) { updateStatus('File is an archive, but no specific files were selected. Please use "Select Files" or upload a non-archive subtitle file.', 'warning'); setButtonLoading(false); await releaseWakeLock(); return; } } else { updateStatus('No file selected or no files chosen from archive.', 'error'); setButtonLoading(false); await releaseWakeLock(); return; }
             if (filesToProcess.length === 0) { updateStatus('No valid files to translate.', 'warning'); setButtonLoading(false); await releaseWakeLock(); return; }
 
             let tasksWithContent = []; updateStatus(`Reading content of ${filesToProcess.length} file(s)...`, 'system');
@@ -498,7 +742,7 @@
             if (processedResults.some(r => r.translatedText)) { setupDownloadSection(); } else if (tasksWithContent.length > 0) { updateStatus('No files translated successfully.', 'error'); }
             setButtonLoading(false); await releaseWakeLock();
         });
-        function setupDownloadSection() { downloadSection.classList.remove('hidden'); let successfulTranslations = processedResults.filter(r => r.translatedText); if (successfulTranslations.length === 0) { downloadSection.classList.add('hidden'); return; } if (successfulTranslations.length > 1) { downloadAllButtonText.textContent = `Download All (${successfulTranslations.length}) as ZIP`; } else if (successfulTranslations.length === 1) { const result = successfulTranslations[0]; const originalBaseName = result.originalName.includes('/') ? result.originalName.substring(result.originalName.lastIndexOf('/') + 1) : result.originalName; const baseName = originalBaseName.substring(0, originalBaseName.lastIndexOf('.')) || originalBaseName; const langCode = getLanguageCode(); const outputFilename = `${baseName}_${langCode}.${result.extension}`; downloadAllButtonText.textContent = `Download ${outputFilename}`; } }
+        function setupDownloadSection() { downloadSection.classList.remove('hidden'); let successfulTranslations = processedResults.filter(r => r.translatedText); if (successfulTranslations.length === 0) { downloadSection.classList.add('hidden'); return; } if (successfulTranslations.length > 1) { downloadAllButtonText.textContent = `Download All (${successfulTranslations.length}) as ZIP`; } else if (successfulTranslations.length === 1) { const result = successfulTranslations[0]; const originalBaseName = result.originalName.includes('/') ? result.originalName.substring(result.originalName.lastIndexOf('/') + 1) : result.originalName; const baseName = originalBaseName.substring(0, originalBaseName.lastIndexOf('.')) || originalBaseName; const langCode = getLanguageCode(); downloadAllButtonText.textContent = `Download`; } } // outputFilename kaldırıldı, downloadSingleFile'da oluşturulacak
         function getLanguageCode() { let langCode = 'tr'; const selectedLang = targetLanguageSelect.value; if (selectedLang === 'Other') { langCode = customTargetLanguageInput.value.trim().substring(0, 3).toLowerCase().replace(/[^a-z]/g, '') || 'unk'; } else { const langMap = { 'Turkish': 'tr', 'English': 'en', 'Spanish': 'es', 'French': 'fr', 'German': 'de', 'Japanese': 'ja', 'Korean': 'ko', 'Chinese (Simplified)': 'zh-cn', 'Portuguese (Brazil)': 'pt-br', 'Russian': 'ru', 'Arabic': 'ar' }; langCode = langMap[selectedLang] || selectedLang.substring(0, 2).toLowerCase(); } return langCode; }
         function downloadSingleFile(content, filename) { if (!content || content.trim().length === 0) { updateStatus(`No content for ${filename}.`, 'error'); return; } try { const BOM = "\uFEFF"; const blob = new Blob([BOM + content], { type: 'text/plain;charset=utf-8' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.style.display = 'none'; a.href = url; a.download = filename; document.body.appendChild(a); a.click(); window.URL.revokeObjectURL(url); document.body.removeChild(a); updateStatus(`Download initiated: "${filename}".`, 'success'); } catch(e) { updateStatus(`Download error: ${e.message}`, 'error'); console.error("Download Error:", e); } }
         downloadAllButton.addEventListener('click', async (event) => {
