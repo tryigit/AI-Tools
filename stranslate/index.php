@@ -521,10 +521,118 @@
         const requestWakeLock = async () => { if ('wakeLock' in navigator) { try { wakeLock = await navigator.wakeLock.request('screen'); updateStatus('Screen kept active during translation.', 'system'); wakeLock.addEventListener('release', () => { if (wakeLock) { updateStatus('Screen lock auto-released by browser.', 'warning'); wakeLock = null; } }); } catch (err) { console.error(`Wake Lock Error: ${err.name}, ${err.message}`); updateStatus(`Could not keep screen active.`, 'warning'); wakeLock = null; } } else { updateStatus('Wake Lock API not supported on this browser.', 'warning'); } };
         const releaseWakeLock = async () => { if (wakeLock !== null) { const tempLock = wakeLock; wakeLock = null; try { await tempLock.release(); updateStatus('Screen lock released.', 'system'); } catch (err) { console.error(`Wake Lock Release Error: ${err.name}, ${err.message}`); } } };
 
+        function assToSrtConverter(assContent) {
+            const eventsRegex = /\[Events\]\s*Format:(.*)\n([\s\S]*)/i;
+            const dialogueRegexGlobal = /^Dialogue:\s*([^,]+),([^,]+),([^,]+),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),([^,]*),(.*)/gim;
+
+            const eventsMatch = assContent.match(eventsRegex);
+            if (!eventsMatch || eventsMatch.length < 3) {
+                console.warn("ASS to SRT: [Events] section not found or malformed.");
+                return { srt: null, originalDialogueDetails: [] };
+            }
+
+            const dialoguesSection = eventsMatch[2];
+            let srtOutput = "";
+            let srtCounter = 1;
+            const originalDialogueDetails = [];
+
+            let match;
+            while ((match = dialogueRegexGlobal.exec(dialoguesSection)) !== null) {
+                const layer = match[1].trim();
+                const startTimeAss = match[2].trim();
+                const endTimeAss = match[3].trim();
+                const style = match[4].trim() || "Default";
+                const name = match[5].trim();
+                const marginL = match[6].trim();
+                const marginR = match[7].trim();
+                const marginV = match[8].trim();
+                const effect = match[9].trim();
+                let text = match[10].trim();
+
+                text = text.replace(/\{[^}]*\}/g, "").replace(/\\N/g, "\n").trim();
+
+                if (!text) continue;
+
+                const formatAssTime = (assTime) => {
+                    const parts = assTime.split(':');
+                    const h = parts[0];
+                    const m = parts[1];
+                    const s_cs = parts[2].split('.');
+                    const s = s_cs[0];
+                    const cs = s_cs[1].padEnd(2, '0');
+                    const ms = parseInt(cs) * 10;
+                    return `${h.padStart(2, '0')}:${m.padStart(2, '0')}:${s.padStart(2, '0')},${String(ms).padStart(3, '0')}`;
+                };
+
+                try {
+                    const startTimeSrt = formatAssTime(startTimeAss);
+                    const endTimeSrt = formatAssTime(endTimeAss);
+
+                    srtOutput += `${srtCounter}\n`;
+                    srtOutput += `${startTimeSrt} --> ${endTimeSrt}\n`;
+                    srtOutput += `${text}\n\n`;
+
+                    originalDialogueDetails.push({
+                        originalIndex: srtCounter - 1,
+                        layer,
+                        startTimeAss,
+                        endTimeAss,
+                        style,
+                        name,
+                        marginL,
+                        marginR,
+                        marginV,
+                        effect
+                    });
+                    srtCounter++;
+                } catch (e) {
+                    console.warn(`ASS to SRT: Error formatting time for line: ${match[0]}. Error: ${e.message}`);
+                }
+            }
+            if (srtCounter === 1) {
+                console.warn("ASS to SRT: No valid dialogue lines found to convert.");
+                return { srt: null, originalDialogueDetails: [] };
+            }
+            return { srt: srtOutput.trim(), originalDialogueDetails };
+        }
+
+        function srtToAssConverter(translatedSrtContent, originalAssHeaderSections, originalEventsFormatLine, originalDialogueDetails) {
+            if (!translatedSrtContent || !originalAssHeaderSections || !originalEventsFormatLine || !originalDialogueDetails) {
+                console.error("SRT to ASS: Missing one or more required inputs.");
+                return null;
+            }
+
+            let finalAssContent = originalAssHeaderSections;
+            finalAssContent += "\n\n[Events]\n";
+            finalAssContent += `Format: ${originalEventsFormatLine}\n`;
+
+            const srtBlockRegex = /(\d+)\s*\n(\d{2}:\d{2}:\d{2},\d{3})\s*-->\s*(\d{2}:\d{2}:\d{2},\d{3})\s*\n([\s\S]*?)(?=\n\n\d+|\s*$)/g;
+            let match;
+            let srtLineCounter = 0;
+            while ((match = srtBlockRegex.exec(translatedSrtContent)) !== null) {
+                const translatedText = match[4].replace(/\n/g, "\\N");
+                const detail = originalDialogueDetails[srtLineCounter];
+
+                if (detail) {
+                    const startTime = detail.startTimeAss;
+                    const endTime = detail.endTimeAss;
+                    finalAssContent += `Dialogue: ${detail.layer},${startTime},${endTime},${detail.style},${detail.name},${detail.marginL},${detail.marginR},${detail.marginV},${detail.effect},${translatedText}\n`;
+                } else {
+                    console.warn(`SRT to ASS: No original details found for SRT line index ${srtLineCounter}. Skipping.`);
+                }
+                srtLineCounter++;
+            }
+            if (srtLineCounter === 0) {
+                console.warn("SRT to ASS: No SRT blocks found in translated content. Returning header and empty Events.");
+            }
+
+            return finalAssContent.trim();
+        }
+
         async function translateSingleContent(fileContent, originalName, fileExtension, translationParams) {
             const { apiKey, modelId, targetLanguage, contentType, optionalNotes, temperature } = translationParams;
             const displayName = originalName.includes('/') ? originalName.substring(originalName.lastIndexOf('/') + 1) : originalName;
-            updateStatus(`Preparing '${displayName}'...`, 'info');
+            updateStatus(`Preparing '${displayName}' (as ${fileExtension})...`, 'info');
 
             let system_prompt_text = "";
             const user_content_text = fileContent;
@@ -596,8 +704,8 @@ CRITICAL RULES - YOU MUST FOLLOW THESE EXACTLY:
 
 Translate the following text content into {targetLanguage} according to these rules:`;
             } else {
-                updateStatus(`Unsupported file extension: ${fileExtension}`, 'error');
-                throw new Error(`Unsupported file extension for translation: ${fileExtension}`);
+                updateStatus(`Unsupported file extension: ${fileExtension} for API translation.`, 'error');
+                throw new Error(`Unsupported file extension for API translation: ${fileExtension}`);
             }
 
             const final_system_prompt = system_prompt_text
@@ -618,9 +726,7 @@ Translate the following text content into {targetLanguage} according to these ru
                 ]
             };
 
-            updateStatus(`Sending '${displayName}' to Gemini (${modelId})...`, 'api');
-            // console.log("System Prompt for " + displayName + ":", final_system_prompt);
-            // console.log("User Content for " + displayName + " length:", user_content_text.length);
+            updateStatus(`Sending '${displayName}' (as ${fileExtension}) to Gemini (${modelId})...`, 'api');
 
             try {
                 const response = await fetch(apiUrl, {
@@ -638,11 +744,11 @@ Translate the following text content into {targetLanguage} according to these ru
                         if (jsonError?.error?.details) {
                             errDetail += ` Details: ${JSON.stringify(jsonError.error.details)}`;
                         }
-                    } catch (e) { /* no-op, use raw responseBody */ }
+                    } catch (e) { /* no-op */ }
                     throw new Error(`API Error HTTP ${response.status}: ${errDetail.substring(0, 1000)}`);
                 }
 
-                updateStatus(`Response for '${displayName}' received. Processing...`, 'api');
+                updateStatus(`Response for '${displayName}' (as ${fileExtension}) received. Processing...`, 'api');
                 let translatedText = null;
                 try {
                     const d = JSON.parse(responseBody);
@@ -695,16 +801,16 @@ Translate the following text content into {targetLanguage} according to these ru
                             updateStatus(`Warning: Output for '${displayName}' (ASS) seems invalid (missing [Events] or Dialogue:). Review carefully. Start of AI response: ${translatedText.substring(0,150)}...`, 'warning');
                             isValid = false;
                         }
-                        if (fileContent.toLowerCase().includes('[script info]') && !translatedText.toLowerCase().includes('[script info]')) {
+                        if (user_content_text.toLowerCase().includes('[script info]') && !translatedText.toLowerCase().includes('[script info]')) {
                             updateStatus(`Warning: '[Script Info]' section might be missing in translated ASS for '${displayName}'.`, 'warning');
                         }
-                         if (fileContent.toLowerCase().includes('[v4+ styles]') && !translatedText.toLowerCase().includes('[v4+ styles]')) {
+                         if (user_content_text.toLowerCase().includes('[v4+ styles]') && !translatedText.toLowerCase().includes('[v4+ styles]')) {
                             updateStatus(`Warning: '[V4+ Styles]' section might be missing in translated ASS for '${displayName}'.`, 'warning');
                         }
                     }
 
                     if (isValid) {
-                        updateStatus(`'${displayName}' translated!`, 'success');
+                        updateStatus(`'${displayName}' (as ${fileExtension}) translated!`, 'success');
                     }
                     return translatedText;
                 } else if (processedResults.find(r => r.originalName === originalName && r.error && r.error.includes("Content blocked by safety filters"))) {
@@ -714,7 +820,7 @@ Translate the following text content into {targetLanguage} according to these ru
                     throw new Error(`Empty translation content received for '${displayName}' after processing.`);
                 }
             } catch (error) {
-                if (!statusPanel.innerHTML.includes(error.message.substring(0,50))) { // Hatanın tamamı çok uzun olabilir
+                if (!statusPanel.innerHTML.includes(error.message.substring(0,50))) {
                     updateStatus(`Translation failed for '${displayName}': ${error.message}`, 'error');
                 }
                 console.error(`Full error during translation attempt for ${displayName}:`, error);
@@ -732,17 +838,114 @@ Translate the following text content into {targetLanguage} according to these ru
             else if (mainFile) { const mainFileName = mainFile.name; const mainFileExtension = mainFileName.split('.').pop()?.toLowerCase(); if (['srt', 'ass', 'txt'].includes(mainFileExtension)) { filesToProcess.push({ name: mainFileName, getContent: () => mainFile.text(), extension: mainFileExtension }); updateStatus(`Processing single file: ${mainFileName}`, 'info'); } else if (!['zip', 'tar.gz', 'gz', '7z'].includes(mainFileExtension) && !['tar.gz'].includes(mainFileName.split('.').slice(-2).join('.'))) { updateStatus(`Invalid file type: .${mainFileExtension}. Supported: SRT, ASS, TXT, ZIP.`, 'error'); setButtonLoading(false); await releaseWakeLock(); return; } else if (currentArchiveEntries.length === 0 && mainFile) { updateStatus('File is an archive, but no specific files were selected. Please use "Select Files" or upload a non-archive subtitle file.', 'warning'); setButtonLoading(false); await releaseWakeLock(); return; } } else { updateStatus('No file selected or no files chosen from archive.', 'error'); setButtonLoading(false); await releaseWakeLock(); return; }
             if (filesToProcess.length === 0) { updateStatus('No valid files to translate.', 'warning'); setButtonLoading(false); await releaseWakeLock(); return; }
 
-            let tasksWithContent = []; updateStatus(`Reading content of ${filesToProcess.length} file(s)...`, 'system');
-            try { for (const fileTask of filesToProcess) { const displayName = fileTask.name.includes('/') ? fileTask.name.substring(fileTask.name.lastIndexOf('/') + 1) : fileTask.name; updateStatus(`Reading '${displayName}'...`, 'system'); const fileContent = await fileTask.getContent(); if (!fileContent) { throw new Error(`Content empty for ${displayName}`); } tasksWithContent.push({ name: fileTask.name, content: fileContent, extension: fileTask.extension }); } }
-            catch (error) { updateStatus(`Error reading file content: ${error.message}`, 'error'); setButtonLoading(false); await releaseWakeLock(); return; }
+            let tasksWithContent = [];
+            updateStatus(`Reading and pre-processing content of ${filesToProcess.length} file(s)...`, 'system');
+            let originalAssDataCache = {};
 
-            const translationParams = { apiKey, modelId: modelIdToUse, targetLanguage, contentType, optionalNotes, temperature }; let successCount = 0;
-            for (let i = 0; i < tasksWithContent.length; i++) { const task = tasksWithContent[i]; const displayName = task.name.includes('/') ? task.name.substring(task.name.lastIndexOf('/') + 1) : task.name; updateStatus(`Translating ${i + 1}/${tasksWithContent.length}: '${displayName}'...`, 'info'); try { const translatedText = await translateSingleContent(task.content, task.name, task.extension, translationParams); processedResults.push({ originalName: task.name, translatedText: translatedText, error: null, extension: task.extension }); successCount++; } catch (error) { processedResults.push({ originalName: task.name, translatedText: null, error: error.message || "Unknown error", extension: task.extension }); if (error.message && error.message.toLowerCase().includes("api key not valid")) { updateStatus("API Key Error. Aborting further translations.", "error"); break; } if (error.message && (error.message.includes("quota") || error.message.includes("limit"))) { updateStatus("API limit likely reached. Further translations may fail.", "error"); } } }
+            try {
+                for (const fileTask of filesToProcess) {
+                    const displayName = fileTask.name.includes('/') ? fileTask.name.substring(fileTask.name.lastIndexOf('/') + 1) : fileTask.name;
+                    updateStatus(`Reading '${displayName}'...`, 'system');
+                    let fileContent = await fileTask.getContent();
+                    let effectiveExtensionForApi = fileTask.extension;
+                    let contentForApi = fileContent;
+
+                    if (fileTask.extension === 'ass') {
+                        updateStatus(`Converting '${displayName}' from ASS to SRT for translation...`, 'system');
+                        
+                        const eventsSectionRegex = /\[Events\]/i;
+                        const eventsIndex = fileContent.search(eventsSectionRegex);
+                        let originalHeaderSections = "";
+                        let eventsFormatLine = "Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text";
+
+                        if (eventsIndex !== -1) {
+                            originalHeaderSections = fileContent.substring(0, eventsIndex).trim();
+                            const eventsContentAfterHeader = fileContent.substring(eventsIndex);
+                            const formatLineRegex = /Format:\s*([^\n\r]+)/i;
+                            const formatMatch = eventsContentAfterHeader.match(formatLineRegex);
+                            if (formatMatch && formatMatch[1]) {
+                                eventsFormatLine = formatMatch[1].trim();
+                            }
+                        } else {
+                            updateStatus(`Warning: '[Events]' section start not clearly found in '${displayName}'. Header might be incomplete.`, "warning");
+                            originalHeaderSections = fileContent; 
+                        }
+                        
+                        const conversionResult = assToSrtConverter(fileContent);
+                        if (conversionResult && conversionResult.srt) {
+                            contentForApi = conversionResult.srt;
+                            effectiveExtensionForApi = 'srt';
+                            originalAssDataCache[fileTask.name] = {
+                                headerSections: originalHeaderSections,
+                                dialogueDetails: conversionResult.originalDialogueDetails,
+                                eventsFormat: eventsFormatLine
+                            };
+                            updateStatus(`'${displayName}' converted to SRT successfully.`, 'success');
+                        } else {
+                            updateStatus(`Failed to convert '${displayName}' to SRT. Will attempt to translate as ASS directly.`, 'warning');
+                        }
+                    }
+                    if (!contentForApi) { throw new Error(`Content empty for ${displayName} after pre-processing`); }
+                    tasksWithContent.push({ name: fileTask.name, originalExtension: fileTask.extension, content: contentForApi, extensionForApi: effectiveExtensionForApi });
+                }
+            }
+            catch (error) {
+                updateStatus(`Error reading or pre-processing file content: ${error.message}`, 'error');
+                setButtonLoading(false); await releaseWakeLock(); return;
+            }
+
+            const translationParams = { apiKey, modelId: modelIdToUse, targetLanguage, contentType, optionalNotes, temperature };
+            let successCount = 0;
+
+            for (let i = 0; i < tasksWithContent.length; i++) {
+                const task = tasksWithContent[i];
+                const displayName = task.name.includes('/') ? task.name.substring(task.name.lastIndexOf('/') + 1) : task.name;
+                updateStatus(`Translating ${i + 1}/${tasksWithContent.length}: '${displayName}' (as ${task.extensionForApi})...`, 'info');
+                try {
+                    let translatedApiContent = await translateSingleContent(task.content, task.name, task.extensionForApi, translationParams);
+                    let finalTranslatedText = translatedApiContent;
+                    let finalExtension = task.originalExtension;
+
+
+                    if (task.originalExtension === 'ass' && task.extensionForApi === 'srt' && originalAssDataCache[task.name]) {
+                        updateStatus(`Converting translated SRT back to ASS for '${displayName}'...`, 'system');
+                        const assCache = originalAssDataCache[task.name];
+                        const reconvertedAss = srtToAssConverter(translatedApiContent, assCache.headerSections, assCache.eventsFormat, assCache.dialogueDetails);
+                        if (reconvertedAss) {
+                            finalTranslatedText = reconvertedAss;
+                            updateStatus(`'${displayName}' successfully reconverted to ASS.`, 'success');
+                        } else {
+                            updateStatus(`Failed to reconvert '${displayName}' to ASS. Result will be the translated SRT.`, 'warning');
+                            finalExtension = 'srt';
+                        }
+                    }
+
+                    processedResults.push({ originalName: task.name, translatedText: finalTranslatedText, error: null, extension: finalExtension });
+                    successCount++;
+                } catch (error) {
+                    processedResults.push({ originalName: task.name, translatedText: null, error: error.message || "Unknown error", extension: task.originalExtension });
+                    if (error.message && error.message.toLowerCase().includes("api key not valid")) { updateStatus("API Key Error. Aborting further translations.", "error"); break; }
+                    if (error.message && (error.message.includes("quota") || error.message.includes("limit"))) { updateStatus("API limit likely reached. Further translations may fail.", "error"); }
+                }
+            }
             if (tasksWithContent.length > 0) { updateStatus(`Batch complete: ${successCount}/${tasksWithContent.length} successful.`, successCount === tasksWithContent.length ? 'success' : (successCount > 0 ? 'warning' : 'error')); }
             if (processedResults.some(r => r.translatedText)) { setupDownloadSection(); } else if (tasksWithContent.length > 0) { updateStatus('No files translated successfully.', 'error'); }
             setButtonLoading(false); await releaseWakeLock();
         });
-        function setupDownloadSection() { downloadSection.classList.remove('hidden'); let successfulTranslations = processedResults.filter(r => r.translatedText); if (successfulTranslations.length === 0) { downloadSection.classList.add('hidden'); return; } if (successfulTranslations.length > 1) { downloadAllButtonText.textContent = `Download All (${successfulTranslations.length}) as ZIP`; } else if (successfulTranslations.length === 1) { const result = successfulTranslations[0]; const originalBaseName = result.originalName.includes('/') ? result.originalName.substring(result.originalName.lastIndexOf('/') + 1) : result.originalName; const baseName = originalBaseName.substring(0, originalBaseName.lastIndexOf('.')) || originalBaseName; const langCode = getLanguageCode(); downloadAllButtonText.textContent = `Download`; } } // outputFilename kaldırıldı, downloadSingleFile'da oluşturulacak
+
+        function setupDownloadSection() {
+            downloadSection.classList.remove('hidden');
+            let successfulTranslations = processedResults.filter(r => r.translatedText);
+            if (successfulTranslations.length === 0) {
+                downloadSection.classList.add('hidden');
+                return;
+            }
+            if (successfulTranslations.length > 1) {
+                downloadAllButtonText.textContent = `Download All (${successfulTranslations.length}) as ZIP`;
+            } else if (successfulTranslations.length === 1) {
+                downloadAllButtonText.textContent = `Download`;
+            }
+        }
         function getLanguageCode() { let langCode = 'tr'; const selectedLang = targetLanguageSelect.value; if (selectedLang === 'Other') { langCode = customTargetLanguageInput.value.trim().substring(0, 3).toLowerCase().replace(/[^a-z]/g, '') || 'unk'; } else { const langMap = { 'Turkish': 'tr', 'English': 'en', 'Spanish': 'es', 'French': 'fr', 'German': 'de', 'Japanese': 'ja', 'Korean': 'ko', 'Chinese (Simplified)': 'zh-cn', 'Portuguese (Brazil)': 'pt-br', 'Russian': 'ru', 'Arabic': 'ar' }; langCode = langMap[selectedLang] || selectedLang.substring(0, 2).toLowerCase(); } return langCode; }
         function downloadSingleFile(content, filename) { if (!content || content.trim().length === 0) { updateStatus(`No content for ${filename}.`, 'error'); return; } try { const BOM = "\uFEFF"; const blob = new Blob([BOM + content], { type: 'text/plain;charset=utf-8' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.style.display = 'none'; a.href = url; a.download = filename; document.body.appendChild(a); a.click(); window.URL.revokeObjectURL(url); document.body.removeChild(a); updateStatus(`Download initiated: "${filename}".`, 'success'); } catch(e) { updateStatus(`Download error: ${e.message}`, 'error'); console.error("Download Error:", e); } }
         downloadAllButton.addEventListener('click', async (event) => {
