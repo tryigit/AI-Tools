@@ -3,7 +3,7 @@ Tools to customize and effortlessly use advanced AI API's. Runs entirely on the 
 
 # Current Projects:
 ## [AI Subtitle Alchemist](https://tryigit.dev/ai/stranslate/)
-**V1.1.0**
+**V1.2.0**
 
 ## [AI Article Weaver](https://tryigit.dev/ai/article/)
 **V1.0.2**
