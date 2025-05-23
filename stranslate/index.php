@@ -296,11 +296,11 @@
                          <label for="temperatureSetting">AI Temperature (0.0 - 2.0):</label>
                          <div class="flex items-center space-x-3 mt-1">
                              <input type="number" id="temperatureSetting" name="temperatureSetting" min="0.0" max="2.0" step="0.01" class="w-24 px-2 py-1.5 text-center !shadow-none">
-                             <span id="temperatureValueDisplay" class="font-semibold text-light-text-primary dark:text-dark-text-primary w-10 text-center tabular-nums">0.68</span>
+                             <span id="temperatureValueDisplay" class="font-semibold text-light-text-primary dark:text-dark-text-primary w-10 text-center tabular-nums">0.45</span>
                              <input type="range" id="temperatureSlider" min="0.0" max="2.0" step="0.01">
                          </div>
                          <p class="input-field-description mt-2.5 mb-10 md:mb-8">
-                             Default <strong class="text-light-accent-start dark:text-dark-accent-start font-semibold">0.68</strong> is optimized via simulation for <strong class="text-light-accent-start dark:text-dark-accent-start font-semibold">Netflix-level quality</strong> (balanced accuracy & fluency). Higher values increase fluency/creativity but also risk errors/hallucinations, likely requiring <strong class="warning-text font-semibold">post-editing</strong>. Use high values for specific creative needs or highly professional/niche content where manual review is planned.
+                             Default <strong class="text-light-accent-start dark:text-dark-accent-start font-semibold">0.45</strong> is optimized via simulation for <strong class="text-light-accent-start dark:text-dark-accent-start font-semibold">Netflix-level quality</strong> (balanced accuracy & fluency). Higher values increase fluency/creativity but also risk errors/hallucinations, likely requiring <strong class="warning-text font-semibold">post-editing</strong>. Use high values for specific creative needs or highly professional/niche content where manual review is planned.
                          </p>
                      </div>
                  </div>
@@ -410,7 +410,7 @@
 
         const STORAGE_PREFIX = 'aiSubtitleAlchemist_v3_';
         const API_KEY_KEY = STORAGE_PREFIX + 'apiKey'; const MODEL_ID_KEY = STORAGE_PREFIX + 'modelId'; const TARGET_LANG_KEY = STORAGE_PREFIX + 'targetLanguage'; const CUSTOM_TARGET_LANG_KEY = STORAGE_PREFIX + 'customTargetLanguage'; const CONTENT_TYPE_KEY = STORAGE_PREFIX + 'contentType'; const CUSTOM_CONTENT_TYPE_KEY = STORAGE_PREFIX + 'customContentType'; const TEMPERATURE_KEY = STORAGE_PREFIX + 'temperature'; const THEME_KEY = STORAGE_PREFIX + 'theme';
-        let processedResults = []; let currentArchiveEntries = []; let selectedArchiveIndices = []; let currentArchiveFilename = ''; const DEFAULT_MODEL = 'gemini-2.5-pro-exp-03-25'; const DEFAULT_TEMPERATURE = 0.68; let wakeLock = null;
+        let processedResults = []; let currentArchiveEntries = []; let selectedArchiveIndices = []; let currentArchiveFilename = ''; const DEFAULT_MODEL = 'gemini-2.5-pro-exp-03-25'; const DEFAULT_TEMPERATURE = 0.45; let wakeLock = null;
 
         function updateStatus(message, type = 'info') {
             if (statusSection.classList.contains('hidden')) {
@@ -518,6 +518,12 @@
     temperatureDisplay.textContent = valueToSet;
     saveSettings();
 });
+temperatureSlider.addEventListener('input', () => {
+            const valueToSet = parseFloat(temperatureSlider.value).toFixed(2);
+            temperatureInput.value = valueToSet;
+            temperatureDisplay.textContent = valueToSet;
+            saveSettings();
+        });
         toggleApiKey.addEventListener('click', () => { const t = apiKeyInput.getAttribute('type') === 'password' ? 'text' : 'password'; apiKeyInput.setAttribute('type', t); toggleApiKeyIcon.setAttribute('data-feather', t === 'password' ? 'eye' : 'eye-off'); feather.replace(); });
         fileInput.addEventListener('change', async () => { downloadSection.classList.add('hidden'); processedResults = []; currentArchiveEntries = []; selectedArchiveIndices = []; currentArchiveFilename = ''; showArchiveModalButton.classList.add('hidden'); archiveSelectionSummary.textContent = ''; if (fileInput.files.length > 0) { await processUploadedFile(fileInput.files[0]); } else { fileNameDisplay.textContent = 'No file selected'; fileNameDisplay.title = ''; fileNameDisplay.classList.add('text-light-text-secondary', 'dark:text-dark-text-secondary'); fileNameDisplay.classList.remove('text-light-accent-start', 'dark:text-dark-accent-start', 'font-semibold'); } });
         themeToggleButton.addEventListener('click', toggleTheme);
